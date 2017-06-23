@@ -1,0 +1,10 @@
+#include <stdio.h>
+void reverse( int arr[], unsigned int len ){
+    int i;
+    for(i=0;i<len/2;i++){
+        int temp=arr[i];
+        arr[i]=arr[len-i-1];
+        arr[len-i-1]=temp;
+        
+    }
+}
