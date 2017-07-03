@@ -159,7 +159,7 @@ intarr_result_t intarr_push( intarr_t* ia, int val ){
 intarr_result_t intarr_pop( intarr_t* ia, int* i ){
   
   
-  int *new/*,l,j=-999999*/;
+  int *newia/*,l,j=-999999*/;
   if(ia==NULL){
     return INTARR_BADARRAY;
   }
@@ -178,14 +178,14 @@ intarr_result_t intarr_pop( intarr_t* ia, int* i ){
   // for(l=k;l<ia->len-1;l++){
   //   ia->data[l]=ia->data[l+1];
   // }
-  new=realloc(ia->data,(ia->len-1)*sizeof(int));
+  newia=realloc(ia->data,(ia->len-1)*sizeof(int));
   
-  if(new==NULL){
-    return INTARR_BADALLOC;
-  }
+  // if(new==NULL){
+  //   return INTARR_BADALLOC;
+  // }
   
   ia->len--;
-  ia->data=new;
+  ia->data=newia;
   
   return INTARR_OK;
   
@@ -201,7 +201,7 @@ intarr_result_t intarr_pop( intarr_t* ia, int* i ){
 // INTARR_BADARRAY.
 intarr_result_t intarr_resize( intarr_t* ia, unsigned int newlen ){
   
-  int *new,i;
+  int *newia,i;
   if(ia==NULL){
     return INTARR_BADARRAY;
   }
@@ -209,15 +209,15 @@ intarr_result_t intarr_resize( intarr_t* ia, unsigned int newlen ){
     return INTARR_OK;
   }
   
-  new=realloc(ia->data,newlen*sizeof(int));
+  newia=realloc(ia->data,newlen*sizeof(int));
   
-  if(new==NULL){
+  if(newia==NULL&&newlen!=0){
     
     return INTARR_BADALLOC;
   }
   if(newlen<ia->len){
     ia->len=newlen;
-    ia->data=new;
+    ia->data=newia;
     return INTARR_OK;
   }
   
@@ -229,7 +229,7 @@ intarr_result_t intarr_resize( intarr_t* ia, unsigned int newlen ){
   
   
   ia->len=newlen;
-  ia->data=new;
+  ia->data=newia;
   
   return INTARR_OK;
   

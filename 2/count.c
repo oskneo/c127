@@ -7,7 +7,7 @@ int main( void )
   unsigned long charcount=0,wordcount=0,linecount=0;
   char str[204800]="";
   char st;
-  //int check=1;
+  int check=1;
  
   //printf("Enter anythings:\n");
   int ern=0;
