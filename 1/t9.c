@@ -19,29 +19,36 @@ int main( void )
   for(i=z-1;i>0;i--){
       left=floor(i/m);
       right=x-left-1;
-      for(j=0;j<x;j++){
+      for(j=0;j<x&&check!=3;j++){
           
           
           
           
           if(j==left||j==right||(check==1&&i==z-1)){
               strcat(str,"#");
-              if(j==left){
-                  check=1;
+              if(j==right){
+                  check=2;
               }
-              else if(j==right){
-                  check=0;
+              else if(j==left){
+                  check=1;
               }
           }
           else if(check==1){
               strcat(str,".");
           }
+          
           else{
               strcat(str," ");
           }
+          if(check==2){
+            strcat(str,"\n");
+            check=3;
+          }
       }
-      strcat(str,"\n");
+      check=0;
+      
   }
+  
   for(j=0;j<x;j++){
       strcat(str,"#");
   }
