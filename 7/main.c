@@ -112,16 +112,14 @@ int checkcreate(list_t *list){
   
 }
 
-int checkindex(list_t *list,unsigned int i,element_t *el2){
+int checkindex(list_t *list,unsigned int i,element_t **el1){
   
   int sz=size(list);
   unsigned int index=0;
-  element_t *el;
-  if(list->head==NULL){
-    el2=NULL;
-  }
-  else{
+  element_t *el,*el2=NULL;
+  if(list->head!=NULL){
     el2= list_index( list, i );
+    *el1=el2;
   }
   
   if(sz<0){
@@ -184,7 +182,7 @@ int main( int argc, char* argv[] )
 
   int index = 2;
   element_t* el=NULL ;
-  if(checkindex(list,index,el)==1){
+  if(checkindex(list,index,&el)==1){
     return 1;
   }
   if( el == NULL )
