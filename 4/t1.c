@@ -27,7 +27,7 @@ void draw_circle( uint8_t img[],
 	// 		}
 	// 	}
 	// }
-		int i, j;
+    int i, j;
     double dx,dy,dt;
  
     for(i = 0; i< cols; i++)
