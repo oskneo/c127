@@ -2,18 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include "vec.h"
-vec_t* vec_create( double data[], unsigned int dim );
 
-// frees all memory allocated for v. If the pointer is null, do
-// nothing. If the v->data is null, do not attempt to free it.
-void vec_destroy( vec_t* v );
-
-// print a vector v of type vec_t
-void vec_print( vec_t* v );
-
-/* WRITE CODE FOR THE FOLLOWING TASKS */
-
-/* Always check all pointers if they are NULL before you use them */
 
 /* TASK 1 */
 
@@ -56,7 +45,7 @@ int vec_max( vec_t *v, double* result ){
   if(v==NULL||v->dim==0||v->data==NULL){
     return -1;
   }
-  double rs=-999;
+  double rs=-9999;
   unsigned int i=0;
   for(;i<v->dim;i++){
     if(v->data[i]>rs){
@@ -80,7 +69,7 @@ int vec_min( vec_t *v, double* result ){
   if(v==NULL||v->dim==0||v->data==NULL){
     return -1;
   }
-  double rs=999;
+  double rs=9999;
   unsigned int i=0;
   for(;i<v->dim;i++){
     if(v->data[i]<rs){
