@@ -37,7 +37,7 @@ int intarr_save_json( intarr_t* ia, const char* filename ){
     return -5;
   }
     
-  char st[2000];//=malloc(2000*sizeof(char));
+  char st[10000];//=malloc(2000*sizeof(char));
   strcat(st,"[ ");
   char tk[10];
   int i;
@@ -57,12 +57,15 @@ int intarr_save_json( intarr_t* ia, const char* filename ){
   }
   strcat(st," ]\0");
   //st=(char*)realloc(st,strlen(st));
+  int c=0;
+  for(;st[c]!='\0';c++){}
+  
     
   FILE* file=fopen(filename,"w");
   if(!file){
       return -1;
   }
-  if(!fwrite(st,sizeof(st),1,file)){
+  if(!fwrite(st,c,1,file)){
       return -2;
   }
   fclose(file);
@@ -86,7 +89,7 @@ intarr_t* intarr_load_json( const char* filename ){
     
   char st[10000],*tk;
   int fs=0;
-  intarr_t* ia=malloc(sizeof(intarr_t*));
+  intarr_t* ia=intarr_create(0);
   //char temp[10]="";
   //puts("ccccc");
   FILE* file=fopen(filename,"r");
@@ -103,7 +106,8 @@ intarr_t* intarr_load_json( const char* filename ){
   fclose(file);
   //puts("bbbb");
   //puts(st);
-  
+  //strcat(st,"\0");
+  //printf("%s...%lu\n",st,sizeof(intarr_t));
   tk=strtok(st,"[ ,]\0");
   //puts("ffff");
   while(tk!=NULL){
