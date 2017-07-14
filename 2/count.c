@@ -8,6 +8,8 @@ int main( void )
   char str[204800]="";
   char st;
   int check=1;
+  char *ch="abcdefghijklmnopqrstuvwxyzABCDEFGHJIKLMNOPQRSTUVWXYZ'";
+  char *p;
  
   //printf("Enter anythings:\n");
   int ern=0;
@@ -30,13 +32,28 @@ int main( void )
             wordcount+=check;
             //check=0;
           }
+          
+          p=strchr(ch,st);
+          if(p==NULL){
+            if(check==1){
+              check=0;
+            }
+            
+            
+          }
+          else{
+            if(check==0){
+              wordcount++;
+              check=1;
+            }
+          }
+          p=NULL;
+          
           // else{
           //   check=1;
             
           // }
-          if(st=='\n'){
-              linecount++;
-          }
+          
           
           charcount++;
           
