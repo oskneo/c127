@@ -48,9 +48,16 @@ int main( int argc, char* argv[] )
   printf("Saving test_ia into JSON file %s\n", filename); 
   if ( intarr_save_json( test_ia, filename ) != 0 )
   	printf("Saving test_ia into JSON file failed!\n"); 
-
+  
+  
   printf("Destroying test_ia\n");  
   intarr_destroy( test_ia );
+  printf("loading test_ia from JSON file %s\n", filename); 
+  intarr_t* test_ia2 = intarr_load_json("JSON_Test.txt");
+  printf("Printing test_ia\n"); 
+  print_intarr( test_ia2 );
+  printf("Destroying test_ia\n");  
+  intarr_destroy( test_ia2 );
 
   return 0;
 }

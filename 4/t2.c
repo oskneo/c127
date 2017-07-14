@@ -54,10 +54,16 @@ void draw_rectangle( uint8_t array[],
 		  //          check=0;
 		  //      }
 		  //  }
-			if(((i==x1||i==x2)||(j==y1||j==y2))&&(i>=0&&i<cols&&j>=0&&j<rows)){
+			if(((i==x1||i==x2)||(j==y1||j==y2))&&(i>=0&&i<cols&&j>=0&&j<rows)&&x1-1!=x2&&y1-1!=y2){
 				set_pixel(array, cols, rows, i,j,color);
 			}
 		}
 	}
 		      
 }
+
+// set_pixel(uint8_t array[], unsigned int cols, unsigned int rows, unsigned int i, unsigned int j, uint8_t color){
+// 	if(i>=0&&i<cols&&j>=0&&j<rows){
+// 		array[i*cols+j]=color;
+// 	}
+// }
