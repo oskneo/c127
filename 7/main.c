@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <setjmp.h>
+#include <signal.h>
+#include <string.h>
+
 
 #include "list.h"
 
@@ -112,7 +116,79 @@ int checkcreate(list_t *list){
   
 }
 
+
+
+
+jmp_buf restore_point;
+void Handler(int sig)
+{
+    if (sig == SIGSEGV)
+    {
+        //printf("received SegFault\n");
+        signal(SIGSEGV, &Handler);
+        longjmp(restore_point, SIGSEGV);
+    }
+}
+
+void testindex(){
+        list_t *l1=list_create();
+        l1->head=NULL;
+        l1->tail=element_create(5);
+        list_index(l1,1);
+}
+int test(void f())
+{
+    int fault_code = setjmp(restore_point);
+    if (fault_code == 0)
+    {
+        // do something that might cause a segfault
+        f();
+        return 1;
+    }
+    else
+    {
+        //printf("recovered from a fault; code = %d\n", fault_code);
+        return 2;
+    }
+}
+
+
+
+
 int checkindex(list_t *list,unsigned int i,element_t **el1){
+  
+  // list_t *l1=list_create();
+  // l1->head=NULL;
+  // l1->tail=element_create(5);
+  // if(list_index(l1,1)!=NULL){
+  //   return 1;
+  // }
+  signal(SIGSEGV,Handler);
+  if(test(testindex)==2){
+    return 1;
+  }
+  //printf("%d\n",ts(list_index(l1,1));
+  
+  //assert(list_index(l1,1)==NULL);
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   int sz=size(list);
   unsigned int index=0;
@@ -181,7 +257,7 @@ int main( int argc, char* argv[] )
   list_print( list );
 
   int index = 2;
-  element_t* el=NULL ;
+  element_t* el=list_index(list,index) ;
   if(checkindex(list,index,&el)==1){
     return 1;
   }

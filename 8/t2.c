@@ -90,7 +90,7 @@ int point_array_append( point_array_t* pa, point_t* p ){
     if(new==NULL){
       return 1;
     }
-    pa-?reserved=pa->len-1;
+    pa->reserved=pa->len-1;
     pa->len++;
     pa->points=new;
     pa->points[pa->len-1]=*p;
@@ -121,7 +121,7 @@ int point_array_append( point_array_t* pa, point_t* p ){
 // the array by one. The order of points in the array may change.
 int point_array_remove( point_array_t* pa, unsigned int i ){
    
-  point_t *new;
+  //point_t *new;
   //unsigned int j;
   if(pa==NULL||i>=(unsigned int)(pa->len)){
     return 1;
@@ -145,11 +145,11 @@ int point_array_remove( point_array_t* pa, unsigned int i ){
   }
   else{
     point_t *new;
-    new=realloc(pa->points,(int)ceil(pa->len*0.5)*sizeof(point_t));
+    new=realloc(pa->points,(pa->len/2+pa->len%2)*sizeof(point_t));
     if(new==NULL){
       return 1;
     }
-    pa-?reserved=pa->len%2;
+    pa->reserved=pa->len%2;
     pa->len--;
     pa->points=new;
     

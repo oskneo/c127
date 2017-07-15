@@ -61,9 +61,9 @@ int main( void )
       }
   }
   //puts(str);
-  if(str[charcount-2]!='\n'){
-    linecount++;
-  }
+  // if(str[charcount-2]!='\n'){
+  //   linecount++;
+  // }
   
   printf( "%lu %lu %lu\n", charcount, wordcount, linecount );
   

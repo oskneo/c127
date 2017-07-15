@@ -7,12 +7,20 @@
 // newly-allocated intarr_t.  If unsuccessful, returns a null pointer.
 
 intarr_t* intarr_create( unsigned int len ){
-  intarr_t* a=malloc(sizeof(intarr_t));
-  if(a!=NULL){
-    a->len=len;
-    a->data=malloc(len*sizeof(int));
+  intarr_t* a;//=malloc(sizeof(intarr_t));
+  // if(a!=NULL){
+  //   a->len=len;
+  //   a->data=malloc(len*sizeof(int));
     
+  // }
+  
+  
+  
+  a->data=malloc(len*sizeof(int));
+  if(a->data==NULL){
+    return NULL;
   }
+  a->len=len;
   return a;
   
 }
@@ -209,7 +217,7 @@ intarr_result_t intarr_resize( intarr_t* ia, unsigned int newlen ){
     return INTARR_OK;
   }
   
-  newia=(int*)realloc(ia->data,newlen*sizeof(int));
+  newia=realloc(ia->data,newlen*sizeof(int));
   
   if(newia==NULL&&newlen!=0){
     
