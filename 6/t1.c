@@ -17,8 +17,8 @@
 int intarr_save_binary( intarr_t* ia, const char* filename ){
   
   if(ia==NULL){
-    //return -4;
-    ia=intarr_create(0);
+    return -4;
+    //ia=intarr_create(0);
   }
   if(filename==NULL){
     return -5;

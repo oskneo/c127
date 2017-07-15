@@ -108,14 +108,14 @@ intarr_t* intarr_load_json( const char* filename ){
   //puts(st);
   //strcat(st,"\0");
   //printf("%s...%lu\n",st,sizeof(intarr_t));
-  tk=strtok(st,"[ ,]\0");
+  tk=strtok(st,"[ ,]\t\0");
   //puts("ffff");
   while(tk!=NULL){
       //puts("ddddd");
       intarr_push(ia,atoi(tk));
       //printf("%d\n",ia->len);
       //puts("dde");
-      tk=strtok(NULL,"[ ,]\0");
+      tk=strtok(NULL,"[ ,]\t\0");
       //puts("ddfdd");
   }
   

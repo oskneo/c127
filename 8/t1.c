@@ -1,5 +1,7 @@
+#define _XOPEN_SOURCE 600
+
 #include <stdio.h>
-//#include <stdlib.h>
+#include <stdlib.h>
 
 #include "point_array.h"
 
@@ -12,20 +14,20 @@
 
 // Safely initalize an empty array structure.
 void point_array_init( point_array_t* pa ){
-  char *t=(char *)realloc(NULL,sizeof(point_t*));
-  int i;
-  for(i=0;i<sizeof(point_array_t);i++){
-    t[i]='\0';
-  }
-  free(t);
-  pa=(point_array_t*)realloc(NULL,sizeof(point_array_t));
-  char *tu=(char *)realloc(NULL,sizeof(point_t*));
-  int j;
-  for(j=0;j<sizeof(point_t*);j++){
-    tu[j]='\0';
-  }
-  free(tu);
-  pa->points=realloc(NULL,sizeof(point_t*));
+  //char *t=(char *)realloc(NULL,sizeof(point_t*));
+  // int i;
+  // for(i=0;i<sizeof(point_array_t);i++){
+  //   t[i]='\0';
+  // }
+  // free(t);
+  //pa=realloc(NULL,sizeof(point_array_t));
+  // char *tu=(char *)realloc(NULL,sizeof(point_t*));
+  // int j;
+  // for(j=0;j<sizeof(point_t*);j++){
+  //   tu[j]='\0';
+  // }
+  // free(tu);
+  pa->points=NULL;
   pa->reserved=0;
   pa->len=0;
   
@@ -34,7 +36,7 @@ void point_array_init( point_array_t* pa ){
    
 }
 
-/* TASK 2 */
+/* TASK 2 */ 
 
 // Resets the array to be empty, freeing any memory allocated if
 // necessary.
@@ -53,21 +55,41 @@ void point_array_reset( point_array_t* pa ){
 // Append a point to the end of an array. If successful, return 0,
 // else return 1;
 int point_array_append( point_array_t* pa, point_t* p ){
+  // point_t *new;
+  // if(pa==NULL||p==NULL){
+  //   return 1;
+  // }
    
-  point_t *ne=(point_t*)realloc(NULL,(pa->len+1)*sizeof(point_t));
-  if(pa==NULL||ne==NULL){
+  
+  // new=realloc(pa->points,(pa->len+2)*sizeof(pa->points[0]));
+  // if(new==NULL){
+  //   return 1;
+  // }
+  // pa->points=new;
+  // pa->points[pa->len]=*p;
+  // pa->len++;
+  // return 0;
+  
+  //point_t *new;
+
+  
+  point_t *new;
+  //unsigned int j;
+  if(pa==NULL||p==NULL){
     return 1;
   }
-  else{
-    //new->data=realloc
-    pa->points=ne;
-    pa->points[pa->len]=*p;
-    pa->len++;
-    return 0;
+  
+  
+  
+  new=realloc(pa->points,(pa->len+1)*sizeof(point_t));
+  if(new==NULL){
+    return 1;
   }
-  
-  
-  
+  pa->len++;
+  pa->points=new;
+  pa->points[pa->len-1]=*p;
+  //pa->points[pa->len-1]=p;
+  return 0;
   
   
   // if(pa==NULL||p==NULL){
@@ -91,18 +113,20 @@ int point_array_append( point_array_t* pa, point_t* p ){
 int point_array_remove( point_array_t* pa, unsigned int i ){
    
   point_t *new;
-  unsigned int j;
+  //unsigned int j;
   if(pa==NULL||i>=(unsigned int)(pa->len)){
     return 1;
   }
   
-  if(i<(unsigned int)(pa->len)-1){
+  // if(i<(unsigned int)(pa->len)-1){
       
-      for(j=i;j<pa->len-1;j++){
-        pa->points[j]=pa->points[j+1];
-      }
-      //memcpy(&(pa->points[i]),&(pa->points[i+1]),sizeof(point_t)*((unsigned int)(pa->len)-i));
-  }
+  //     for(j=i;j<pa->len-1;j++){
+  //       pa->points[j]=pa->points[j+1];
+  //     }
+  //     //memcpy(&(pa->points[i]),&(pa->points[i+1]),sizeof(point_t)*((unsigned int)(pa->len)-i));
+  // }
+  
+  pa->points[i]=pa->points[pa->len-1];
   
   new=realloc(&(pa->points[0]),(pa->len-1)*sizeof(point_t));
   if(new==NULL){

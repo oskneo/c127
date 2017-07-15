@@ -66,18 +66,18 @@ int main( int argc, char** argv )
       point_array_init( &A );
       
       uint64_t start_append = time_now_usec();
-      puts("aaaaaa");
+      //puts("aaaaaa");
       for( unsigned long i=0; i<pts; i++ )
 	point_array_append( &A, &p );    
-      puts("baaaaa");
+      //puts("baaaaa");
       uint64_t app_time = time_now_usec() - start_append;
       
   
       uint64_t start_remove = time_now_usec();
-      puts("caaaaa");
+      //puts("caaaaa");
       for( int i=0; i<pts; i++ )
 	point_array_remove( &A, random() % A.len );
-           puts("daaaaa");
+           //puts("daaaaa");
       uint64_t rem_time = time_now_usec() - start_remove;
       
       printf( "%d\t%10lu\t%10lu\t%10lu\t\n", 
