@@ -27,10 +27,11 @@ void point_array_init( point_array_t* pa ){
   //   tu[j]='\0';
   // }
   // free(tu);
+  
   pa->points=realloc(NULL,1*sizeof(point_t));
   pa->reserved=1;
   pa->len=0;
-  
+  //printf("%u   %u\n",pa->len,pa->reserved);
   return;
    
    
@@ -72,19 +73,22 @@ int point_array_append( point_array_t* pa, point_t* p ){
   
   //point_t *new;
 
-  
+  //printf("%u   %u\n",pa->len,pa->reserved);
   
   //unsigned int j;
   if(pa==NULL||p==NULL){
     return 1;
   }
   
-  if(pa->reserved!=0){
+  if(pa->reserved>0){
     pa->len++;
     pa->reserved--;
+    //printf("%u   %u\n",pa->len,pa->reserved);
     pa->points[pa->len-1]=*p;
+    
   }
   else{
+    
     point_t *new;
     new=realloc(pa->points,(pa->len*2)*sizeof(point_t));
     if(new==NULL){
@@ -123,6 +127,7 @@ int point_array_remove( point_array_t* pa, unsigned int i ){
    
   //point_t *new;
   //unsigned int j;
+  //printf("%u -  %u\n",pa->len,pa->reserved);
   if(pa==NULL||i>=(unsigned int)(pa->len)){
     return 1;
   }
@@ -145,11 +150,13 @@ int point_array_remove( point_array_t* pa, unsigned int i ){
   }
   else{
     point_t *new;
-    new=realloc(pa->points,(pa->len/2+pa->len%2)*sizeof(point_t));
+    //puts("kkkk");
+    new=realloc(pa->points,(pa->len+pa->len%2)*sizeof(point_t));
+    //puts("kkkkd");
     if(new==NULL){
       return 1;
     }
-    pa->reserved=pa->len%2;
+    pa->reserved=pa->len%2+1;
     pa->len--;
     pa->points=new;
     

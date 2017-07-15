@@ -7,7 +7,7 @@
 // newly-allocated intarr_t.  If unsuccessful, returns a null pointer.
 
 intarr_t* intarr_create( unsigned int len ){
-  intarr_t* a;//=malloc(sizeof(intarr_t));
+  intarr_t* a=malloc(sizeof(intarr_t));
   // if(a!=NULL){
   //   a->len=len;
   //   a->data=malloc(len*sizeof(int));
