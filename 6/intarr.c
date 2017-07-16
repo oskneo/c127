@@ -8,11 +8,19 @@
 
 intarr_t* intarr_create( unsigned int len ){
   intarr_t* a=malloc(sizeof(intarr_t));
-  if(a!=NULL){
-    a->len=len;
-    a->data=malloc(len*sizeof(int));
+  // if(a!=NULL){
+  //   a->len=len;
+  //   a->data=malloc(len*sizeof(int));
     
+  // }
+  
+  
+  
+  a->data=malloc(len*sizeof(int));
+  if(a->data==NULL){
+    return NULL;
   }
+  a->len=len;
   return a;
   
 }
@@ -201,7 +209,7 @@ intarr_result_t intarr_pop( intarr_t* ia, int* i ){
 // INTARR_BADARRAY.
 intarr_result_t intarr_resize( intarr_t* ia, unsigned int newlen ){
   
-  int *newia,i;
+  //int *newia,i;
   if(ia==NULL){
     return INTARR_BADARRAY;
   }
@@ -209,27 +217,58 @@ intarr_result_t intarr_resize( intarr_t* ia, unsigned int newlen ){
     return INTARR_OK;
   }
   
-  newia=(int*)realloc(ia->data,newlen*sizeof(int));
   
-  if(newia==NULL&&newlen!=0){
-    
+  
+  
+  
+  
+  
+  intarr_t *newia=intarr_create(newlen);
+  if(newia==NULL){
     return INTARR_BADALLOC;
   }
-  if(newlen<ia->len){
-    ia->len=newlen;
-    ia->data=newia;
-    return INTARR_OK;
+  unsigned int i;
+  if(ia->len<newlen){
+    for(i=0;i<newlen;i++){
+      if(i<ia->len){
+        newia->data[i]=ia->data[i];
+      }
+      else{
+        newia->data[i]=0;
+      }
+    }
+  }
+  else{
+    for(i=0;i<newlen;i++){
+      newia->data[i]=ia->data[i];
+    }
   }
   
   
-  for(i=ia->len;i<newlen;i++){
-    ia->data[i]=0;
-  }
+  
+  
+  
+  // newia=realloc(ia->data,newlen*sizeof(int));
+  
+  // if(newia==NULL&&newlen!=0){
+    
+  //   return INTARR_BADALLOC;
+  // }
+  // if(newlen<ia->len){
+  //   ia->len=newlen;
+  //   ia->data=newia;
+  //   return INTARR_OK;
+  // }
+  
+  
+  // for(i=ia->len;i<newlen;i++){
+  //   ia->data[i]=0;
+  // }
 
   
   
-  ia->len=newlen;
-  ia->data=newia;
+  // ia->len=newlen;
+  // ia->data=newia;
   
   return INTARR_OK;
   

@@ -90,6 +90,7 @@ intarr_t* intarr_load_json( const char* filename ){
   char st[10000],*tk;
   int fs=0;
   intarr_t* ia=intarr_create(0);
+  
   //char temp[10]="";
   //puts("ccccc");
   FILE* file=fopen(filename,"r");
@@ -110,28 +111,36 @@ intarr_t* intarr_load_json( const char* filename ){
   //printf("%s...%lu\n",st,sizeof(intarr_t));
   
   int check=0;
-  tk=strtok(st," \t\0\n");
+  tk=strtok(st,", \t\0\n");
   //puts("ffff");
   while(tk!=NULL&&check!=4){
       //puts("ddddd");
-      if(tk=='['){
+      // if(ia->data!=NULL){
+      //   printf("%d    %d\n",ia->data[0],ia->len);
+      // }
+      //puts(tk);
+      if(strcmp(tk,"[")==0){
         check=1;
       }
-      else if(tk==','){
-        check=2;
-      }else if(tk==']'){
+      // else if(strcmp(tk,",")==0){
+      //   check=2;
+      // }
+      else if(strcmp(tk,"]")==0){
         check=4;
       }
-      if(check==1||check==2){
+      else if(check==1){
+        // if(ia->len==0){
+        //   free(ia->data);
+        // }
         intarr_push(ia,atoi(tk));
-        check=3;
+        //check=1;
       }
       
       
       
       //printf("%d\n",ia->len);
       //puts("dde");
-      tk=strtok(NULL," \t\0\n");
+      tk=strtok(NULL,", \t\0\n");
       //puts("ddfdd");
   }
   
