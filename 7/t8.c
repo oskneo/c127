@@ -1,7 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* Implements a linked list of integers
+
+ A list is comprised of a single header and zero or more elements. The
+ header contains pointers to the first and last elements in the list,
+ or NULL if the list is empty. The first element contains a pointer to
+ the next element, and so on. The last element in the list has its
+ "next" pointer set to NULL.
+
+ ** Global Precondition **
+
+ Functions that operate on an existing list require a valid pointer to
+ a list_t header as their first argument.
+*/
+
 #include "list.h"
+
+
+
 
 // element_t* element_create( int i )
 // {
@@ -17,65 +34,23 @@
 //   return el;
 // }
 
-int isempty(list_t *list){
-  if(list==NULL){
-    return -1;
-  }
-  else if(list->tail==NULL&&list->head==NULL){
-    return 1;
-  }
-  else if(list->head==NULL||list->tail==NULL){
-    return -1;
-  }
-  else{
-    return 0;
-  }
-}
-
-int size(list_t *list){
-  
-  int index=0;
-  element_t* el;
-  int ern;
-  ern=isempty(list);
-  if(ern==1){
-    
-    return 0;
-  }
-  else if(ern==-1){
-    return -1;
-  }
-  el=list->head;
-  index++;
-  while(el->next!=NULL){
-    index++;
-    el=el->next;
-    
-  }
-  if(el!=list->tail){
-    return -1;
-  }
-  //index++;
-  return index;
-  
-}
 
 void list_sort( list_t* list ){
-  element_t *el,*pre;
-  int index=0,check=0;
-  int sz=size(list);
-  if(sz>1){
+  element_t *el,*el2,*pre;
+  int check=0;
+  //int sz=size(list);
+  if(list->head->next!=NULL){
     el=list->head;
-    
+    el2=list->head;
     do{
-      index++;
+      el2=el2->next;
       el=list->head;
       do{
-        puts("stss");
+        //puts("stss");
         list_print(list);
         element_t *t=el->next;
         if(el->val>el->next->val){
-          puts("suss");
+          //puts("suss");
           
           if(el==list->head){
             el->next=el->next->next;
@@ -84,16 +59,16 @@ void list_sort( list_t* list ){
             if(el->next==NULL){
               list->tail=el;
             }
-            puts("svss");
+            //puts("svss");
           }
           
           else if(el->next==list->tail){
-            puts("sss");
+            //puts("sss");
             pre->next=el->next;
             t->next=el;
             el->next=NULL;
             list->tail=el;
-            puts("s2ss");
+            //puts("s2ss");
             list_print(list);
             //break;
             
@@ -107,7 +82,7 @@ void list_sort( list_t* list ){
           //free(t);
           check=1;
         }
-        puts("3sss");
+        //puts("3sss");
         if(check==1){
           pre=t;
           //el=el->next;
@@ -120,11 +95,11 @@ void list_sort( list_t* list ){
         }
         
         //index++;
-        puts("4sss");
+        //puts("4sss");
     
       }while(el->next!=NULL);
     
-    }while(index!=sz-1);
+    }while(el->next!=NULL);
   }
   
   return;

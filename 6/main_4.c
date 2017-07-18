@@ -25,7 +25,7 @@ int main( int argc, char* argv[] )
 
   const char* filename = "JSON_Test.txt";
   printf("Creating test_ia\n"); 
-  intarr_t* test_ia = intarr_create( 10 );
+  intarr_t* test_ia = intarr_create( 12 );
   if ( test_ia ==  NULL ) {
     printf("test_ia ==  NULL\n");
     return 1;

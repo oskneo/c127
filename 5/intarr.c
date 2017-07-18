@@ -1,3 +1,4 @@
+#include "stdio.h"
 #include "intarr.h"
 
 /* LAB 5 TASK 1 */
@@ -243,10 +244,11 @@ intarr_result_t intarr_resize( intarr_t* ia, unsigned int newlen ){
       newia->data[i]=ia->data[i];
     }
   }
+  newia->len=newlen;
   
-  
-  
-  
+  *ia=*newia;
+  //free(ia);
+  //printf("%u\n",ia->len);
   
   // newia=realloc(ia->data,newlen*sizeof(int));
   

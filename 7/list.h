@@ -54,3 +54,5 @@ element_t* list_index( list_t* list, unsigned int i );
 // Prints a list in human-readable form from the first to last
 // elements, between curly braces.
 void list_print( list_t* list );
+
+void list_sort( list_t* list );

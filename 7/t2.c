@@ -30,6 +30,7 @@ void list_destroy( list_t* list )
 element_t* element_create( int i )
 {
   element_t* el = malloc( sizeof(element_t) );
+  
   el->val = i;
   return el;
 }

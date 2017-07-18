@@ -1,8 +1,10 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <setjmp.h>
 #include <signal.h>
 #include <string.h>
+
 
 
 #include "list.h"
@@ -119,6 +121,10 @@ int checkcreate(list_t *list){
 
 
 
+
+
+
+
 jmp_buf restore_point;
 void Handler(int sig)
 {
@@ -128,6 +134,30 @@ void Handler(int sig)
         signal(SIGSEGV, &Handler);
         longjmp(restore_point, SIGSEGV);
     }
+}
+
+
+int chElCre(){
+  
+  //puts("kkkkk");
+  list_t *lt=list_create();
+  list_append(lt,0);
+  list_append(lt,1);
+  free(lt->head);
+  lt->head=element_create(0);
+  if(lt->head->next==NULL){
+    return 0;
+  }
+  else{
+    return 1;
+  }
+  //element_t *el=element_create(5);
+ 
+  //puts("ddd");
+  //int *ee=malloc(sizeof(int)*2);
+  //free(el);
+  //free(ee);
+  //puts("kkkkk");
 }
 
 void testindex(){
@@ -155,6 +185,10 @@ int test(void f())
 
 
 
+
+
+
+
 int checkindex(list_t *list,unsigned int i,element_t **el1){
   
   // list_t *l1=list_create();
@@ -163,7 +197,7 @@ int checkindex(list_t *list,unsigned int i,element_t **el1){
   // if(list_index(l1,1)!=NULL){
   //   return 1;
   // }
-  signal(SIGSEGV,Handler);
+  
   if(test(testindex)==2){
     return 1;
   }
@@ -258,9 +292,18 @@ int main( int argc, char* argv[] )
 
   int index = 2;
   element_t* el=list_index(list,index) ;
+  signal(SIGSEGV,Handler);
+  if(chElCre()==1){
+    return 1;
+  }
   if(checkindex(list,index,&el)==1){
     return 1;
   }
+  
+  
+  // #ifndef malloc
+  // #define malloc malloc
+  // #endif
   if( el == NULL )
     {
       printf( "index %d not found\n", index );
@@ -274,7 +317,10 @@ int main( int argc, char* argv[] )
     puts("The val of el is not -2");
     return 1;
   }
-    
+  //list->head->val=10;
+  //list_sort(list);
+  //list_print(list);
+  
   
   list_destroy( list );
 

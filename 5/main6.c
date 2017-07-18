@@ -27,6 +27,21 @@ int main( int argc, char* argv[] )
   // Put data in the array
   for( unsigned i=0; i<test_ia->len; i++ )
     test_ia->data[i] = rand() % 100;
+  printf("Printing test_ia\n"); 
+  print_intarr( test_ia );
+  
+  
+  
+  intarr_resize(test_ia,11);
+  puts("hhhh");
+
+
+  printf("Printing test_ia\n"); 
+  print_intarr( test_ia );
+  
+  intarr_resize(test_ia,10);
+  puts("hhhh");
+
 
   printf("Printing test_ia\n"); 
   print_intarr( test_ia );
