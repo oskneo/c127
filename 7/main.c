@@ -82,6 +82,18 @@ int checkappend(list_t *list,int i){
 }
 
 int checkprepend(list_t *list,int i){
+  
+  
+  list_t *lt=list_create();
+  list_prepend(lt,0);
+  if(lt->tail==NULL){
+    return 1;
+  }
+  
+  
+  
+  
+  
   int sz=size(list);
   element_t *ls;
   if(sz<0){
@@ -185,7 +197,13 @@ int test(void f())
 
 
 
-
+void testindex2(){
+        list_t *l1=list_create();
+        list_append(l1,5);
+        //l1->head=NULL;
+        //l1->tail=element_create(5);
+        list_index(l1,2);
+}
 
 
 
@@ -206,7 +224,9 @@ int checkindex(list_t *list,unsigned int i,element_t **el1){
   //assert(list_index(l1,1)==NULL);
   
   
-  
+  if(test(testindex2)==2){
+    return 1;
+  }
   
   
   
