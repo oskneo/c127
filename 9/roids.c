@@ -121,124 +121,38 @@ void ship_update( ship_t* ship )
 
 void ship_draw( const ship_t* ship )
 {
-  float shipcolor[4] = { 1,1,0,1 };
-  float thrustcolor[4] = { 1, 0.2, 0, 0.8 };
+    float shipcolor[4] = { 1,1,0,1 };
+    float thrustcolor[4] = { 1, 0.2, 0, 0.8 };
 
-  float dx = ship->size * cos( ship->a );
-  float dy = ship->size * sin( ship->a );
-     
-  float lx = ship->size/2.0 * cos( fmod( ship->a + 2.2, 2.0*M_PI) );
-  float ly = ship->size/2.0 * sin( fmod( ship->a + 2.2, 2.0*M_PI) );
+    float dx = ship->size * cos( ship->a );
+    float dy = ship->size * sin( ship->a );
 
-  float rx = ship->size/2.0 * cos( fmod( ship->a - 2.2, 2.0*M_PI) );
-  float ry = ship->size/2.0 * sin( fmod( ship->a - 2.2, 2.0*M_PI) );
-  /*
-  draw_triangle( ship->x + dx, ship->y + dy+HEIGHT,
-		 ship->x + lx, ship->y + ly+HEIGHT,
-		 ship->x + rx, ship->y + ry+HEIGHT,
-		 shipcolor );
-	draw_triangle( ship->x + dx, ship->y + dy,
-		 ship->x + lx, ship->y + ly,
-		 ship->x + rx, ship->y + ry,
-		 shipcolor );
-	draw_triangle( ship->x + dx, ship->y + dy-HEIGHT,
-		 ship->x + lx, ship->y + ly-HEIGHT,
-		 ship->x + rx, ship->y + ry-HEIGHT,
-		 shipcolor );	 
-	draw_triangle( ship->x + dx+WIDTH, ship->y + dy+HEIGHT,
-		 ship->x + lx+WIDTH, ship->y + ly+HEIGHT,
-		 ship->x + rx+WIDTH, ship->y + ry+HEIGHT,
-		 shipcolor );
-	draw_triangle( ship->x + dx+WIDTH, ship->y + dy,
-		 ship->x + lx+WIDTH, ship->y + ly,
-		 ship->x + rx+WIDTH, ship->y + ry,
-		 shipcolor );
-	draw_triangle( ship->x + dx+WIDTH, ship->y + dy-HEIGHT,
-		 ship->x + lx+WIDTH, ship->y + ly-HEIGHT,
-		 ship->x + rx+WIDTH, ship->y + ry-HEIGHT,
-		 shipcolor );	 
-	draw_triangle( ship->x + dx-WIDTH, ship->y + dy+HEIGHT,
-		 ship->x + lx-WIDTH, ship->y + ly+HEIGHT,
-		 ship->x + rx-WIDTH, ship->y + ry+HEIGHT,
-		 shipcolor );
-	draw_triangle( ship->x + dx-WIDTH, ship->y + dy,
-		 ship->x + lx-WIDTH, ship->y + ly,
-		 ship->x + rx-WIDTH, ship->y + ry,
-		 shipcolor );
-	draw_triangle( ship->x + dx-WIDTH, ship->y + dy-HEIGHT,
-		 ship->x + lx-WIDTH, ship->y + ly-HEIGHT,
-		 ship->x + rx-WIDTH, ship->y + ry-HEIGHT,
-		 shipcolor );	 */
-		 
-		 if(dx+ship->x < 0){
-		   draw_triangle( ship->x + dx + 1, ship->y + dy,ship->x + lx + 1, ship->y + ly,ship->x + rx + 1, ship->y + ry,shipcolor );}
-		 else if(ship->y+dy < 0){
-		   draw_triangle( ship->x + dx, ship->y + dy + 1,ship->x + lx, ship->y + ly + 1,ship->x + rx, ship->y + ry + 1,shipcolor );}
-		 else if(dx+ship->x > 1){
-		   draw_triangle( ship->x + dx - 1, ship->y + dy,ship->x + lx - 1, ship->y + ly,ship->x + rx - 1, ship->y + ry,shipcolor );}
-		 else if(ship->y+dy > 1){
-		   draw_triangle( ship->x + dx, ship->y + dy - 1,ship->x + lx, ship->y + ly - 1,ship->x + rx, ship->y + ry - 1,shipcolor );}
-	
-	
+    float lx = ship->size/2.0 * cos( fmod( ship->a + SHIP_BASE_WIDTH, 2.0*M_PI) );
+    float ly = ship->size/2.0 * sin( fmod( ship->a + SHIP_BASE_WIDTH, 2.0*M_PI) );
 
-  if( ship->thrust )
+    float rx = ship->size/2.0 * cos( fmod( ship->a - SHIP_BASE_WIDTH, 2.0*M_PI) );
+    float ry = ship->size/2.0 * sin( fmod( ship->a - SHIP_BASE_WIDTH, 2.0*M_PI) );
+
+    draw_triangle( ship->x + dx, ship->y + dy,
+            ship->x + lx, ship->y + ly,
+            ship->x + rx, ship->y + ry,
+            shipcolor );
+
+    if( ship->thrust )
     {
-      /*
-      draw_triangle( ship->x - dx, ship->y - dy+HEIGHT,
-		     ship->x + lx, ship->y + ly+HEIGHT,
-		     ship->x + rx, ship->y + ry+HEIGHT,
-		     thrustcolor );         
-		  draw_triangle( ship->x - dx, ship->y - dy,
-		     ship->x + lx, ship->y + ly,
-		     ship->x + rx, ship->y + ry,
-		     thrustcolor );  
-		  draw_triangle( ship->x - dx, ship->y - dy-HEIGHT,
-		     ship->x + lx, ship->y + ly-HEIGHT,
-		     ship->x + rx, ship->y + ry-HEIGHT,
-		     thrustcolor );  
-		  draw_triangle( ship->x - dx+WIDTH, ship->y - dy+HEIGHT,
-		     ship->x + lx+WIDTH, ship->y + ly+HEIGHT,
-		     ship->x + rx+WIDTH, ship->y + ry+HEIGHT,
-		     thrustcolor );         
-		  draw_triangle( ship->x - dx+WIDTH, ship->y - dy,
-		     ship->x + lx+WIDTH, ship->y + ly,
-		     ship->x + rx+WIDTH, ship->y + ry,
-		     thrustcolor );  
-		  draw_triangle( ship->x - dx+WIDTH, ship->y - dy-HEIGHT,
-		     ship->x + lx+WIDTH, ship->y + ly-HEIGHT,
-		     ship->x + rx+WIDTH, ship->y + ry-HEIGHT,
-		     thrustcolor );  
-		  draw_triangle( ship->x - dx-WIDTH, ship->y - dy+HEIGHT,
-		     ship->x + lx-WIDTH, ship->y + ly+HEIGHT,
-		     ship->x + rx-WIDTH, ship->y + ry+HEIGHT,
-		     thrustcolor );         
-		  draw_triangle( ship->x - dx-WIDTH, ship->y - dy,
-		     ship->x + lx-WIDTH, ship->y + ly,
-		     ship->x + rx-WIDTH, ship->y + ry,
-		     thrustcolor );  
-		  draw_triangle( ship->x - dx-WIDTH, ship->y - dy-HEIGHT,
-		     ship->x + lx-WIDTH, ship->y + ly-HEIGHT,
-		     ship->x + rx-WIDTH, ship->y + ry-HEIGHT,
-		     thrustcolor );  */
-		     
-		  if(ship->x-dx < 0){
-		    draw_triangle( ship->x - dx + 1, ship->y - dy,ship->x + lx + 1, ship->y + ly,ship->x + rx + 1, ship->y + ry,thrustcolor );}
-		  else if(ship->y-dy < 0){
-		    draw_triangle( ship->x - dx, ship->y - dy + 1,ship->x + lx, ship->y + ly + 1,ship->x + rx, ship->y + ry + 1,thrustcolor );}
-		  else if(ship->x+dx > 0){
-		    draw_triangle( ship->x - dx - 1, ship->y - dy,ship->x + lx - 1, ship->y + ly,ship->x + rx - 1, ship->y + ry,thrustcolor );}
-		  else if(ship->y+dy > 0){
-		    draw_triangle( ship->x - dx, ship->y - dy - 1,ship->x + lx, ship->y + ly - 1,ship->x + rx, ship->y + ry - 1,thrustcolor ); }
+        draw_triangle( ship->x - dx, ship->y - dy,
+                ship->x + lx, ship->y + ly,
+                ship->x + rx, ship->y + ry,
+                thrustcolor );                 
     }
-  
 
-  /* TASK 3 */
-  /* TODO: 
-     more drawing so that the ship and its thrust jet appears to
-     wrap around the 1x1 world correctly.
-  */
-  
+    /* TASK 3 */
+    /* TODO: 
+       more drawing so that the ship and its thrust jet appears to
+       wrap around the 1x1 world correctly.
+     */
 }
+
 
 // -- functions that operate on shots --------------------------------
 
