@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 /* Implements a linked list of integers
 
@@ -36,142 +37,97 @@
 
 
 void list_sort( list_t* list ){
-  element_t *el,*el2,*pre;
-  int check=0;
+  
+  
+  
+  
+  
+  
+  element_t *el;//,*el2,*pre;
+  //int check=0;
   //int sz=size(list);
-  if(list->head->next!=NULL){
-    el=list->head;
-    el2=list->head;
+  list_t **lt=malloc(sizeof(list_t*)*19);
+  int i;
+  
+  el=list->head;
+  
+  if(el){
+    int count,dg=0;
     do{
-      el2=el2->next;
-      el=list->head;
+      count=0;
+      //printf("5:%d\n",count);
+      for(i=0;i<19;i++){
+        lt[i]=list_create();
+      }
       do{
-        //puts("stss");
-        list_print(list);
-        element_t *t=el->next;
-        if(el->val>el->next->val){
-          //puts("suss");
-          
-          if(el==list->head){
-            el->next=el->next->next;
-            t->next=el;
-            list->head=t;
-            if(el->next==NULL){
-              list->tail=el;
-            }
-            //puts("svss");
+        int j=((el->val/(int)pow(10,dg))%10)+9;
+        if(count==0){
+          if(el->val/(int)pow(10,dg+1)!=0){
+            count=1;
           }
-          
-          else if(el->next==list->tail){
-            //puts("sss");
-            pre->next=el->next;
-            t->next=el;
-            el->next=NULL;
-            list->tail=el;
-            //puts("s2ss");
-            list_print(list);
-            //break;
-            
-          }else{
-            pre->next=el->next;
-            el->next=el->next->next;
-            t->next=el;
-            
-          }
-          //el=t;
-          //free(t);
-          check=1;
         }
-        //puts("3sss");
-        if(check==1){
-          pre=t;
-          //el=el->next;
-          //pre->next=el->next;
-          //el=el->next;
+        //printf("1:%d\n",j);
+        element_t *el3;//,*el4;
+        if(el->next){
+          list->head=list->head->next;
+      
+        }
+        if(lt[j]->tail){
+          lt[j]->tail->next=el;
+          lt[j]->tail=lt[j]->tail->next;
         }
         else{
-          pre=el;
-          el=el->next;
+          lt[j]->tail=el;
+          lt[j]->head=el;
         }
+        el3=el->next;
+        lt[j]->tail->next=NULL;
+        //list_append(&(lt[j]),el->val);
+        //printf("1:%d\n",el->next->val);
+        //printf("2:%d\n",lt[j]->tail->val);
+        el=el3;
+        //printf("3:%d\n",el->val);
+      }
+      while(el);
+      
+      
+      //printf("%d\n",list->head->next->val);
+      list_t *list2=list_create();
+    
+      for(i=0;i<19;i++){
+        if(lt[i]->head){
+          //printf("++%d\n",i);
+          if(list2->tail){
+            //printf("%d\n",(-4%10));
+            list2->tail->next=lt[i]->head;
+            list2->tail=lt[i]->tail;
+          }
+          else{
+            //printf("%d\n",lt[i]->head->val);
+            list2->head=lt[i]->head;
+            list2->tail=lt[i]->tail;
+          }
         
-        //index++;
-        //puts("4sss");
+        }
+      }
+      //printf("4:%d\n",list2->head->next->val);
+      *list=*list2;
+      
+      
+      el=list->head;
+      
+      dg++;
+      //printf("6:%d\n",count);
+      
+      
+    }
+    while(count!=0);
     
-      }while(el->next!=NULL);
     
-    }while(el->next!=NULL);
+    
+    
   }
   
-  return;
-  
-}
-
-// void list_print( list_t* list )
-// {
-//   printf( "{" );
-  
-//   if(size(list)>0){
-//     for( element_t* el = list->head;
-//       el!=NULL;
-//       el = el->next )
-//     printf( " %d", el->val );
-//   }
   
   
-
-//   printf( " }\n" );
-// }
-
-
-// int list_append( list_t* list, int i )
-// {
-//   element_t* el = element_create( i );
-//   if( size(list)<0 )
-//     return 1;
-  
-//   if( list->head == NULL )
-//     list->head = el;
-  
-//   if( list->tail )
-//     list->tail->next = el;
-
-//   list->tail = el;
-//   return 0;
-// }
-
-// list_t* list_create( void )
-// {
-  
-//   char t[sizeof(list_t)];
-//   int i;
-//   for(i=0;i<sizeof(list_t);i++){
-//     t[i]='\0';
-//   }
-//   //free(t);
-//   list_t* l = malloc( sizeof(list_t) );
-//   if( l )
-//     {
-//       l->head = NULL;
-//       l->tail = NULL;
-//     }
-//   return l;
-// }
-// int main(void){
-  
-//   list_t* l=list_create();
-//   list_append(l,9);
-//   list_print(l);
-//   puts("         ");
-//   list_append(l,5);
-//   list_print(l);
-//   puts("         ");
-//   list_append(l,6);
-//   list_print(l);
-//   puts("         ");
-//   list_append(l,1);
-//   list_print(l);
-//   puts("         ");
-//   list_sort(l);
-//   list_print(l);
-//   return 0;
-// }
+}  
