@@ -317,8 +317,40 @@ void roid_draw( const roid_t* roid )
 {
     // draw a rectangle around centre of the roid.
     draw_rectangle( roid->x-roid->width/2.0, roid->y-roid->height/2.0, 
-            roid->x+roid->width/2.0, roid->y+roid->height/2,
+            roid->x+roid->width/2.0, roid->y+roid->height/2.0,
             roid->color );
+            
+    if(roid->x-roid->width/2.0 < 0 && roid->y-roid->height/2.0 < 0)
+    {
+      draw_rectangle( 1+roid->x-roid->width/2.0, 1+roid->y-roid->height/2.0,1, 1,roid->color );
+      
+    }
+    if(roid->x-roid->width/2.0 < 0 && roid->y-roid->height/2.0 > 1){
+      draw_rectangle( 1+roid->x-roid->width/2.0, roid->y-roid->height/2.0-1,1, 0,roid->color ); 
+      
+    } 
+    if(roid->x-roid->width/2.0 > 1 && roid->y-roid->height/2.0 < 0){ 
+      draw_rectangle( roid->x-roid->width/2.0-1, 1+roid->y-roid->height/2.0, 0, 1, roid->color );
+    }
+    if(roid->x-roid->width/2.0 > 1 && roid->y-roid->height/2.0 > 1){
+      draw_rectangle( roid->x-roid->width/2.0-1, roid->y-roid->height/2.0-1,0, 0,roid->color );
+      
+    }
+    if(roid->x-roid->width/2.0 < 0){
+      draw_rectangle( 1+roid->x-roid->width/2.0, roid->y-roid->height/2.0,1, roid->y+roid->height/2.0,roid->color );
+      
+    }
+    if(roid->y-roid->height/2.0 < 0){
+      draw_rectangle( roid->x-roid->width/2.0, 1+roid->y-roid->height/2.0,roid->x+roid->width/2.0, 1,roid->color );
+      
+    }
+    if(roid->width/2.0+roid->x > 1){
+      draw_rectangle( 0, roid->y-roid->height/2.0,roid->x+roid->width/2.0-1, roid->y+roid->height/2.0,roid->color );
+      
+    }
+    if(roid->height/2.0+roid->y > 1){
+      draw_rectangle( roid->x-roid->width/2.0, 0,roid->x+roid->width/2.0, roid->y+roid->height/2.0-1,roid->color );
+    }
 
     /* TASK 4 */
     /* TODO: 
