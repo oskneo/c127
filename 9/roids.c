@@ -320,8 +320,6 @@ void roid_draw( const roid_t* roid )
     float y=fmod(roid->y+1.0,1.0);
     
     
-    
-    
     draw_rectangle( x-roid->width/2.0, y-roid->height/2.0, 
             x+roid->width/2.0, y+roid->height/2.0,
             roid->color );
