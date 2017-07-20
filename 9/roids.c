@@ -131,18 +131,51 @@ void ship_draw( const ship_t* ship )
 
     float rx = ship->size/2.0 * cos( fmod( ship->a - SHIP_BASE_WIDTH, 2.0*M_PI) );
     float ry = ship->size/2.0 * sin( fmod( ship->a - SHIP_BASE_WIDTH, 2.0*M_PI) );
+    
+    float x=fmod(ship->x+1.0,1.0);
+    float y=fmod(ship->y+1.0,1.0);
+    
 
-    draw_triangle( ship->x + dx, ship->y + dy,
-            ship->x + lx, ship->y + ly,
-            ship->x + rx, ship->y + ry,
-            shipcolor );
+    draw_triangle( x + dx - 1, y + dy, x + lx - 1, y + ly, x + rx- 1, y + ry, shipcolor );
+    
+    draw_triangle( x + dx, y + dy, x + lx, y + ly, x + rx, y + ry, shipcolor );
+    
+    draw_triangle( x + dx + 1, y + dy, x + lx + 1, y + ly, x + rx + 1, y + ry, shipcolor );
+    
+    draw_triangle( x + dx - 1, y + dy - 1, x + lx - 1, y + ly - 1, x + rx- 1, y + ry - 1, shipcolor );
+    
+    draw_triangle( x + dx, y + dy - 1, x + lx, y + ly - 1, x + rx, y + ry - 1, shipcolor );
+    
+    draw_triangle( x + dx + 1, y + dy - 1, x + lx + 1, y + ly - 1, x + rx + 1, y + ry - 1, shipcolor );
+    
+    draw_triangle( x + dx - 1, y + dy + 1, x + lx - 1, y + ly + 1, x + rx- 1, y + ry + 1, shipcolor );
+    
+    draw_triangle( x + dx, y + dy + 1, x + lx, y + ly + 1, x + rx, y + ry + 1, shipcolor );
+    
+    draw_triangle( x + dx + 1, y + dy + 1, x + lx + 1, y + ly + 1, x + rx + 1, y + ry + 1, shipcolor );
 
     if( ship->thrust )
     {
-        draw_triangle( ship->x - dx, ship->y - dy,
-                ship->x + lx, ship->y + ly,
-                ship->x + rx, ship->y + ry,
-                thrustcolor );                 
+        //draw_triangle( x - dx, y - dy,  x + lx, y + ly, x + rx, y + ry, thrustcolor );         
+        
+        draw_triangle( x - dx - 1, y - dy, x + lx - 1, y + ly, x + rx- 1, y + ry, thrustcolor );
+    
+        draw_triangle( x - dx, y - dy, x + lx, y + ly, x + rx, y + ry, thrustcolor );
+    
+        draw_triangle( x - dx + 1, y - dy, x + lx + 1, y + ly, x + rx + 1, y + ry, thrustcolor );
+    
+        draw_triangle( x - dx - 1, y - dy - 1, x + lx - 1, y + ly - 1, x + rx- 1, y + ry - 1, thrustcolor );
+    
+        draw_triangle( x - dx, y - dy - 1, x + lx, y + ly - 1, x + rx, y + ry - 1, thrustcolor );
+    
+        draw_triangle( x - dx + 1, y - dy - 1, x + lx + 1, y + ly - 1, x + rx + 1, y + ry - 1, thrustcolor );
+    
+        draw_triangle( x - dx - 1, y - dy + 1, x + lx - 1, y + ly + 1, x + rx- 1, y + ry + 1, thrustcolor );
+    
+        draw_triangle( x - dx, y - dy + 1, x + lx, y + ly + 1, x + rx, y + ry + 1, thrustcolor );
+    
+        draw_triangle( x - dx + 1, y - dy + 1, x + lx + 1, y + ly + 1, x + rx + 1, y + ry + 1, thrustcolor );
+    
     }
 
     /* TASK 3 */
