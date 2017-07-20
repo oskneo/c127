@@ -436,11 +436,23 @@ int shot_roid_hit( const shot_t* shot, const roid_t* roid )
     /* TODO: modify this code so it takes into account the toroidal
        shape of the world.
      */
+     
+    float lx=fmod(roid->x - roid->width/2+1.0,1.0);
+    float rx=fmod(roid->x + roid->width/2+1.0,1.0);
+    float uy=fmod(roid->y - roid->height/2+1.0,1.0);
+    float dy=fmod(roid->y + roid->height/2+1.0,1.0);
+    int check1=0,check2=0;
+    if(lx>rx){
+        check1++;
+    }
+    if(uy>dy){
+        check2++;
+    }
+    
+    float sx=fmod(shot->x+1.0,1.0);
+    float sy=fmod(shot->y+1.0,1.0);
 
-    return( shot->x >= roid->x - roid->width/2 &&
-            shot->x <= roid->x + roid->width/2 &&
-            shot->y >= roid->y - roid->height/2 &&
-            shot->y <= roid->y + roid->height/2 );
+    return( ((sx >= lx && sx <= rx && check1 == 0) || ((sx >= lx || sx <= rx) && check1 == 1)) && ((sy >= uy && sy <= dy && check2 == 0)||((sy >= uy || sy <= dy) && check2 == 1)));
 
 }
 
