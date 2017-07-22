@@ -1,7 +1,7 @@
-#include <stdio.h>
-#include <stdint.h> 
+//#include <stdio.h>
+//#include <stdint.h> 
 #include <stdlib.h>
-#include <string.h>
+//#include <string.h>
 #include <fstream>
 
 #include "image3.hpp"
@@ -26,18 +26,18 @@ Image::~Image(){
     //free(&i);
     free(pixels);
 }
-int resize( unsigned int width,  unsigned int height, uint8_t fillcolor ){
+int Image::resize( unsigned int width,  unsigned int height, uint8_t fillcolor ){
     pixels=(uint8_t**)malloc(sizeof(uint8_t)*width*height);
     if(pixels==NULL){
         return -1;
     }
-    for(int j=0;j<=(int)height;j++){
+    for(unsigned int j=0;j<=height;j++){
     
       pixels[j]=(uint8_t*)malloc(sizeof(uint8_t)*width);
       if(pixels[j]==NULL){
         return -1;
       }
-      for(int i;i<=(int)width;i++){
+      for(unsigned int i;i<=width;i++){
         pixels[j][i]=fillcolor;
       }
         
@@ -50,7 +50,7 @@ int resize( unsigned int width,  unsigned int height, uint8_t fillcolor ){
   
   /* Sets the color of the pixel at (x,y) to color. Returns 0 on success, else a non-zero 
      error code. If (x,y) is not a valid pixel, the call fails and the image does not change.*/
-int set_pixel( unsigned int x, unsigned int y, uint8_t color ){
+int Image::set_pixel( unsigned int x, unsigned int y, uint8_t color ){
     if(x<cols&&y<rows)
     {
         pixels[y][x]=color;
@@ -63,7 +63,7 @@ int set_pixel( unsigned int x, unsigned int y, uint8_t color ){
   
   /* Gets the color of the pixel at (x,y) and stores at the address pointed to 
      by colorp. Returns 0 on success, else a non-zero error code. */
-int get_pixel( unsigned int x, unsigned int y, uint8_t* colorp ){
+int Image::get_pixel( unsigned int x, unsigned int y, uint8_t* colorp ){
     if(x>=cols||y>=rows){
       return -1;
     }
@@ -82,7 +82,7 @@ int get_pixel( unsigned int x, unsigned int y, uint8_t* colorp ){
   /* Saves the image in the file filename. In a format that can be
      loaded by load().  Returns 0 on success, else a non-zero error
      code. */
-int save( const char* filename ){
+int Image::save( const char* filename ){
   int hdr[2];
   if(filename==NULL){
     return -1;
@@ -109,7 +109,7 @@ int save( const char* filename ){
   /* Load the an image from the file filename, replacing the current
      image size and data. The file is in a format that was saved by
      save().  Returns 0 success, else a non-zero error code . */
-int load( const char* filename ){
+int Image::load( const char* filename ){
   int hdr[2];
   if(filename==NULL){
     return -1;

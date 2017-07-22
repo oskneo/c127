@@ -1,7 +1,7 @@
-#include <stdio.h>
-#include <stdint.h> 
+//#include <stdio.h>
+//#include <stdint.h> 
 #include <stdlib.h>
-#include <string.h>
+//#include <string.h>
 #include "image.hpp"
 
 using namespace std;
@@ -19,7 +19,7 @@ Image::~Image(){
     //free(rows);
     free(pixels);
 }
-int resize( unsigned int width,  unsigned int height, uint8_t fillcolor ){
+int Image::resize( unsigned int width,  unsigned int height, uint8_t fillcolor ){
     pixels=(uint8_t*)realloc(pixels,sizeof(uint8_t)*width*height);
     if(pixels==NULL){
         return -1;
@@ -36,7 +36,7 @@ int resize( unsigned int width,  unsigned int height, uint8_t fillcolor ){
   
   /* Sets the color of the pixel at (x,y) to color. Returns 0 on success, else a non-zero 
      error code. If (x,y) is not a valid pixel, the call fails and the image does not change.*/
-int set_pixel( unsigned int x, unsigned int y, uint8_t color ){
+int Image::set_pixel( unsigned int x, unsigned int y, uint8_t color ){
     if(x<cols&&y<rows)
     {
         pixels[y*cols+x]=color;
@@ -49,7 +49,7 @@ int set_pixel( unsigned int x, unsigned int y, uint8_t color ){
   
   /* Gets the color of the pixel at (x,y) and stores at the address pointed to 
      by colorp. Returns 0 on success, else a non-zero error code. */
-int get_pixel( unsigned int x, unsigned int y, uint8_t* colorp ){
+int Image::get_pixel( unsigned int x, unsigned int y, uint8_t* colorp ){
     if(y*cols+x>cols*rows){
         return -1;
     }
