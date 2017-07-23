@@ -23,7 +23,7 @@ int Image::resize( unsigned int width,  unsigned int height, uint8_t fillcolor )
     uint8_t* pix;
     if(cols!=width||rows!=height){
         pix=(uint8_t*)realloc(pixels,sizeof(uint8_t)*width*height);
-        if(pix==NULL){
+        if(width!=0&&height!=0&&pix==NULL){
             return -1;
         }
         cols=width;

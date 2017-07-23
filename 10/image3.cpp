@@ -33,7 +33,7 @@ int Image::resize( unsigned int width,  unsigned int height, uint8_t fillcolor )
     int check=0;
     if(cols!=width||rows!=height){
         pix=(uint8_t**)realloc(pixels,sizeof(uint8_t*)*height);
-        if(pix==NULL){
+        if(width!=0&&height!=0&&pix==NULL){
             return -1;
         }
         cols=width;
@@ -48,7 +48,7 @@ int Image::resize( unsigned int width,  unsigned int height, uint8_t fillcolor )
     // if(pixels==NULL){
     //     return -1;
     // }
-    for(unsigned int j=0;j<height;j++){
+    for(unsigned int j=0;j<height&&width!=0;j++){
       if(check){
         pixels[j]=(uint8_t*)malloc(sizeof(uint8_t)*width);
         if(pixels[j]==NULL){
