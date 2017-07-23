@@ -3,7 +3,7 @@
 #include <stdlib.h>
 //#include <string.h>
 #include <fstream>
-
+#include <iostream>
 #include "image3.hpp"
 
 using namespace std;
@@ -15,6 +15,7 @@ Image::Image(){
     cols=0;
     rows=0;
     pixels=(uint8_t**)realloc(NULL,sizeof(uint8_t*));
+    
 }
 Image::~Image(){
     int i;
@@ -31,7 +32,7 @@ int Image::resize( unsigned int width,  unsigned int height, uint8_t fillcolor )
     uint8_t** pix;
     int check=0;
     if(cols!=width||rows!=height){
-        pix=(uint8_t**)realloc(pixels,sizeof(uint8_t)*width*height);
+        pix=(uint8_t**)realloc(pixels,sizeof(uint8_t*)*height);
         if(pix==NULL){
             return -1;
         }
@@ -39,7 +40,7 @@ int Image::resize( unsigned int width,  unsigned int height, uint8_t fillcolor )
         rows=height;
         check=1;
         
-        *pixels=*pix;
+        pixels=pix;
     }
   
   
@@ -53,15 +54,18 @@ int Image::resize( unsigned int width,  unsigned int height, uint8_t fillcolor )
         if(pixels[j]==NULL){
           return -1;
         }
+        //cout << "yyy" << endl;
       }
     
       
       
-      for(unsigned int i;i<width;i++){
+      for(unsigned int i=0;i<width;i++){
         pixels[j][i]=fillcolor;
+        //cout << pixels[j][i] << endl;
       }
         
     }
+    //cout << pixels[0][0] << endl;
     return 0;
     
 }
@@ -69,6 +73,9 @@ int Image::resize( unsigned int width,  unsigned int height, uint8_t fillcolor )
   /* Sets the color of the pixel at (x,y) to color. Returns 0 on success, else a non-zero 
      error code. If (x,y) is not a valid pixel, the call fails and the image does not change.*/
 int Image::set_pixel( unsigned int x, unsigned int y, uint8_t color ){
+    if(cols==0||rows==0){
+      return -1;
+    }
     if(x<cols&&y<rows)
     {
         pixels[y][x]=color;
@@ -110,7 +117,7 @@ int Image::save( const char* filename ){
   ofstream ofs(filename,ios::binary);
   if(ofs){
     ofs.write(reinterpret_cast<const char*>(hdr),2*sizeof(int));
-    ofs.write(reinterpret_cast<const char*>(pixels),sizeof(uint8_t**));
+    ofs.write(reinterpret_cast<const char*>(pixels),sizeof(uint8_t)*cols*rows);
     //ofs<<hdr<<" "<<pixels;
   }
     
@@ -128,19 +135,27 @@ int Image::save( const char* filename ){
      image size and data. The file is in a format that was saved by
      save().  Returns 0 success, else a non-zero error code . */
 int Image::load( const char* filename ){
-  int hdr[2];
+  unsigned int hdr[2];
   if(filename==NULL){
     return -1;
   }
   
   ifstream in(filename,ios::binary);
-    if(in){
+  if(in){
       //in.seekg(0,ios::beg);
       //in>>hdr>>pixels;
       in.read(reinterpret_cast<char*>(hdr),2*sizeof(int));
-      in.read(reinterpret_cast<char*>(pixels),2*sizeof(uint8_t**));
-    }
-    in.close();
+      if(cols!=hdr[0]||rows!=hdr[1]){
+        //cout << "not" << endl;
+        resize(hdr[0],hdr[1],0);
+      }
+      
+      
+      in.read(reinterpret_cast<char*>(pixels),sizeof(uint8_t)*cols*rows);
+  }
+  else{
+    return -1;
+  }
     
     
     // file.read(hdr,sizeof(int)*2);
