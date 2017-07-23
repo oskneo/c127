@@ -31,12 +31,12 @@ int Image::resize( unsigned int width,  unsigned int height, uint8_t fillcolor )
         //free(pixels);
         pixels=pix;
     }
-    cout<<"kkkkk"<<endl;
+    //cout<<"kkkkk"<<endl;
     for(unsigned int i=0;i<(height*width);i++){
         pixels[i]=fillcolor;
     }
     
-    cout << "yyy" << endl;
+    //cout << "yyy" << endl;
     
     
     return 0;
