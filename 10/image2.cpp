@@ -20,15 +20,24 @@ Image::~Image(){
     free(pixels);
 }
 int Image::resize( unsigned int width,  unsigned int height, uint8_t fillcolor ){
-    pixels=(uint8_t*)malloc(sizeof(uint8_t)*width*height);
-    if(pixels==NULL){
-        return -1;
+    uint8_t* pix;
+    if(cols!=width||rows!=height){
+        pix=(uint8_t*)realloc(pixels,sizeof(uint8_t)*width*height);
+        if(pix==NULL){
+            return -1;
+        }
+        cols=width;
+        rows=height;
+        
+        *pixels=*pix;
     }
     for(unsigned int i=0;i<(height*width);i++){
         pixels[i]=fillcolor;
     }
-    cols=width+1;
-    rows=height+1;
+    
+    
+    
+    
     return 0;
     
 }
@@ -49,17 +58,21 @@ int Image::set_pixel( unsigned int x, unsigned int y, uint8_t color ){
   /* Gets the color of the pixel at (x,y) and stores at the address pointed to 
      by colorp. Returns 0 on success, else a non-zero error code. */
 int Image::get_pixel( unsigned int x, unsigned int y, uint8_t* colorp ){
-    if(y*cols+x>cols*rows){
+    if(x>=cols||y>=rows){
         return -1;
     }
-    if(x<cols&&y<rows)
-    {
-        *colorp=pixels[y*cols+x];
-        return 0;
+    if(colorp==NULL){
+        return -1;
     }
     else{
-        return -1;
+        //std::cout << "hhh\n";
+        *colorp=pixels[y*cols+x];
+        
     }
+    
+    
+    //std::cout << "hhhh\n";
+    return 0;
     
     
 }

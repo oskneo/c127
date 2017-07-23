@@ -27,23 +27,41 @@ Image::~Image(){
     free(pixels);
 }
 int Image::resize( unsigned int width,  unsigned int height, uint8_t fillcolor ){
-    pixels=(uint8_t**)malloc(sizeof(uint8_t)*width*height);
-    if(pixels==NULL){
-        return -1;
+  
+    uint8_t** pix;
+    int check=0;
+    if(cols!=width||rows!=height){
+        pix=(uint8_t**)realloc(pixels,sizeof(uint8_t)*width*height);
+        if(pix==NULL){
+            return -1;
+        }
+        cols=width;
+        rows=height;
+        check=1;
+        
+        *pixels=*pix;
     }
-    for(unsigned int j=0;j<=height;j++){
-    
-      pixels[j]=(uint8_t*)malloc(sizeof(uint8_t)*width);
-      if(pixels[j]==NULL){
-        return -1;
+  
+  
+    //pixels=(uint8_t**)realloc(sizeof(uint8_t)*width*height);
+    // if(pixels==NULL){
+    //     return -1;
+    // }
+    for(unsigned int j=0;j<height;j++){
+      if(check){
+        pixels[j]=(uint8_t*)malloc(sizeof(uint8_t)*width);
+        if(pixels[j]==NULL){
+          return -1;
+        }
       }
-      for(unsigned int i;i<=width;i++){
+    
+      
+      
+      for(unsigned int i;i<width;i++){
         pixels[j][i]=fillcolor;
       }
         
     }
-    cols=width+1;
-    rows=height+1;
     return 0;
     
 }
@@ -64,7 +82,7 @@ int Image::set_pixel( unsigned int x, unsigned int y, uint8_t color ){
   /* Gets the color of the pixel at (x,y) and stores at the address pointed to 
      by colorp. Returns 0 on success, else a non-zero error code. */
 int Image::get_pixel( unsigned int x, unsigned int y, uint8_t* colorp ){
-    if(x>=cols||y>=rows){
+    if(x>=cols||y>=rows||!colorp){
       return -1;
     }
     if(x<cols&&y<rows)
