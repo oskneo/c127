@@ -1,7 +1,7 @@
 //#include <stdio.h>
 //#include <stdint.h> 
 #include <stdlib.h>
-//#include <iostream>
+#include <iostream>
 //#include <string.h>
 #include "image.hpp"
 
@@ -16,8 +16,7 @@ Image::Image(){
     pixels=(uint8_t*)realloc(NULL,sizeof(uint8_t*));
 }
 Image::~Image(){
-    //free(cols);
-    //free(rows);
+    
     free(pixels);
 }
 int Image::resize( unsigned int width,  unsigned int height, uint8_t fillcolor ){
@@ -36,7 +35,7 @@ int Image::resize( unsigned int width,  unsigned int height, uint8_t fillcolor )
         pixels[i]=fillcolor;
     }
     
-    
+    cout << pixels[0] << endl;
     
     
     return 0;
