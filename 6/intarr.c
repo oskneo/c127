@@ -1,3 +1,4 @@
+#include "stdio.h"
 #include "intarr.h"
 
 /* LAB 5 TASK 1 */
@@ -147,17 +148,28 @@ intarr_result_t intarr_find( intarr_t* ia, int target, int* i ){
 // successful, return INTARR_OK, otherwise return
 // INTARR_BADALLOC. If ia is null, return INTARR_BADARRAY.
 intarr_result_t intarr_push( intarr_t* ia, int val ){
-  int *new;
+  //int *new;
   if(ia==NULL){
     return INTARR_BADARRAY;
   }
-  new=realloc(ia->data,(ia->len+1)*sizeof(int));
-  if(new==NULL){
-    return INTARR_BADALLOC;
+  //new=realloc(ia->data,(ia->len+1)*sizeof(int));
+  int i;
+  for(i=0;i<ia->len;i++){
+    if(ia->data[i]=='\0'){
+      ia->data[i]=val;
+      break;
+    }
+    else if(i==ia->len-1){
+      return INTARR_BADALLOC;
+    }
   }
-  ia->len++;
-  ia->data=new;
-  ia->data[ia->len-1]=val;
+  
+  // if(new==NULL){
+  //   return INTARR_BADALLOC;
+  // }
+  //ia->len++;
+  //ia->data=new;
+  //ia->data[ia->len-1]=val;
   return INTARR_OK;
 }
 // If the array is not empty, remove the value with the highest index
@@ -167,7 +179,7 @@ intarr_result_t intarr_push( intarr_t* ia, int val ){
 intarr_result_t intarr_pop( intarr_t* ia, int* i ){
   
   
-  int *newia/*,l,j=-999999*/;
+  //int *newia/*,l,j=-999999*/;
   if(ia==NULL){
     return INTARR_BADARRAY;
   }
@@ -182,18 +194,30 @@ intarr_result_t intarr_pop( intarr_t* ia, int* i ){
   // }
   if(i!=NULL){
     *i=ia->data[ia->len-1];
+    
+    int ii;
+    for(ii=0;ii<ia->len;ii++){
+      if(ia->data[ii]=='\0'&&ii>0){
+        ia->data[ii-1]='\0';
+        break;
+      }
+      else if(ii==ia->len-1){
+        ia->data[ii]='\0';
+      }
+    }
+    
   }
   // for(l=k;l<ia->len-1;l++){
   //   ia->data[l]=ia->data[l+1];
   // }
-  newia=realloc(ia->data,(ia->len-1)*sizeof(int));
+  //newia=realloc(ia->data,(ia->len-1)*sizeof(int));
   
   // if(new==NULL){
   //   return INTARR_BADALLOC;
   // }
   
-  ia->len--;
-  ia->data=newia;
+  //ia->len--;
+  //ia->data=newia;
   
   return INTARR_OK;
   
@@ -243,10 +267,11 @@ intarr_result_t intarr_resize( intarr_t* ia, unsigned int newlen ){
       newia->data[i]=ia->data[i];
     }
   }
+  newia->len=newlen;
   
-  
-  
-  
+  *ia=*newia;
+  //free(ia);
+  //printf("%u\n",ia->len);
   
   // newia=realloc(ia->data,newlen*sizeof(int));
   
