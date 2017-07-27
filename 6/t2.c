@@ -89,7 +89,7 @@ intarr_t* intarr_load_json( const char* filename ){
     
   char st[10000],*tk;
   int fs=0;
-  intarr_t* ia=intarr_create(0);
+  intarr_t* ia=intarr_create(10);
   
   //char temp[10]="";
   //puts("ccccc");
@@ -132,7 +132,9 @@ intarr_t* intarr_load_json( const char* filename ){
         // if(ia->len==0){
         //   free(ia->data);
         // }
-        intarr_push(ia,atoi(tk));
+        if(intarr_push(ia,atoi(tk))==INTARR_BADALLOC){
+          intarr_resize(ia,ia->len*2);
+        }
         //check=1;
       }
       
