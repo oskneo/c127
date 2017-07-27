@@ -33,14 +33,15 @@ int main( int argc, char* argv[] )
   
   
   intarr_resize(test_ia,11);
-  puts("hhhh");
+  //puts("hhhh");
 
 
   printf("Printing test_ia\n"); 
   print_intarr( test_ia );
   
   intarr_resize(test_ia,10);
-  puts("hhhh");
+  //puts("hhhh");
+  intarr_push(test_ia,98);
 
 
   printf("Printing test_ia\n"); 
@@ -54,31 +55,42 @@ int main( int argc, char* argv[] )
 
   printf("pop\n");  
   int i=0;
+  
   intarr_pop( test_ia,&i );
+  printf("%d\n",i);
   print_intarr( test_ia );
   printf("pop\n");  
   intarr_pop( test_ia,&i );
+  printf("%d\n",i);
   print_intarr( test_ia );
   printf("pop\n");  
   intarr_pop( test_ia,&i );
+  printf("%d\n",i);
   print_intarr( test_ia );
   printf("pop\n");  
   intarr_pop( test_ia,&i );
+  printf("%d\n",i);
   print_intarr( test_ia );
   printf("pop\n");  
   intarr_pop( test_ia,&i );
+  printf("%d\n",i);
   print_intarr( test_ia );
   printf("pop\n");  
   intarr_pop( test_ia,&i );
+  printf("%d\n",i);
+  printf("%d\n",i);
   print_intarr( test_ia );
   printf("pop\n");  
   intarr_pop( test_ia,&i );
+  printf("%d\n",i);
   print_intarr( test_ia );
   printf("pop\n");  
   intarr_pop( test_ia,&i );
+  printf("%d\n",i);
   print_intarr( test_ia );
   printf("pop\n");  
   intarr_pop( test_ia,&i );
+  printf("%d\n",i);
   print_intarr( test_ia );
   printf("pop\n");  
   intarr_pop( test_ia,&i );

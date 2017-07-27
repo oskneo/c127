@@ -153,16 +153,54 @@ intarr_result_t intarr_push( intarr_t* ia, int val ){
     return INTARR_BADARRAY;
   }
   //new=realloc(ia->data,(ia->len+1)*sizeof(int));
-  int i;
+  int i,i2=0;
+  // for(i=0;i<ia->len;i++){
+  //   if(ia->data[i]=='\0'){
+  //     ia->data[i]=val;
+  //     break;
+  //   }
+  //   else if(i==ia->len-1){
+  //     if(intarr_resize(ia,ia->len*2)!=INTARR_OK){
+  //       return INTARR_BADALLOC;
+  //     }
+  //     else{
+  //       ia->data[i+1]=val;
+  //     }
+      
+  //   }
+  // }
+  
+  
   for(i=0;i<ia->len;i++){
-    if(ia->data[i]=='\0'){
-      ia->data[i]=val;
-      break;
+      if(ia->data[i]!='\0'){
+        i2=i;
+        
+        // *i=ia->data[ii-1];
+        // ia->data[ii-1]='\0';
+        // break;
+      }
+      // else if(ia->data[ii]=='\0'&&ii==0){
+      //   return INTARR_BADINDEX;
+      // }
+      // else if(ii==ia->len-1){
+      //   *i=ia->data[ii];
+        
+
+      //   ia->data[ii]='\0';
+        
+      // }
     }
-    else if(i==ia->len-1){
-      return INTARR_BADALLOC;
+    if(i2==ia->len-1){
+      if(intarr_resize(ia,ia->len*2)!=INTARR_OK){
+        return INTARR_BADALLOC;
+      }
+      else{
+        ia->data[i2+1]=val;
+      }
     }
-  }
+    else{
+      ia->data[i2+1]=val;
+    }
   
   // if(new==NULL){
   //   return INTARR_BADALLOC;
@@ -194,24 +232,35 @@ intarr_result_t intarr_pop( intarr_t* ia, int* i ){
   // }
   if(i!=NULL){
     //*i=ia->data[ia->len-1];
-    
+    int i2=0;
     int ii;
     for(ii=0;ii<ia->len;ii++){
-      if(ia->data[ii]=='\0'&&ii>0){
-        *i=ia->data[ii-1];
-        ia->data[ii-1]='\0';
-        break;
+      if(ia->data[ii]!='\0'){
+        i2=ii;
+        
+        // *i=ia->data[ii-1];
+        // ia->data[ii-1]='\0';
+        // break;
       }
-      else if(ia->data[ii]=='\0'&&ii==0){
-        return INTARR_BADINDEX;
-      }
-      else if(ii==ia->len-1){
-        *i=ia->data[ii];
+      // else if(ia->data[ii]=='\0'&&ii==0){
+      //   return INTARR_BADINDEX;
+      // }
+      // else if(ii==ia->len-1){
+      //   *i=ia->data[ii];
         
 
-        ia->data[ii]='\0';
+      //   ia->data[ii]='\0';
         
-      }
+      // }
+    }
+    if(i2==0){
+      return INTARR_BADINDEX;
+    }
+    else{
+      *i=ia->data[i2];
+        
+
+      ia->data[i2]='\0';
     }
     
   }
