@@ -193,16 +193,24 @@ intarr_result_t intarr_pop( intarr_t* ia, int* i ){
   //   }
   // }
   if(i!=NULL){
-    *i=ia->data[ia->len-1];
+    //*i=ia->data[ia->len-1];
     
     int ii;
     for(ii=0;ii<ia->len;ii++){
       if(ia->data[ii]=='\0'&&ii>0){
+        *i=ia->data[ii-1];
         ia->data[ii-1]='\0';
         break;
       }
+      else if(ia->data[ii]=='\0'&&ii==0){
+        return INTARR_BADINDEX;
+      }
       else if(ii==ia->len-1){
+        *i=ia->data[ii];
+        
+
         ia->data[ii]='\0';
+        
       }
     }
     
