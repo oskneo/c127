@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <string.h>
 
 
 unsigned int deadoralive( uint8_t array[], 
@@ -21,9 +22,9 @@ unsigned int deadoralive( uint8_t array[],
 		y=0;
 	}
 	
-	uint8_t *cl;
-	get_pixel(x,y,cl);
-    if(*cl==0){
+	uint8_t cl=get_pixel(array,cols,rows,x,y);
+	
+    if(cl==0){
 		return 0;
 		
 	}
@@ -37,6 +38,9 @@ void life( uint8_t array[],
 	     unsigned int rows )
 {
 	int i,j;
+	
+	uint8_t ar2=malloc(cols*rows*sizeof(uint8_t));
+	zero(ar2,cols,rows);
 	for(i=0;i<cols;i++){
 		for(j=0;j<rows;j++){
 		    int check =deadoralive(array,cols,rows,i,j);
@@ -67,14 +71,14 @@ void life( uint8_t array[],
 		    }
 		    if(check==1){
 		        if(n<2||n>3){
-		            set_pixel(array, cols, rows, i,j,0);
+		            set_pixel(ar2, cols, rows, i,j,0);
 		        }
 		        
 		        
 		    }
 		    else{
 		        if(n==3){
-		            set_pixel(array, cols, rows, i,j,255);
+		            set_pixel(ar2, cols, rows, i,j,255);
 		        }
 		    }
 			    
@@ -82,6 +86,9 @@ void life( uint8_t array[],
 			
 		}
 	}
+	
+	
+	memcpy(array,ar2,cols*rows*sizeof(uint8_t));
 		      
 }
 
