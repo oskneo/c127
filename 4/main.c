@@ -1,9 +1,20 @@
 #include <stdio.h>
-#include "t2.c"
+#include "imgops.h"
 
 int main(void){
-    
-    uint8_t img[193*96];
-    draw_rectangle( img, 193,  96,  -73,   67,  126,   41,  117 );
-    return 0;
+	int w=500,h=500;
+	
+	int glider[][2] = { {1,0}, {2,1}, {0,2}, {1,2}, {2,2} };   
+
+	for( int i=0; i<5; i++ )
+    		set_pixel( img, w, h, glider[i][0], glider[i][1], 255 );
+  
+	for( int i=0; i<32; i++ )
+	{ 
+      		draw_image_grey( img, w, h );
+      		life( img, w, h );
+	} 
+	draw_image_grey( img, w, h );
+
+
 }
