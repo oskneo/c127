@@ -191,7 +191,7 @@ intarr_result_t intarr_push( intarr_t* ia, int val ){
       // }
     }
     if(i2==ia->len-1){
-      if(intarr_resize(ia,ia->len*2)!=INTARR_OK){
+      if(intarr_resize(ia,ia->len+1)!=INTARR_OK){
         return INTARR_BADALLOC;
       }
       else{
