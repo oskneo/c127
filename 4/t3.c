@@ -77,7 +77,7 @@ void life( uint8_t array[],
 		            ar3[k][1]=j;
 		            ar3[k][2]=1;
 		            k++;
-		            printf("i:%d,j:%d,0.\n",i,j);
+		            //printf("i:%d,j:%d,0.\n",i,j);
 		        }
 		        
 		        
@@ -89,20 +89,20 @@ void life( uint8_t array[],
 		            ar3[k][1]=j;
 		            ar3[k][2]=2;
 		            k++;
-		            printf("i:%d,j:%d,255.\n",i,j);
+		            //printf("i:%d,j:%d,255.\n",i,j);
 		        }
 		    }
-			if(n){
-				printf("i:%d,j:%d,n:%d,st:%d.\n",i,j,n,check);
-			}
+			// if(n){
+			// 	printf("i:%d,j:%d,n:%d,st:%d.\n",i,j,n,check);
+			// }
 			
 			
 			
 		}
 	}
 	
-	int x=1,y=2;
-	printf("0:%d\n",array[ y*cols + x ]);
+	//int x=1,y=2;
+	//printf("0:%d\n",array[ y*cols + x ]);
 	//memcpy(array,ar2,cols*rows*sizeof(uint8_t));
 	k--;
 	for(;k>=0;k--){
@@ -116,7 +116,7 @@ void life( uint8_t array[],
 	
 	
 	
-	printf("1:%d\n",array[ y*cols + x ]);
+	//printf("1:%d\n",array[ y*cols + x ]);
 	//printf("2:%d\n",ar2[ y*cols + x ]);
 	//*array=*ar2;
 		      
