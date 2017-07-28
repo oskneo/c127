@@ -22,8 +22,8 @@
 
 int main( int argc, char* argv[] )
 {
-  const unsigned int winwidth  = 400;
-  const unsigned int winheight = 400; 
+  const unsigned int winwidth  = 100;
+  const unsigned int winheight = 100; 
 
   unsigned int imgwidth  = winwidth / 4;
   unsigned int imgheight = winheight / 4 ; 
@@ -74,7 +74,7 @@ int main( int argc, char* argv[] )
 for( int i=0; i<5; i++ )
     set_pixel( img, imgwidth, imgheight, glider[i][0], glider[i][1], 255 );
   
-for( int i=0; i<32; i++ )
+for( int i=0; i<320; i++ )
 { 
       draw_image_grey( img, imgwidth, imgheight );
       life( img, imgwidth, imgheight );
