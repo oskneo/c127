@@ -88,7 +88,8 @@ void life( uint8_t array[],
 	}
 	
 	
-	memcpy(array,ar2,cols*rows*sizeof(uint8_t));
+	//memcpy(array,ar2,cols*rows*sizeof(uint8_t));
+	*array=*ar2;
 		      
 }
 

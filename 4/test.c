@@ -34,28 +34,29 @@ int main( int argc, char* argv[] )
   uint8_t* img = NULL; 
   
   if( argc == 2 ) // if a filename was specified
-    {
-      uint32_t depth=0;
-      int alpha=0;
-      if( LoadPngImage( argv[1], &imgwidth, &imgheight, &depth, &alpha, &img ) == 0 )
+  {
+	uint32_t depth=0;
+    int alpha=0;
+	if( LoadPngImage( argv[1], &imgwidth, &imgheight, &depth, &alpha, &img ) == 0 )
 	{
-	  printf( "failed to load image %s\n", argv[1] );
-	  exit(1);
+		printf( "failed to load image %s\n", argv[1] );
+		exit(1);
+  	
 	}      
-    }
+  }
   else // no filename specified: create a blank image
-    {
-      // allocate an array for our image
-      img = malloc( imgwidth * imgheight * sizeof(uint8_t) );
-      if( img == NULL )
+  {
+    // allocate an array for our image
+	img = malloc( imgwidth * imgheight * sizeof(uint8_t) );
+    if( img == NULL )
 	{
 	  printf( "failed to allocate memory for image.\n" );
 	  exit(1);
 	}      
       
       // set the whole array to zero (black)
-      memset( img, 0, imgwidth * imgheight * sizeof(img[0] ));      
-    }
+    memset( img, 0, imgwidth * imgheight * sizeof(img[0] ));      
+  }
   
   // todo: this is a good place to use some image-modifying functions from imgops.c
   
