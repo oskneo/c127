@@ -72,6 +72,7 @@ void life( uint8_t array[],
 		    if(check==1){
 		        if(n<2||n>3){
 		            set_pixel(ar2, cols, rows, i,j,0);
+		            printf("i:%d,j:%d,0.\n",i,j);
 		        }
 		        
 		        
@@ -79,6 +80,7 @@ void life( uint8_t array[],
 		    else{
 		        if(n==3){
 		            set_pixel(ar2, cols, rows, i,j,255);
+		            printf("i:%d,j:%d,0.\n",i,j);
 		        }
 		    }
 			if(n){
