@@ -93,6 +93,7 @@ void life( uint8_t array[],
 	}
 	
 	int x=1,y=2;
+	printf("0:%d\n",array[ y*cols + x ]);
 	memcpy(array,ar2,cols*rows*sizeof(uint8_t));
 	printf("1:%d\n",array[ y*cols + x ]);
 	printf("2:%d\n",ar2[ y*cols + x ]);
