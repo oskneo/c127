@@ -81,15 +81,18 @@ void life( uint8_t array[],
 		            set_pixel(ar2, cols, rows, i,j,255);
 		        }
 		    }
-			    
+			if(n){
+				printf("i:%d,j:%d,n:%d.\n",i,j,n);
+			}
+			
 			
 			
 		}
 	}
 	
 	
-	//memcpy(array,ar2,cols*rows*sizeof(uint8_t));
-	*array=*ar2;
+	memcpy(array,ar2,cols*rows*sizeof(uint8_t));
+	//*array=*ar2;
 		      
 }
 
