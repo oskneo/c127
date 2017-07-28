@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
-
+#include "imgops.h"
 
 unsigned int deadoralive( uint8_t array[], 
 	     unsigned int cols, 
@@ -39,7 +39,7 @@ void life( uint8_t array[],
 {
 	int i,j;
 	
-	uint8_t ar2=malloc(cols*rows*sizeof(uint8_t));
+	uint8_t *ar2=malloc(cols*rows*sizeof(uint8_t));
 	zero(ar2,cols,rows);
 	for(i=0;i<cols;i++){
 		for(j=0;j<rows;j++){

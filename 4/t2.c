@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+
+
  
 void draw_rectangle( uint8_t array[], 
          unsigned int cols, 

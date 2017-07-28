@@ -7,7 +7,7 @@
 
 /* get the value in the array at coordinate (x,y)
  */
-#include <stdint.h>
+//#include <stdint.h>
 uint8_t get_pixel( const uint8_t array[], 
 		   unsigned int cols, 
 		   unsigned int rows,
