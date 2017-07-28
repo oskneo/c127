@@ -82,7 +82,7 @@ void life( uint8_t array[],
 		        }
 		    }
 			if(n){
-				printf("i:%d,j:%d,n:%d.\n",i,j,n);
+				printf("i:%d,j:%d,n:%d,st:%d.\n",i,j,n,check);
 			}
 			
 			
