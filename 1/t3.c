@@ -3,12 +3,11 @@
  
 int main( void )
 {
-  float d = 0;
+  float f = 0;
  
-  //printf("Enter a floating number: \n");
  
-  scanf( "%f", &d );
-  printf( "%.0f %.0f %.0f\n", floor(d), round(d), ceil(d) );
+  scanf( "%f", &f );
+  printf( "%.0f %.0f %.0f\n", floor(f), round(f), ceil(f) );
  
   return 0;
 }

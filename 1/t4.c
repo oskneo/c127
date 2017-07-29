@@ -3,19 +3,20 @@
  
 int main( void )
 {
-  float d = 0;
+  float f = 0;
  
-  //printf("Enter a floating number: \n");
-  int ern =scanf( "%f", &d );
-  if(ern<=0){
-      printf("scanf error: (%d)\n",ern);
+  
+  int sig =scanf( "%f", &f );
+  //
+  if(sig<=0){
+      printf("scanf error: (%d)\n",sig);
+      //
   }
   else{
-      printf( "%.0f %.0f %.0f\n", floor(d), round(d), ceil(d) );
-
+      printf( "%.0f %.0f %.0f\n", floor(f), round(f), ceil(f) );
+//
   }
-  //printf("%d",ern);
-  //puts("");
+  
  
   return 0;
 }

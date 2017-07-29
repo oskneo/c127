@@ -22,7 +22,8 @@ unsigned int deadoralive( uint8_t array[],
 		y=0;
 	}
 	
-	uint8_t cl=get_pixel(array,cols,rows,(unsigned int)x,(unsigned int)y);
+	//uint8_t cl=get_pixel(array,cols,rows,(unsigned int)x,(unsigned int)y);
+	uint8_t cl=array[ y*cols + x ];
 	
     if(cl==0){
 		return 0;
@@ -40,7 +41,7 @@ void life( uint8_t array[],
 	int i,j;
 	
 	//uint8_t *ar2=malloc(cols*rows*sizeof(uint8_t));
-	int ar3[10][3],k=0;
+	int ar3[100][3],k=0;
 	//zero(ar2,cols,rows);
 	for(i=0;i<cols;i++){
 		for(j=0;j<rows;j++){

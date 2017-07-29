@@ -3,30 +3,37 @@
  
 int main( void )
 {
-  float d=0,min=INFINITY,max=-INFINITY,total=0,n=0;
+  float f = 0, mnum = INFINITY, xnum = -INFINITY, tt = 0, n = 0;
  
-  //printf("Enter floating numbers:\n");
-  int ern=0;
-  while (ern!=EOF){
-      ern =scanf( "%f", &d );
-      if(ern>0){
-          if(d<min){
-              min=d;
+  
+  int sig=0;
+  //
+  while ( sig!=EOF ){
+    //
+      sig =scanf( "%f", &f );
+      //
+      if(sig>0){
+          if(f<mnum){
+            //
+              mnum=f;
+              //
           }
-          if(d>max){
-              max=d;
+          if ( f > xnum ){
+            //
+              xnum = f;
+              //
           }
+          //
           n++;
-          total+=d;
+          //
+          tt+=f;
       }
   }
-  if(n>0){
-        printf( "%.2f %.2f %.2f\n", min, max, total/n );
-
+  if ( n > 0 ){
+    //
+        printf( "%.2f %.2f %.2f\n", mnum, xnum, tt/n );
+//
   }
-  // else{
-  //     printf("\nPlease input at least one floating number.\n");
-  // }
   
 
  

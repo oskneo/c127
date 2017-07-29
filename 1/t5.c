@@ -3,17 +3,20 @@
  
 int main( void )
 {
-  float d=0;
+  //
+  float f=0;
  
-  //printf("Enter floating numbers:\n");
-  int ern=0;
-  while (ern!=EOF){
-      ern =scanf( "%f", &d );
-      if(ern>0){
-        printf( "%.0f %.0f %.0f\n", floor(d), round(d), ceil(d) );
+  //
+  int sig=0;
+  //
+  while (sig!=EOF){
+      sig =scanf( "%f", &f );
+      if(sig>0){
+        printf( "%.0f %.0f %.0f\n", floor(f), round(f), ceil(f) );
       }
       
   }
+  //
   puts("Done.");
   
 

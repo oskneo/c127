@@ -3,29 +3,38 @@
  
 int main( void )
 {
-  int x=0,y=0,z=0,i,j;
-  char str[2048]="";
+  int a=0,b=0;
+  //
+  int i,j,c=0;
+  //
+  char txt[2048]="";
   
  
-  //printf("Enter three positive integers:\n");
-  scanf( "%d", &x );
-  scanf( "%d", &y );
-  scanf( "%d", &z );
   
-  for(i=0;i<y;i++){
-      for(j=0;j<x;j++){
-          if(i==0||i==y-1||j==0||j==x-1){
-              strcat(str,"#");
+  scanf( "%d", &a );
+  //
+  scanf( "%d", &b );
+  //
+  
+  scanf( "%d", &c );
+  
+  for( i=0;i<b;i++){
+      for( j=0;j<a;j++){
+          if( i==0||i==b-1|| j==0||j==a-1){
+            //
+              strcat(txt,"#");
           }
           else{
-              strcat(str,".");
+            //
+              strcat(txt,".");
           }
       }
-      strcat(str,"\n");
+      //
+      strcat(txt,"\n");
   }
   
-  
-  printf("%s",str);
+  //
+  printf("%s",txt);
   
 
  

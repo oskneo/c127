@@ -1,61 +1,83 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 #include <string.h>
  
 int main( void )
 {
-  int x=0,y=0,z=0,i,j;
-  
-  char str[2048]="";
+  int a=0,b=0;
+  int c=0,x,y;
+  char txt[2048] = "";
   
  
-  //printf("Enter three positive integers:\n");
-  scanf( "%d", &x );
-  scanf( "%d", &y );
-  scanf( "%d", &z );
-  float m=2.0*z/x;
-  int left,right;
-  int check=0;
-  for(i=z-1;i>0;i--){
-      left=floor(i/m);
-      right=x-left-1;
-      for(j=0;j<x&&check!=3;j++){
+ 
+  scanf( "%d", &a );
+  //
+  scanf( "%d", &b );
+  //
+  scanf( "%d", &c );
+  //
+  float m=2.0*c/a;
+  //
+  int lt,rt;
+  //
+  int ck=0;
+  //
+  for( x=c-1;x>0;x--){
+    //
+      lt= floor(x/m);
+      //
+      rt= a-lt-1;
+      //
+      for( y=0;y<a&& ck!=3;y++){
           
           
           
-          
-          if(j==left||j==right||(check==1&&i==z-1)){
-              strcat(str,"#");
-              if(j==right){
-                  check=2;
+          //
+          if( y==lt||y==rt|| (ck==1&&x==c-1)){
+            //
+              strcat( txt,"#");
+              //
+              if( y==rt){
+                //
+                  ck=2;
               }
-              else if(j==left){
-                  check=1;
+              else if( y==lt){
+                //
+                  ck=1;
               }
           }
-          else if(check==1){
-              strcat(str,".");
+          else if( ck==1){
+            //
+              strcat( txt,".");
           }
           
           else{
-              strcat(str," ");
+            //
+              strcat( txt," ");
           }
-          if(check==2){
-            strcat(str,"\n");
-            check=3;
+          if(ck==2){
+            //
+            strcat(txt,"\n");
+            //
+            ck=3;//
           }
       }
-      check=0;
+      //
+      ck=0;
       
   }
   
-  for(j=0;j<x;j++){
-      strcat(str,"#");
+  for( y=0;y<a;y++){
+    //
+      strcat( txt,"#");
+      //
   }
-  strcat(str,"\n");
+  //
+  strcat( txt,"\n");
   
-  
-  printf("%s",str);
+  //
+  printf( "%s",txt);
   
 
  
