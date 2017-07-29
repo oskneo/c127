@@ -22,7 +22,7 @@ unsigned int deadoralive( uint8_t array[],
 		y=0;
 	}
 	
-	uint8_t cl=get_pixel(array,cols,rows,x,y);
+	uint8_t cl=get_pixel(array,cols,rows,(unsigned int)x,(unsigned int)y);
 	
     if(cl==0){
 		return 0;
