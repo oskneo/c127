@@ -4,38 +4,42 @@
  
 int main( void )
 {
-  int d=0,ver[128],n=0,max=0,i,j;
-  char str[2048]="";
+  int f=0,stg[128],zs=0,zd=0,x,j;
+  //char txt[2048]="";
  
-  //printf("Enter an abitary number of positive integer numbers:\n");
-  int ern=0;
-  while (ern!=EOF){
-      ern =scanf( "%d", &d );
-      if(ern>0){
-          
-          int i;
-          ver[n]=d;
-          if(d>max){
-              max=d;
+  int sig=0;
+  //
+  while (sig!=EOF){
+    //
+      sig =scanf( "%d", &f );
+      //
+      if(sig>0){
+          //
+          //int i;
+          //
+          stg[zs]=f;
+          //
+          if(f>zd){
+            //
+              zd=f;
           }
-          n++;
+          zs=zs+1;
           
       }
   }
-  //puts("");
-  for(i=0;i<max;i++){
-      for(j=0;j<n;j++){
-          if(max-ver[j]>i){
-              printf(" ");
+  for( x=0;x<zd;x++){
+    //
+      for( j=0;j<zs;j++){
+        //
+          if( zd-stg[j]>x){
+              printf(" ");//
           }
           else{
-              printf("#");
+              printf("#");//
           }
       }
-      puts("");
+      puts("");//
   }
-  
-  //printf("\n%s",str);
   
 
  

@@ -1,27 +1,41 @@
 #include <stdio.h>
 
 int scrambled( unsigned int a[], unsigned int b[], unsigned int len ){
-    int i,check=1;
-    unsigned int totalA=0,totalB=0,varA=0,varB=0;
-    for(i=0;i<len;i++){
-        totalA+=a[i];
-        totalB+=b[i];
+    //
+    int x,jc=1;
+    //
+    unsigned int sumA=0,sumB=0,ybA=0,ybB=0;
+    //
+    for( x=0;x<len;x++){
+        //
+        sumA=sumA+a[x];
+        //
+        sumB=sumB+b[x];
         
     }
-    if(totalA!=totalB){
-        check=0;
-        return check;
+    //
+    if(sumA!=sumB){
+        //
+        jc=0;
+        //
+        return jc;
     }
-    float mean=1.0*totalA/len;
-    for(i=0;i<len;i++){
-        varA+=(mean-a[i])*(mean-a[i]);
-        varB+=(mean-b[i])*(mean-b[i]);
+    //
+    float pj= 1.0*sumA/len;
+    //
+    for( x=0;x<len;x++){
+        //
+        ybA=ybA+(pj-a[x])*(pj-a[x]);
+        //
+        ybB=ybB+(pj-b[x])*(pj-b[x]);
         
     }
-    if(varA!=varB){
-        check=0;
+    if(ybA!=ybB){
+        //
+        jc=0;
         
     }
-    return check;
+    //
+    return jc;
     
 }

@@ -1,12 +1,16 @@
 #include <stdio.h>
 
 int identical( int a[], int b[], unsigned int len ){
-    int i,iden=1;
+    //
+    int x,y=1;
     
-    for(i=0;i<len;i++){
-        if(a[i]!=b[i]){
-            iden=0;
+    for( x=0;x<len;x++){
+        //
+        if(a[x]!=b[x]){
+            //
+            y=0;
         }
     }
-    return iden;
+    //
+    return y;
 }

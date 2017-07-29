@@ -4,68 +4,64 @@
  
 int main( void )
 {
-  unsigned long charcount=0,wordcount=0,linecount=0;
-  char str[204800]="";
+  unsigned long cc=0,wc=0,lc=0;
+  //
+  char xtx[204800]="";
+  //
   char st;
-  int check=1;
+  //
+  int ck=1;
+  //
   char *ch="abcdefghijklmnopqrstuvwxyzABCDEFGHJIKLMNOPQRSTUVWXYZ'";
+  //
   char *p;
  
-  //printf("Enter anythings:\n");
   int ern=0;
+  //
   while (ern!=EOF){
+    //
       ern =scanf( "%c", &st );
+      //
       if(ern>0){
           
           
-          str[charcount]=st;
-          str[charcount+1]='\0';
+          xtx[cc]=st;
+          xtx[cc+1]='\0';
           
           if(st=='\n'){
-            linecount++;
+            lc++;
           }
-          // if(charcount>0&&(st==' '||st=='.'||st=='\n'||st==EOF||st=='\"'||st==','||st=='-'||st=='?'||st=='!')&&(isalpha(str[charcount-1])||str[charcount-1]=='\'')){
-          //   wordcount++;
-          // }
           
-          if(!isspace(st)&&(isspace(str[charcount-1])||str[charcount-1]=='\0')){
-            wordcount+=check;
-            //check=0;
+          if( !isspace(st)&& (isspace(xtx[cc-1])|| xtx[cc-1]=='\0')){
+            wc+=ck;
+            //ck=0;
           }
           
           p=strchr(ch,st);
           if(p==NULL){
-            if(check==1){
-              check=0;
+            if(ck==1){
+              ck=0;
             }
             
             
           }
           else{
-            if(check==0){
-              wordcount++;
-              check=1;
+            if(ck==0){
+              wc++;
+              ck=1;
             }
           }
           p=NULL;
           
-          // else{
-          //   check=1;
-            
-          // }
           
           
-          charcount++;
+          cc++;
           
           
       }
   }
-  //puts(str);
-  // if(str[charcount-2]!='\n'){
-  //   linecount++;
-  // }
   
-  printf( "%lu %lu %lu\n", charcount, wordcount, linecount );
+  printf( "%lu %lu %lu\n", cc, wc, lc );
   
 
  

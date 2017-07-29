@@ -5,28 +5,38 @@
  
 int main( int argc, char* argv[] )
 {
-    int len1=strlen(argv[1]),len2=strlen(argv[2]),i,j,check2=1;
-    //strcmp(argv[1],argv[2]);
-    char fir=argv[2][0];
-    for(i=0;i<len1-len2+1;i++){
-        check2=1;
-        for(j=0;j<len2;j++){
-            if(argv[1][i+j]!=argv[2][j]){
-                check2=0;
+    int cd1=strlen(argv[1]),cd2=strlen(argv[2]);
+    
+    int a,j,ck=1;
+    //char fr=argv[2][0];
+    //
+    for(a=0;a<cd1-cd2+1;a++){
+        //
+        ck=1;
+        //
+        for( j=0;j<cd2;j++){
+            //
+            if( argv[1][a+j]!=argv[2][j]){
+                //
+                ck=0;
             }
             
         }
-        if(check2==1){
+        if( ck==1){
+            //
             break;
         }
     }
-    if(len1<len2){
-        check2=0;
+    if( cd1<cd2){
+        //
+        ck=0;
     }
-    if(check2==1){
+    if( ck==1){
+        //
         puts("true");
     }
     else{
+        //
         puts("false");
     }
     

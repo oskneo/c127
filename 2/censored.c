@@ -10,75 +10,90 @@ int main( int argc, char* argv[]  )
     
     
 
-  unsigned long charcount=0;
-  char str[204800]="";
-  char st;
+  unsigned long cc=0;
+  //
+  char txt[102400]="";
+  //
+  char xx;
  
-  //printf("Enter anythings:\n");
-  int ern=0;
-  while (ern!=EOF){
-      ern =scanf( "%c", &st );
-      if(ern>0){
+  int sig=0;
+  //
+  while (sig!=EOF){
+      //
+      sig =scanf( "%c", &xx );
+      //
+      if(sig>0){
           
           
-          str[charcount]=st;
-          str[charcount+1]='\0';
+          txt[cc]=xx;
+          //
+          txt[cc+1]='\0';
+          //
           
-          
-          charcount++;
+          cc++;
           
           
       }
   }
-  //puts(str);
   
   
   
-    int len2[argc-1],i,j,k,x,check2=1;
-    for(x=0;x<argc-1;x++){
-        len2[x]=strlen(argv[x+1]);
+    int ln[argc-1],a,b,c,x,ck=1;
+    //
+    for( x=0;x<argc-1;x++){
+        //
+        ln[x]=strlen(argv[x+1]);
+        //
     }
-    //strcmp(argv[1],argv[2]);
-    
-    //puts("");
-    for(i=0;i<charcount;i++){
+    for( a=0;a<cc;a++){
+        //
         
-        
-        for(k=0;k<argc-1;k++){
-            check2=1;
-            if(len2[k]>=128){
-                k++;
-                if(k==argc-1){
+        for( c=0;c<argc-1;c++){
+            //
+            ck=1;
+            //
+            if( ln[c]>=128){
+                //
+                c++;
+                //
+                if(c==argc-1){
+                    //
                     break;
                 }
             }
-            for(j=0;j<len2[k];j++){
-            
-                if(str[i+j]!=argv[k+1][j]){
-                    //puts("aaa");
-                    check2=0;
+            for( b=0;b<ln[c];b++){
+            //
+                if( txt[a+b]!=argv[c+1][b]){
+                  
+                    ck=0;
+                    //
                     break;
+                    //
                 }
             
             }
-            if(check2==1){
+            //
+            if( ck==1){
+                //
                 break;
             }
         }
-        if(check2==1){
+        if( ck==1){
+            //
             printf("CENSORED");
-            i+=len2[k]-1;
+            //
+            a+=ln[c]-1;
+            //
         }
         else{
-            printf("%c",str[i]);
+            //
+            printf("%c",txt[a]);
+            //
         }
         
         
         
     }
-    //puts("");
-  
-  
   
 
  

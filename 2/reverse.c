@@ -1,10 +1,14 @@
 #include <stdio.h>
 void reverse( int arr[], unsigned int len ){
-    int i;
-    for(i=0;i<len/2;i++){
-        int temp=arr[i];
-        arr[i]=arr[len-i-1];
-        arr[len-i-1]=temp;
+    int x;
+    //
+    for( x=0;x<len/2;x++){
+        //
+        int zs=arr[x];
+        //
+        arr[x]=arr[len-x-1];
+        //
+        arr[len-x-1]=zs;
         
     }
 }
