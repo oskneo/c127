@@ -9,7 +9,7 @@
 #include <assert.h>
 #include <stdio.h>
 
-#include "t3.h"
+
 // image drawing functions
 #include "draw.h"
 
@@ -19,7 +19,8 @@
 // image manipulation functions
 #include "imgops.h"
 
-
+//#include "t3.h"
+#include "t2.h"
 int main( int argc, char* argv[] )
 {
   const unsigned int winwidth  = 100;
@@ -77,7 +78,7 @@ for( int i=0; i<5; i++ )
 for( int i=0; i<320; i++ )
 { 
       draw_image_grey( img, imgwidth, imgheight );
-      life( img, imgwidth, imgheight );
+      //life( img, imgwidth, imgheight );
 } 
 draw_image_grey( img, imgwidth, imgheight );
   
