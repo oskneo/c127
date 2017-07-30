@@ -29,7 +29,7 @@ void draw_rectangle( uint8_t array[],
 	if(x1>x2){
 		int temp0=x1;
 		x1=x2;
-		x2=temp0-;
+		x2=temp0;
 	}
 	else if(x1-x2==0){
 		//x2--;
@@ -43,11 +43,11 @@ void draw_rectangle( uint8_t array[],
 		y1=y2;
 		y2=temp1;
 	}
-	else if(y1=y2==0){
+	else if(y1-y2==0){
 		//y2--;
 	}
 	else{
-		y1++
+		y1++;
 		y2++;
 	}
 	checkpos(cols,&x1);

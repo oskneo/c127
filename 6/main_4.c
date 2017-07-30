@@ -25,7 +25,7 @@ int main( int argc, char* argv[] )
 
   const char* filename = "JSON_Test.txt";
   printf("Creating test_ia\n"); 
-  intarr_t* test_ia = intarr_create( 12 );
+  intarr_t* test_ia = intarr_create( 0 );
   if ( test_ia ==  NULL ) {
     printf("test_ia ==  NULL\n");
     return 1;
@@ -33,8 +33,11 @@ int main( int argc, char* argv[] )
 
   printf("Populating test_ia\n");
   // Put data in the array
-  for( unsigned i=0; i<test_ia->len; i++ )
-    test_ia->data[i] = rand() % 100;
+  for( unsigned i=0; i<10; i++ )
+    intarr_push(test_ia,rand() % 100);
+    
+    
+    
 
   printf("Printing test_ia\n"); 
   print_intarr( test_ia );
