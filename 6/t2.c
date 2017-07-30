@@ -87,9 +87,9 @@ intarr_t* intarr_load_json( const char* filename ){
     return NULL;
   }
     
-  char st[10000],*tk;
+  char st[100000],*tk;
   int fs=0;
-  intarr_t* ia=intarr_create(10);
+  intarr_t* ia=intarr_create(0);
   
   //char temp[10]="";
   //puts("ccccc");
@@ -133,7 +133,7 @@ intarr_t* intarr_load_json( const char* filename ){
         //   free(ia->data);
         // }
         if(intarr_push(ia,atoi(tk))==INTARR_BADALLOC){
-          intarr_resize(ia,ia->len*2);
+          intarr_resize(ia,(ia->len+1)*2);
         }
         //check=1;
       }
@@ -146,7 +146,7 @@ intarr_t* intarr_load_json( const char* filename ){
       //puts("ddfdd");
   }
   
-  
+  printf("len=%d\n",ia->len)
   
 //   if(ia==NULL||ia->len<0){
 //       return -1;

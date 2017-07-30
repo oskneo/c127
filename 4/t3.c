@@ -9,18 +9,20 @@ unsigned int deadoralive( uint8_t array[],
 	     unsigned int cols, 
 	     unsigned int rows , int x, int y)
 {
-	if(x==-1){
-		x=cols-1;
-	}
-	if(x==cols){
-		x=0;
-	}
-	if(y==-1){
-		y=rows-1;
-	}
-	if(y==rows){
-		y=0;
-	}
+	x=(x%(int)cols+(int)cols)%(int)cols;
+	y=(y%(int)rows+(int)rows)%(int)rows;
+	// if(x==-1){
+	// 	x=cols-1;
+	// }
+	// if(x==cols){
+	// 	x=0;
+	// }
+	// if(y==-1){
+	// 	y=rows-1;
+	// }
+	// if(y==rows){
+	// 	y=0;
+	// }
 	
 	//uint8_t cl=get_pixel(array,cols,rows,(unsigned int)x,(unsigned int)y);
 	uint8_t cl=array[ y*cols + x ];
@@ -41,7 +43,7 @@ void life( uint8_t array[],
 	int i,j;
 	
 	//uint8_t *ar2=malloc(cols*rows*sizeof(uint8_t));
-	int ar3[100][3],k=0;
+	int ar3[1000][3],k=0;
 	//zero(ar2,cols,rows);
 	for(i=0;i<cols;i++){
 		for(j=0;j<rows;j++){
