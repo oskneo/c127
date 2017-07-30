@@ -501,19 +501,32 @@ void key_down( unsigned char key, int x, int y )
   */
   switch(key){
     case 'z':
-      ship.da=SHIP_SPIN_SPEED;
+    //
+      ship.da = SHIP_SPIN_SPEED;
+      //
       break;
     case 'x':
-      ship.da=-SHIP_SPIN_SPEED;
+    //
+      ship.da = -SHIP_SPIN_SPEED;
+      //
       break;
+      //
     case 'p':
-      paused=1-paused;
+    //
+      paused= 1- paused;
+      //
       break;
+      //
     case 'm':
-      ship.thrust=1;
+    //
+      ship.thrust =1;
+      //
       break;
+      //
     case ' ':
+    //
       shot_add();
+      //
       break;
   }
 }
@@ -532,16 +545,17 @@ void key_up( unsigned char key, int x, int y )
     case 'z':
       
     case 'x':
+    //
       ship.da=0;
       break;
     // case 'p':
-    //   paused=1-paused;
     //   break;
     case 'm':
+    //
       ship.thrust=0;
+      //
       break;
     // case ' ':
-    //   shot_add();
     //   break;
   }
 }

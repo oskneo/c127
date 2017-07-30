@@ -275,7 +275,7 @@ void normalize( uint8_t array[],
     unsigned int a;
     uint8_t minnum=min( array,cols,rows);
     //
-    maxnum=max( array,cols,rows);
+    uint8_t maxnum=max( array,cols,rows);
     //
     for (a=0;a<cols* rows;a++){
         //
