@@ -37,9 +37,9 @@ int intarr_save_json( intarr_t* ia, const char* filename ){
     return -5;
   }
     
-  char st[10000];//=malloc(2000*sizeof(char));
+  char st[100000];//=malloc(2000*sizeof(char));
   strcat(st,"[ ");
-  char tk[10];
+  char tk[20];
   int i;
   //char temp[10]="";
   
@@ -132,9 +132,10 @@ intarr_t* intarr_load_json( const char* filename ){
         // if(ia->len==0){
         //   free(ia->data);
         // }
-        if(intarr_push(ia,atoi(tk))==INTARR_BADALLOC){
-          intarr_resize(ia,(ia->len+1)*2);
-        }
+        // if(intarr_push(ia,atoi(tk))==INTARR_BADALLOC){
+        //   intarr_resize(ia,(ia->len+1)*2);
+        // }
+        intarr_push(ia,atoi(tk));
         //check=1;
       }
       

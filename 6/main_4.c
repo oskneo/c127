@@ -41,6 +41,7 @@ int main( int argc, char* argv[] )
 
   printf("Sort test_ia\n"); 
   intarr_sort( test_ia );
+  intarr_push(test_ia,0);
 
   printf("Printing test_ia\n"); 
   print_intarr( test_ia );

@@ -14,6 +14,9 @@ intarr_t* intarr_create( unsigned int len ){
   //   a->data=malloc(len*sizeof(int));
     
   // }
+  if(a==NULL){
+    return NULL;
+  }
   
   
   
@@ -29,7 +32,10 @@ intarr_t* intarr_create( unsigned int len ){
 // frees all memory allocated for ia. If the pointer is null, do
 // nothing. If the ia->data is null, do not attempt to free it.
 void intarr_destroy( intarr_t* ia ){
-  if (ia!=NULL){
+  if (ia){
+    if(ia->data){
+      free(ia->data);
+    }
     free(ia);
   }
 }
@@ -39,15 +45,19 @@ intarr_result_t intarr_set( intarr_t* ia,
 			    unsigned int index, 
 			    int val )
 {
-  //int le=-1;
-  if(ia==NULL){
+  
+  if (!ia){
+    //
     return INTARR_BADARRAY;
   }
-  if(index<ia->len&&index>=0){
-    ia->data[index]=val;
+  if( index<ia-> len&& index>=0){
+    //
+    ia->data[ index]=val;
+    //
     return INTARR_OK;
   }
   else{
+    //
     return INTARR_BADINDEX;
   }
 }
@@ -59,14 +69,18 @@ intarr_result_t intarr_get( const intarr_t* ia,
 			    unsigned int index, 
 			    int* i )
 {
-  if(ia==NULL){
+  if(!ia){
+    //
     return INTARR_BADARRAY;
   }
-  if(index<ia->len&&index>=0){
-    *i=ia->data[index];
+  if(index<ia->len && index>=0){
+    
+    *i= ia->data[index];
+    //
     return INTARR_OK;
   }
   else{
+    //
     return INTARR_BADINDEX;
   }
 }
@@ -77,18 +91,23 @@ intarr_result_t intarr_get( const intarr_t* ia,
 // data (we call this a "deep copy"). If unsuccessful (i.e. memory
 // allocation for the copy fails, or ia is null), return a null pointer. 
 intarr_t* intarr_copy( const intarr_t* ia ){
-  intarr_t* a;
-  if(ia==NULL){
+  intarr_t* b;
+  
+  if(!ia){
     return NULL;
   }
-  a=malloc(sizeof(intarr_t ));
-  if(a==NULL){
-    return a;
+  b=realloc(NULL,sizeof(intarr_t ));
+  if(!b){
+    return b;
   }
-  a->data=malloc(sizeof(int)*ia->len);
-  a->len=ia->len;
-  memcpy( a->data, ia->data, sizeof(int)*ia->len );
-  return a;
+  //
+  b->data=realloc(NULL,sizeof( int)*ia->len);
+  //
+  b->len=ia->len;
+  //
+  memcpy( b->data, ia->data,sizeof(int)*ia->len );
+  //
+  return b;
 }
 
 /* LAB 5 TASK 4 */
@@ -98,21 +117,29 @@ intarr_t* intarr_copy( const intarr_t* ia ){
 // ia are sorted on return. If ia is null, return
 // INTARR_BADARRAY.
 intarr_result_t intarr_sort( intarr_t* ia ){
-  if(ia==NULL){
+  //
+  if(!ia){
+    //
     return INTARR_BADARRAY;
   }
-  int i,j;
-  for(i=0;i<ia->len;i++){
-    for(j=1;j<ia->len;j++){
-      if(ia->data[j-1]>ia->data[j]){
-        int temp=ia->data[j-1];
-        ia->data[j-1]=ia->data[j];
-        ia->data[j]=temp;
+  int x,y;
+  //
+  for(x=0;x<ia->len;x++){
+    //
+    for(y=1;y<ia->len;y++){
+      //
+      if(ia->data[y-1]>ia->data[y]){
+        //
+        int temp=ia->data[y-1];
+        //
+        ia->data[y-1]=ia->data[y];
+        //
+        ia->data[y]=temp;
       }
     }
   }
   
-  
+  //
   return INTARR_OK;
 }
 
@@ -126,17 +153,23 @@ intarr_result_t intarr_sort( intarr_t* ia ){
 // null, return INTARR_BADARRAY.
 intarr_result_t intarr_find( intarr_t* ia, int target, int* i ){
   
-  if(ia==NULL){
+  if(!ia){
+    //
     return INTARR_BADARRAY;
   }
-  int j;
-  for(j=0;j<ia->len;j++){
-    if(ia->data[j]==target&&i!=NULL){
-      *i=j;
+  //
+  int y;
+  //
+  for(y=0;y<ia->len;y++){
+    //
+    if(ia->data[y]==target &&i!=NULL){
+      //
+      *i=y;
+      //
       return INTARR_OK;
     }
   }
-  
+  //
   return INTARR_NOTFOUND;
   
   
@@ -148,28 +181,17 @@ intarr_result_t intarr_find( intarr_t* ia, int target, int* i ){
 // successful, return INTARR_OK, otherwise return
 // INTARR_BADALLOC. If ia is null, return INTARR_BADARRAY.
 intarr_result_t intarr_push( intarr_t* ia, int val ){
-  //int *new;
+  int *new;
   if(ia==NULL){
     return INTARR_BADARRAY;
   }
-  //new=realloc(ia->data,(ia->len+1)*sizeof(int));
-  int i;
-  for(i=0;i<ia->len;i++){
-    if(ia->data[i]=='\0'){
-      ia->data[i]=val;
-      break;
-    }
-    else if(i==ia->len-1){
-      return INTARR_BADALLOC;
-    }
+  new=realloc(ia->data,(ia->len+1)*sizeof(int));
+  if(new==NULL){
+    return INTARR_BADALLOC;
   }
-  
-  // if(new==NULL){
-  //   return INTARR_BADALLOC;
-  // }
-  //ia->len++;
-  //ia->data=new;
-  //ia->data[ia->len-1]=val;
+  ia->len++;
+  ia->data=new;
+  ia->data[ia->len-1]=val;
   return INTARR_OK;
 }
 // If the array is not empty, remove the value with the highest index
@@ -179,7 +201,7 @@ intarr_result_t intarr_push( intarr_t* ia, int val ){
 intarr_result_t intarr_pop( intarr_t* ia, int* i ){
   
   
-  //int *newia/*,l,j=-999999*/;
+  int *newia/*,l,j=-999999*/;
   if(ia==NULL){
     return INTARR_BADARRAY;
   }
@@ -193,39 +215,19 @@ intarr_result_t intarr_pop( intarr_t* ia, int* i ){
   //   }
   // }
   if(i!=NULL){
-    //*i=ia->data[ia->len-1];
-    
-    int ii;
-    for(ii=0;ii<ia->len;ii++){
-      if(ia->data[ii]=='\0'&&ii>0){
-        *i=ia->data[ii-1];
-        ia->data[ii-1]='\0';
-        break;
-      }
-      else if(ia->data[ii]=='\0'&&ii==0){
-        return INTARR_BADINDEX;
-      }
-      else if(ii==ia->len-1){
-        *i=ia->data[ii];
-        
-
-        ia->data[ii]='\0';
-        
-      }
-    }
-    
+    *i=ia->data[ia->len-1];
   }
   // for(l=k;l<ia->len-1;l++){
   //   ia->data[l]=ia->data[l+1];
   // }
-  //newia=realloc(ia->data,(ia->len-1)*sizeof(int));
+  newia=realloc(ia->data,(ia->len-1)*sizeof(int));
   
   // if(new==NULL){
   //   return INTARR_BADALLOC;
   // }
   
-  //ia->len--;
-  //ia->data=newia;
+  ia->len--;
+  ia->data=newia;
   
   return INTARR_OK;
   
@@ -278,30 +280,7 @@ intarr_result_t intarr_resize( intarr_t* ia, unsigned int newlen ){
   newia->len=newlen;
   
   *ia=*newia;
-  //free(ia);
-  //printf("%u\n",ia->len);
-  
-  // newia=realloc(ia->data,newlen*sizeof(int));
-  
-  // if(newia==NULL&&newlen!=0){
-    
-  //   return INTARR_BADALLOC;
-  // }
-  // if(newlen<ia->len){
-  //   ia->len=newlen;
-  //   ia->data=newia;
-  //   return INTARR_OK;
-  // }
-  
-  
-  // for(i=ia->len;i<newlen;i++){
-  //   ia->data[i]=0;
-  // }
 
-  
-  
-  // ia->len=newlen;
-  // ia->data=newia;
   
   return INTARR_OK;
   
@@ -318,23 +297,31 @@ intarr_t* intarr_copy_subarray( intarr_t* ia,
 				unsigned int first, 
 				unsigned int last )
 {
-  intarr_t* a;
+  intarr_t* b;
   
-  if(ia==NULL||last<first||last<0||last>=ia->len||first<0||first>=ia->len){
+  if(!ia||last<first||last<0|| last>=ia->len||first<0||first>=ia->len){
+    //
+    return NULL;
+    //
+  }
+  b=realloc(NULL,sizeof(intarr_t));
+  //
+  if(!b){
+    //
     return NULL;
   }
-  a=malloc(sizeof(intarr_t));
-  if(a==NULL){
+  b->data=realloc(NULL,(last-first+1)*sizeof(int));
+  //
+  if(!(b->data)){
+    //
     return NULL;
   }
-  a->data=malloc((last-first+1)*sizeof(int));
-  if(a->data==NULL){
-    return NULL;
-  }
-  memcpy( a->data, &(ia->data[first]), sizeof(int)*(last-first+1) );
-  
-  a->len=last-first+1;
-  return a;
+  //
+  memcpy( b->data, &( ia->data[first]), sizeof(int)*(last-first+1) );
+  //
+  b->len= last-first+1;
+  //
+  return b;
 
   
   

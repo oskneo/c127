@@ -3,6 +3,16 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include "imgops.h"
+
+void checkpos(unsigned int cr, int *n){
+	if(*n<0){
+		*n=0;
+	}
+	if(*n>(int)cr){
+		*n=cr;
+	}
+}
+
 void draw_rectangle( uint8_t array[], 
 		          unsigned int cols, 
 		          unsigned int rows, 
@@ -13,26 +23,40 @@ void draw_rectangle( uint8_t array[],
 		          uint8_t color )
 {
 	unsigned i,j;
-	int x1=x+rect_width,x2=x-rect_width,
-	y1=y+rect_height,y2=y-rect_height;
+	int x1=x+rect_width,x2=x,
+	y1=y+rect_height,y2=y;
+	
 	if(x1>x2){
 		int temp0=x1;
-		x1=x2-1;
-		x2=temp0;
+		x1=x2;
+		x2=temp0-;
+	}
+	else if(x1-x2==0){
+		//x2--;
 	}
 	else{
+		x1++;
 		x2++;
 	}
 	if(y1>y2){
 		int temp1=y1;
-		y1=y2-1;
+		y1=y2;
 		y2=temp1;
 	}
+	else if(y1=y2==0){
+		//y2--;
+	}
 	else{
+		y1++
 		y2++;
 	}
-	for(i=x1;i<=x2;i++){
-		for(j=y1;j<=y2;j++){
+	checkpos(cols,&x1);
+	checkpos(cols,&x2);
+	checkpos(rows,&y1);
+	checkpos(rows,&y2);
+	
+	for(i=x1;i<x2;i++){
+		for(j=y1;j<y2;j++){
 		  //  int check =1;
 		  //  if(x+rect_width<x){
 		  //      if(i<x+rect_width||i>x){
