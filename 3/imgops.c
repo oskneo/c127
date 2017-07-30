@@ -299,27 +299,30 @@ uint8_t* half( const uint8_t array[],
 	       unsigned int rows )
 {
   // your code here
-    int i,y;
-    unsigned int nc=cols/2,nr=rows/2;
-    uint8_t *ar=malloc(nc*nr*sizeof(uint8_t));
-    if (ar==NULL){
+    int x,y;
+    //
+    unsigned int hi=cols/2,hj=rows/2;
+    //
+    uint8_t *sl=realloc(NULL,hi*hj*sizeof(uint8_t));
+    //
+    if (!sl){
         return NULL;
     }
-    for(i=0;i<cols;i+=2){
-        for(y=0;y<rows;y+=2){
+    for(x=0;x< cols;x+=2){
+        //
+        for(y=0;y< rows;y+=2){
         
+            //
+            float ls=0.25*(get_pixel(array  ,cols,rows,x,y)
+					+ get_pixel(array ,cols,rows,x,y+1)//
+					+ get_pixel(array ,cols,rows,x+1,y)
+					+ get_pixel(array, cols,rows,x+1,y+1));//
             
-            float ls=0.25*(get_pixel(array,cols,rows,i,y)
-					+ get_pixel(array,cols,rows,i,y+1)
-					+ get_pixel(array,cols,rows,i+1,y)
-					+ get_pixel(array,cols,rows,i+1,y+1));
-            // if(ls>255){
-            //     ls=255;
-            // }
-            set_pixel(ar,nc,nr,i/2,y/2,round(ls));
+            set_pixel(sl,hi,hj,x/2,y/2,round(ls));
         }
     }
-    return ar;
+    //
+    return sl;
 }
 
 
@@ -361,18 +364,20 @@ void region_set( uint8_t array[],
          uint8_t color )
 {
     // your code here
-    int i,y;
-    if(right<=left||bottom<=top||right-left>=cols||bottom-top>=rows){
+    int x,y;
+    //
+    if(right<=left || bottom<=top||bottom-top>=rows|| right-left>=cols){
+        //
         return;
     }
     
     
-    for(i=left;i<right;i++){
+    for(x=left;x<right;x++){
     
         for(y=top;y<bottom;y++){
+            //
             
-            
-            set_pixel(array, cols, rows, i, y, color);
+            set_pixel(array, cols,rows, x, y, color);
             
         }
     }
@@ -392,39 +397,26 @@ unsigned long int region_integrate( const uint8_t array[],
                     unsigned int right,
                     unsigned int bottom )
 {
-    // your code here
-    // unsigned int i,y;
-    // unsigned long int val=0;
-    // if(right<=left||bottom<=top||right-left>=cols||bottom-top>=rows){
-    //     return 0;
-    // }
-    // for(y=0;y<rows;y++){
-    //     for(i=0;i<cols;i++){
-    //         if(i>=left&&i<=right&&y>=top&&y<=bottom){
-    //             val+=get_pixel(array, cols, rows, i, y);
-    //         }
-            
-    //     }
-    // }
-    // return val;
+  
     
-    int i,y;
-    unsigned long int val=0;
-    if(right<=left||bottom<=top||right-left>=cols||bottom-top>=rows){
+    int x,y;
+    unsigned long int zhi=0;
+    if(right<=left||bottom<=top||bottom -top>=rows||right- left>=cols){
+        //
         return 0;
     }
     
     
-    for(i=left;i<right;i++){
+    for(x=left;x< right; x++){
     
-        for(y=top;y<bottom;y++){
+        for(y=top;y< bottom;y++){
+            //
             
-            
-            val+=get_pixel(array, cols, rows, i, y);
+            zhi=zhi+get_pixel(array, cols, rows, x, y);
             
         }
     }
-    return val;
+    return zhi;
 }
 
 /* TASK 11 */
@@ -442,20 +434,26 @@ uint8_t* region_copy( const uint8_t array[],
               unsigned int bottom )
 {
     // your code here
-    unsigned int i,y;
-    if(right<=left||bottom<=top||right-left>=cols||bottom-top>=rows){
+    unsigned int x,y;
+    //
+    if(right<=left||right-left>=cols ||bottom-top>=rows||bottom<=top){
+        //
         return NULL;
     }
-    uint8_t *ar=malloc((right-left)*(bottom-top)*sizeof(uint8_t));
+    uint8_t *sl=realloc(NULL,(right-left)*(bottom-top)*sizeof(uint8_t));
+    //
     for(y=top;y<bottom;y++){
-        for(i=left;i<right;i++){
+        //
+        for(x=left;x<right;x++){
             
-            //ar[(y-top)*cols+(i-left)]=array[y*cols+i];
-            uint8_t ls = get_pixel(array,cols,rows,i,y);
-		    set_pixel(ar,right-left,bottom-top,i-left,y-top,ls);
+           
+            uint8_t ls = get_pixel(array,cols,rows,x,y);
+            //
+		    set_pixel(sl,right-left,bottom-top,x-left,y-top,ls);
         }
     }
-    return ar;
+    //
+    return sl;
 }
 
 
