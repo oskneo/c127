@@ -146,7 +146,7 @@ intarr_t* intarr_load_json( const char* filename ){
       //puts("ddfdd");
   }
   
-  printf("len=%d\n",ia->len)
+  printf("len=%d\n",ia->len);
   
 //   if(ia==NULL||ia->len<0){
 //       return -1;

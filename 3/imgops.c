@@ -85,15 +85,18 @@ uint8_t min( const uint8_t array[],
 	     unsigned int rows )
 {
   // your code here
-  unsigned int i;
-  uint8_t clr=255;
-  for (i=0;i<cols*rows;i++){
-      if(array[i]<clr){
-          clr=array[i];
+  unsigned int x;
+  //
+  uint8_t ys=255;
+  //
+  for( x=0;x<cols*rows;x++){
+      if( array[x]<ys){
+          //
+          ys=array[x];
       }
   }
   
-  return clr;
+  return ys;
 }
 
 // Return the lightest color that appears in the array; i.e. the
@@ -103,15 +106,19 @@ uint8_t max( const uint8_t array[],
 		 unsigned int rows )
 {
   // your code here
-  unsigned int i;
-  uint8_t clr=0;
-  for (i=0;i<cols*rows;i++){
-      if(array[i]>clr){
-          clr=array[i];
+  unsigned int x;
+  //
+  uint8_t ys=0;
+  //
+  for( x=0;x<cols*rows;x++){
+      //
+      if(array[x]>ys){
+          //
+          ys=array[x];
       }
   }
   
-  return clr;
+  return ys;
 }
 
 // TASK 2
@@ -124,10 +131,11 @@ void replace_color(  uint8_t array[],
 		     uint8_t post_color )
 {
   // your code here
-  unsigned int i;
-  for (i=0;i<cols*rows;i++){
-      if(array[i]==pre_color){
-          array[i]=post_color;
+  unsigned int x;
+  for( x=0;x<cols* rows;x++){
+      if ( array[x]==pre_color){
+          //
+          array[x]= post_color;
       }
   }
 }
@@ -141,12 +149,16 @@ void flip_horizontal( uint8_t array[],
               unsigned int rows )
 {
   // your code here
-  unsigned int i,j;
-  for(i=0;i<cols/2;i++){
-    for(j=0;j<rows;j++){
-      uint8_t temp=array[j*cols+i];
-      array[j*cols+i]=array[j*cols+(cols-i-1)];
-      array[j*cols+(cols-i-1)]=temp;
+  unsigned int x,y;
+  for(x=0;x< cols/2;x++){
+      //
+    for(y=0;y< rows;y++){
+        //
+      uint8_t ls=array[ y*cols+x];
+      //
+      array[y*cols+x]=array[ y*cols+(cols-x-1)];
+      //
+      array[y* cols+(cols-x-1)]=ls;
     }
   }
   
@@ -158,12 +170,17 @@ void flip_vertical( uint8_t array[],
             unsigned int rows )
 {
     // your code here
-  unsigned int i,j;
-  for(i=0;i<cols;i++){
-    for(j=0;j<rows/2;j++){
-      uint8_t temp=array[j*cols+i];
-      array[j*cols+i]=array[(rows-j-1)*cols+i];
-      array[(rows-j-1)*cols+i]=temp;
+  unsigned int x,y;
+  //
+  for(x=0;x< cols;x++){
+      //
+    for(y=0;y< rows/2;y++){
+        //
+      uint8_t ls= array[y*cols+x];
+      //
+      array[y*cols+x]=array[( rows-y-1)*cols+x];
+      //
+      array[( rows-y-1)*cols+x]=ls;
     }
   }
 }
@@ -182,16 +199,19 @@ int locate_color(  const uint8_t array[],
 		   unsigned int *y )
 {
     // your code here
-    unsigned int i,j;
+    unsigned int a,b;
     
-    for(j=0;j<rows;j++){
-        for(i=0;i<cols;i++){
-            if(*(array+j*cols+i)==color){
-                *x=i;
-                *y=j;
+    for(b=0;b< rows;b++){
+        //
+        for(a=0;a< cols;a++){
+            //
+            if(*(array +b*cols+a)==color){
+                //
+                *x=a;//
+                *y=b;
                 return 1;
             }
-        }
+        }//
     }
     return 0;
 }
@@ -206,9 +226,11 @@ void invert( uint8_t array[],
          unsigned int rows )
 {
     // your code here
-    unsigned int i;
-    for (i=0;i<cols*rows;i++){
-        array[i]=0xff-array[i];
+    unsigned int a;
+    //
+    for (a=0;a< cols*rows;a++){
+        //
+        array[a]=255- array[a];
     }
 }
 
@@ -223,13 +245,18 @@ void scale_brightness( uint8_t array[],
             double scale_factor )
 {
   // your code here
-    unsigned int i;
-    for (i=0;i<cols*rows;i++){
-        unsigned int temp=(unsigned int)round(scale_factor*array[i]);
-        if(temp>255){
-            temp=255;
+    unsigned int a;
+    //
+    for (a=0;a< cols*rows;a++){
+        //
+        unsigned int ls= (unsigned int)round( scale_factor*array[a]);
+        //
+        if( ls> 255){
+            //
+            ls=255;
         }
-        array[i]=temp;
+        //
+        array[a]=ls;
     }
   
 }
@@ -245,14 +272,18 @@ void normalize( uint8_t array[],
         unsigned int rows )
 {
     // your code here
-    unsigned int i;
-    uint8_t mn=min(array,cols,rows),
-    mx=max(array,cols,rows);
-    for (i=0;i<cols*rows;i++){
-        array[i]=array[i]-mn;
+    unsigned int a;
+    uint8_t minnum=min( array,cols,rows);
+    //
+    maxnum=max( array,cols,rows);
+    //
+    for (a=0;a<cols* rows;a++){
+        //
+        array[a]=array[a]- minnum;
     }
-    double m=255.0/(mx-mn);
-    scale_brightness(array,cols,rows,m);
+    double d=255.0/(maxnum -minnum);
+    //
+    scale_brightness( array,cols,rows,d);
 }
 
 /* TASK 8 */
@@ -268,24 +299,24 @@ uint8_t* half( const uint8_t array[],
 	       unsigned int rows )
 {
   // your code here
-    int i,j;
+    int i,y;
     unsigned int nc=cols/2,nr=rows/2;
     uint8_t *ar=malloc(nc*nr*sizeof(uint8_t));
     if (ar==NULL){
         return NULL;
     }
     for(i=0;i<cols;i+=2){
-        for(j=0;j<rows;j+=2){
+        for(y=0;y<rows;y+=2){
         
             
-            float temp=0.25*(get_pixel(array,cols,rows,i,j)
-					+ get_pixel(array,cols,rows,i,j+1)
-					+ get_pixel(array,cols,rows,i+1,j)
-					+ get_pixel(array,cols,rows,i+1,j+1));
-            // if(temp>255){
-            //     temp=255;
+            float ls=0.25*(get_pixel(array,cols,rows,i,y)
+					+ get_pixel(array,cols,rows,i,y+1)
+					+ get_pixel(array,cols,rows,i+1,y)
+					+ get_pixel(array,cols,rows,i+1,y+1));
+            // if(ls>255){
+            //     ls=255;
             // }
-            set_pixel(ar,nc,nr,i/2,j/2,round(temp));
+            set_pixel(ar,nc,nr,i/2,y/2,round(ls));
         }
     }
     return ar;
@@ -330,7 +361,7 @@ void region_set( uint8_t array[],
          uint8_t color )
 {
     // your code here
-    int i,j;
+    int i,y;
     if(right<=left||bottom<=top||right-left>=cols||bottom-top>=rows){
         return;
     }
@@ -338,10 +369,10 @@ void region_set( uint8_t array[],
     
     for(i=left;i<right;i++){
     
-        for(j=top;j<bottom;j++){
+        for(y=top;y<bottom;y++){
             
             
-            set_pixel(array, cols, rows, i, j, color);
+            set_pixel(array, cols, rows, i, y, color);
             
         }
     }
@@ -362,22 +393,22 @@ unsigned long int region_integrate( const uint8_t array[],
                     unsigned int bottom )
 {
     // your code here
-    // unsigned int i,j;
+    // unsigned int i,y;
     // unsigned long int val=0;
     // if(right<=left||bottom<=top||right-left>=cols||bottom-top>=rows){
     //     return 0;
     // }
-    // for(j=0;j<rows;j++){
+    // for(y=0;y<rows;y++){
     //     for(i=0;i<cols;i++){
-    //         if(i>=left&&i<=right&&j>=top&&j<=bottom){
-    //             val+=get_pixel(array, cols, rows, i, j);
+    //         if(i>=left&&i<=right&&y>=top&&y<=bottom){
+    //             val+=get_pixel(array, cols, rows, i, y);
     //         }
             
     //     }
     // }
     // return val;
     
-    int i,j;
+    int i,y;
     unsigned long int val=0;
     if(right<=left||bottom<=top||right-left>=cols||bottom-top>=rows){
         return 0;
@@ -386,10 +417,10 @@ unsigned long int region_integrate( const uint8_t array[],
     
     for(i=left;i<right;i++){
     
-        for(j=top;j<bottom;j++){
+        for(y=top;y<bottom;y++){
             
             
-            val+=get_pixel(array, cols, rows, i, j);
+            val+=get_pixel(array, cols, rows, i, y);
             
         }
     }
@@ -411,17 +442,17 @@ uint8_t* region_copy( const uint8_t array[],
               unsigned int bottom )
 {
     // your code here
-    unsigned int i,j;
+    unsigned int i,y;
     if(right<=left||bottom<=top||right-left>=cols||bottom-top>=rows){
         return NULL;
     }
     uint8_t *ar=malloc((right-left)*(bottom-top)*sizeof(uint8_t));
-    for(j=top;j<bottom;j++){
+    for(y=top;y<bottom;y++){
         for(i=left;i<right;i++){
             
-            //ar[(j-top)*cols+(i-left)]=array[j*cols+i];
-            uint8_t temp = get_pixel(array,cols,rows,i,j);
-		    set_pixel(ar,right-left,bottom-top,i-left,j-top,temp);
+            //ar[(y-top)*cols+(i-left)]=array[y*cols+i];
+            uint8_t ls = get_pixel(array,cols,rows,i,y);
+		    set_pixel(ar,right-left,bottom-top,i-left,y-top,ls);
         }
     }
     return ar;
