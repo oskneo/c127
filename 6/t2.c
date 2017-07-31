@@ -118,44 +118,31 @@ intarr_t* intarr_load_json( const char* filename ){
   //printf("%s...%lu\n",st,sizeof(intarr_t));
   
   int check=0,check2=0,check3=0,check4=0;
-  tk=strtok(st,", \t\0\n");
+  tk=strtok(st,", []\t\0\r\n");
   //puts("ffff");
-  while(tk!=NULL&&check!=4){
-      //puts("ddddd");
-      // if(ia->data!=NULL){
-      //   printf("%d    %d\n",ia->data[0],ia->len);
-      // }
-      //puts(tk);
+  while(tk!=NULL){
+      
       check3++;
-      if(strcmp(tk,"[")==0){
-        puts("[");
-        check=1;
+      if(check3<5){
+        puts(tk);
       }
-      // else if(strcmp(tk,",")==0){
-      //   check=2;
+      // if(strcmp(tk,"[")==0){
+      //   puts("[");
+      //   check=1;
       // }
-      else if(strcmp(tk,"]")==0){
-        puts("]");
-        check=4;
-      }
-      else if(check==1){
-        // if(ia->len==0){
-        //   free(ia->data);
-        // }
-        check4++;
-        if(intarr_push(ia,atoi(tk))==INTARR_BADALLOC){
-          check2++;
-        }
-        //intarr_push(ia,atoi(tk));
-        //check=1;
-      }
       
-      
-      
-      //printf("%d\n",ia->len);
-      //puts("dde");
-      tk=strtok(NULL,", \t\0\n");
-      //puts("ddfdd");
+      // else if(strcmp(tk,"]")==0){
+      //   puts("]");
+      //   check=4;
+      // }
+      // else if(check==1){
+      //   check4++;
+      //   if(intarr_push(ia,atoi(tk))==INTARR_BADALLOC){
+      //     check2++;
+      //   }
+      // }
+      intarr_push(ia,atoi(tk));
+      tk=strtok(NULL,", []\t\0\r\n");
   }
   
   printf("len=%d,check2=%d,check3=%d,check4=%d\n",ia->len,check2,check3,check4);

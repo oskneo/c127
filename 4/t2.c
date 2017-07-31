@@ -28,27 +28,27 @@ void draw_rectangle( uint8_t array[],
 	
 	if(x1>x2){
 		int temp0=x1;
-		x1=x2;
-		x2=temp0;
+		x1=x2+1;
+		x2=temp0+1;
 	}
 	else if(x1-x2==0){
 		//x2--;
 	}
 	else{
-		x1++;
-		x2++;
+		//x1++;
+		//x2++;
 	}
 	if(y1>y2){
 		int temp1=y1;
-		y1=y2;
-		y2=temp1;
+		y1=y2+1;
+		y2=temp1+1;
 	}
 	else if(y1-y2==0){
 		//y2--;
 	}
 	else{
-		y1++;
-		y2++;
+		//y1++;
+		//y2++;
 	}
 	checkpos(cols,&x1);
 	checkpos(cols,&x2);
@@ -79,7 +79,7 @@ void draw_rectangle( uint8_t array[],
 		  //          check=0;
 		  //      }
 		  //  }
-			if((i==(unsigned int)x1||i==(unsigned int)x2-1)||(j==(unsigned int)y1||j==(unsigned int)y2-1)){
+			if(i==(unsigned int)x1||i==(unsigned int)x2-1||j==(unsigned int)y1||j==(unsigned int)y2-1){
 				set_pixel(array, cols, rows, i,j,color);
 				ck++;
 			}
