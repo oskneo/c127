@@ -55,8 +55,8 @@ void draw_rectangle( uint8_t array[],
 	checkpos(rows,&y1);
 	checkpos(rows,&y2);
 	printf("x1=%d,x2=%d,y1=%d,y2=%d\n",x1,x2,y1,y2);
-	for(i=x1;i<x2;i++){
-		for(j=y1;j<y2;j++){
+	for(i=(unsigned int)x1;i<(unsigned int)x2;i++){
+		for(j=(unsigned int)y1;j<(unsigned int)y2;j++){
 		  //  int check =1;
 		  //  if(x+rect_width<x){
 		  //      if(i<x+rect_width||i>x){
@@ -78,7 +78,7 @@ void draw_rectangle( uint8_t array[],
 		  //          check=0;
 		  //      }
 		  //  }
-			if((i==x1||i==x2-1)||(j==y1||j==y2-1)){
+			if((i==(unsigned int)x1||i==(unsigned int)x2-1)||(j==(unsigned int)y1||j==(unsigned int)y2-1)){
 				set_pixel(array, cols, rows, i,j,color);
 			}
 		}
