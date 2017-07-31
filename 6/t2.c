@@ -128,12 +128,14 @@ intarr_t* intarr_load_json( const char* filename ){
       //puts(tk);
       check3++;
       if(strcmp(tk,"[")==0){
+        puts("[");
         check=1;
       }
       // else if(strcmp(tk,",")==0){
       //   check=2;
       // }
       else if(strcmp(tk,"]")==0){
+        puts("]");
         check=4;
       }
       else if(check==1){
