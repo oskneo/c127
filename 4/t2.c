@@ -54,7 +54,7 @@ void draw_rectangle( uint8_t array[],
 	checkpos(cols,&x2);
 	checkpos(rows,&y1);
 	checkpos(rows,&y2);
-	
+	printf("x1=%d,x2=%d,y1=%d,y2=%d\n",x1,x2,y1,y2);
 	for(i=x1;i<x2;i++){
 		for(j=y1;j<y2;j++){
 		  //  int check =1;

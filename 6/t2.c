@@ -84,17 +84,23 @@ int intarr_save_json( intarr_t* ia, const char* filename ){
 */
 intarr_t* intarr_load_json( const char* filename ){
   if(filename==NULL){
+    puts("file name null.");
     return NULL;
   }
     
   char st[100000],*tk;
   int fs=0;
   intarr_t* ia=intarr_create(0);
+  if(!ia){
+    puts("intarr create null.");
+    return NULL;
+  }
   
   //char temp[10]="";
   //puts("ccccc");
   FILE* file=fopen(filename,"r");
   if(!file){
+      puts("file null");
       return NULL;
   }
   //puts("aaaa");
@@ -102,6 +108,7 @@ intarr_t* intarr_load_json( const char* filename ){
   fs = ftell(file); 
   fseek(file, 0, SEEK_SET); 
   if(!fread(st,sizeof(char),fs,file)){
+      puts("read null");
       return NULL;
   }
   fclose(file);
@@ -110,7 +117,7 @@ intarr_t* intarr_load_json( const char* filename ){
   //strcat(st,"\0");
   //printf("%s...%lu\n",st,sizeof(intarr_t));
   
-  int check=0;
+  int check=0,check2=0;
   tk=strtok(st,", \t\0\n");
   //puts("ffff");
   while(tk!=NULL&&check!=4){
@@ -132,10 +139,10 @@ intarr_t* intarr_load_json( const char* filename ){
         // if(ia->len==0){
         //   free(ia->data);
         // }
-        // if(intarr_push(ia,atoi(tk))==INTARR_BADALLOC){
-        //   intarr_resize(ia,(ia->len+1)*2);
-        // }
-        intarr_push(ia,atoi(tk));
+        if(intarr_push(ia,atoi(tk))==INTARR_BADALLOC){
+          check2++;
+        }
+        //intarr_push(ia,atoi(tk));
         //check=1;
       }
       
@@ -147,7 +154,7 @@ intarr_t* intarr_load_json( const char* filename ){
       //puts("ddfdd");
   }
   
-  printf("len=%d\n",ia->len);
+  printf("len=%d,check2=%d\n",ia->len,check2);
   
 //   if(ia==NULL||ia->len<0){
 //       return -1;

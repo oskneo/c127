@@ -21,9 +21,9 @@ intarr_t* intarr_create( unsigned int len ){
   
   
   a->data=malloc(len*sizeof(int));
-  // if(a->data==NULL){
-  //   return NULL;
-  // }
+  if(a->data==NULL&&len>0){
+    return NULL;
+  }
   a->len=len;
   return a;
   

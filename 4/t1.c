@@ -13,18 +13,18 @@ void draw_circle( uint8_t img[],
 	int i,j;
 	for(i=0;i<(int)cols&&r>0;i++){
 		for(j=0;j<(int)rows;j++){
-			if(round(sqrt(pow((x-i),2)+pow((y-j),2)))<r){
+			if(sqrt(pow((x-i-0.5),2)+pow((y-j-0.5),2))<r){
 				set_pixel(img, cols, rows, i,j,color);
 			}
-// 			if(round(sqrt(pow((x-i+.5),2)+pow((y-j+.5),2)))<r){
-// 				set_pixel(img, cols, rows, i,j,color);
-// 			}
-// 			if(round(sqrt(pow((x-i-.5),2)+pow((y-j+.5),2)))<r){
-// 				set_pixel(img, cols, rows, i,j,color);
-// 			}
-// 			if(round(sqrt(pow((x-i+.5),2)+pow((y-j-.5),2)))<r){
-// 				set_pixel(img, cols, rows, i,j,color);
-// 			}
+			if(sqrt(pow((x-i+.5),2)+pow((y-j+.5),2))<r){
+				set_pixel(img, cols, rows, i,j,color);
+			}
+			if(sqrt(pow((x-i-.5),2)+pow((y-j+.5),2))<r){
+				set_pixel(img, cols, rows, i,j,color);
+			}
+			if(sqrt(pow((x-i+.5),2)+pow((y-j-.5),2))<r){
+				set_pixel(img, cols, rows, i,j,color);
+			}
 		}
 	}
     // int i, j;
