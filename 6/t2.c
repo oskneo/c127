@@ -117,7 +117,7 @@ intarr_t* intarr_load_json( const char* filename ){
   //strcat(st,"\0");
   //printf("%s...%lu\n",st,sizeof(intarr_t));
   
-  int check=0,check2=0;
+  int check=0,check2=0,check3=0;
   tk=strtok(st,", \t\0\n");
   //puts("ffff");
   while(tk!=NULL&&check!=4){
@@ -126,6 +126,7 @@ intarr_t* intarr_load_json( const char* filename ){
       //   printf("%d    %d\n",ia->data[0],ia->len);
       // }
       //puts(tk);
+      check3++;
       if(strcmp(tk,"[")==0){
         check=1;
       }
@@ -154,7 +155,7 @@ intarr_t* intarr_load_json( const char* filename ){
       //puts("ddfdd");
   }
   
-  printf("len=%d,check2=%d\n",ia->len,check2);
+  printf("len=%d,check2=%d,check3=%d\n",ia->len,check2,check3);
   
 //   if(ia==NULL||ia->len<0){
 //       return -1;

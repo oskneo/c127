@@ -21,7 +21,7 @@ intarr_t* intarr_create( unsigned int len ){
   
   
   a->data=malloc(len*sizeof(int));
-  if(a->data==NULL){
+  if(a->data==NULL&&len>0){
     return NULL;
   }
   a->len=len;
@@ -181,17 +181,18 @@ intarr_result_t intarr_find( intarr_t* ia, int target, int* i ){
 // successful, return INTARR_OK, otherwise return
 // INTARR_BADALLOC. If ia is null, return INTARR_BADARRAY.
 intarr_result_t intarr_push( intarr_t* ia, int val ){
-  int *new;
-  if(ia==NULL){
+  int *newiad;
+  if(!ia){
     return INTARR_BADARRAY;
   }
-  new=realloc(ia->data,(ia->len+1)*sizeof(int));
-  if(new==NULL){
+  newiad=realloc(ia->data,(ia->len+1)*sizeof(int));
+  if(!newiad){
     return INTARR_BADALLOC;
   }
+  ia->data=newiad;
+  ia->data[ia->len]=val;
   ia->len++;
-  ia->data=new;
-  ia->data[ia->len-1]=val;
+  
   return INTARR_OK;
 }
 // If the array is not empty, remove the value with the highest index

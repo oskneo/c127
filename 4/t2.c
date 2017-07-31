@@ -78,7 +78,7 @@ void draw_rectangle( uint8_t array[],
 		  //          check=0;
 		  //      }
 		  //  }
-			if((i==x1||i==x2)||(j==y1||j==y2)){
+			if((i==x1||i==x2-1)||(j==y1||j==y2-1)){
 				set_pixel(array, cols, rows, i,j,color);
 			}
 		}
