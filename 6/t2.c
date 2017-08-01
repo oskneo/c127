@@ -124,7 +124,14 @@ intarr_t* intarr_load_json( const char* filename ){
       
       check3++;
       if(check3<5){
-        puts(tk);
+        int i;
+        printf("%s:",tk);
+        for(i=0;tk[i]!='\0';i++){
+          printf("%u,",tk[i]);
+        }
+        
+        
+        puts("");
       }
       // if(strcmp(tk,"[")==0){
       //   puts("[");
