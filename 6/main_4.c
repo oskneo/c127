@@ -33,21 +33,21 @@ int main( int argc, char* argv[] )
 
   printf("Populating test_ia\n");
   // Put data in the array
-  for( unsigned i=0; i<10; i++ )
-    intarr_push(test_ia,rand() % 100);
+  for( unsigned i=0; i<875; i++ )
+    intarr_push(test_ia,(int)i);
     
     
     
 
   printf("Printing test_ia\n"); 
-  print_intarr( test_ia );
+  //print_intarr( test_ia );
 
   printf("Sort test_ia\n"); 
   intarr_sort( test_ia );
-  intarr_push(test_ia,0);
+  //intarr_push(test_ia,0);
 
   printf("Printing test_ia\n"); 
-  print_intarr( test_ia );
+  //print_intarr( test_ia );
 
   printf("Saving test_ia into JSON file %s\n", filename); 
   if ( intarr_save_json( test_ia, filename ) != 0 )
@@ -59,7 +59,7 @@ int main( int argc, char* argv[] )
   printf("loading test_ia from JSON file %s\n", filename); 
   intarr_t* test_ia2 = intarr_load_json("JSON_Test.txt");
   printf("Printing test_ia\n"); 
-  print_intarr( test_ia2 );
+  //print_intarr( test_ia2 );
   printf("Destroying test_ia\n");  
   intarr_destroy( test_ia2 );
 
