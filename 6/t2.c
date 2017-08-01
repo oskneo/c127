@@ -143,7 +143,7 @@ intarr_t* intarr_load_json( const char* filename ){
       // }
       char *ptr;
       int num=(int)strtol(tk,&ptr,10);
-      if(ptr[0]=='\0'){
+      if(ptr!=tk){
         intarr_push(ia,num);
         check2++;
       }
