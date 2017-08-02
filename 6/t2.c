@@ -137,7 +137,7 @@ intarr_t* intarr_load_json( const char* filename ){
       //   puts("[");
       //   check=1;
       // }
-      
+      //
       // else if(strcmp(tk,"]")==0){
       //   puts("]");
       //   check=4;
@@ -147,7 +147,7 @@ intarr_t* intarr_load_json( const char* filename ){
       //   if(intarr_push(ia,atoi(tk))==INTARR_BADALLOC){
       //     check2++;
       //   }
-      // }
+      // }//
       char *ptr;
       int num=(int)strtol(tk,&ptr,10);
       if(ptr!=tk){
