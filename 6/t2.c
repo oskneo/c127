@@ -130,7 +130,7 @@ intarr_t* intarr_load_json( const char* filename ){
           printf("%u,",tk[i]);
         }
         
-        
+        puts("");
         puts("");
       }
       // if(strcmp(tk,"[")==0){
