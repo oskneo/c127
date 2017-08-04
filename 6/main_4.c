@@ -33,7 +33,7 @@ int main( int argc, char* argv[] )
 
   printf("Populating test_ia\n");
   // Put data in the array
-  for( unsigned i=0; i<875; i++ )
+  for( unsigned i=0; i<5; i++ )
     intarr_push(test_ia,(int)i);
     
     
