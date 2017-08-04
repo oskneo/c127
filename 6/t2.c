@@ -38,6 +38,7 @@ int intarr_save_json( intarr_t* ia, const char* filename ){
   }
     
   char st[100000];//=malloc(2000*sizeof(char));
+  memset(st,0x00,100000);
   strcat(st,"[ ");
   char tk[20];
   int i;
@@ -55,7 +56,7 @@ int intarr_save_json( intarr_t* ia, const char* filename ){
       sprintf(tk,"%d",ia->data[i]);
       strcat(st,tk);
   }
-  strcat(st," ]\0");
+  strcat(st," ]");
   //st=(char*)realloc(st,strlen(st));
   int c=0;
   for(;st[c]!='\0';c++){}
@@ -89,6 +90,8 @@ intarr_t* intarr_load_json( const char* filename ){
   }
     
   char st[100000],*tk,tk2[20],st2[100000];
+  memset(st,0x00,100000);
+  //memset(st2,0x00,100000);
   int fs=0;
   intarr_t* ia=intarr_create(0);
   if(!ia){
@@ -116,7 +119,7 @@ intarr_t* intarr_load_json( const char* filename ){
   //puts(st);
   //strcat(st,"\0");
   //printf("%s...%lu\n",st,sizeof(intarr_t));
-  *st2=*st;
+  memcpy(st2,st,100000);
   int check2=0,check3=0,check4=0;
   tk=strtok(st,", []\t\n");
   //puts("ffff");

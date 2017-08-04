@@ -22,7 +22,9 @@ void print_intarr(intarr_t* ia)
 
 int main( int argc, char* argv[] )
 {
-
+  char *st=malloc(4);
+  strcat(st,"[ \0");
+  printf("%d\n",(int)strlen(st));
   const char* filename = "JSON_Test.txt";
   printf("Creating test_ia\n"); 
   intarr_t* test_ia = intarr_create( 0 );
@@ -33,7 +35,7 @@ int main( int argc, char* argv[] )
 
   printf("Populating test_ia\n");
   // Put data in the array
-  for( unsigned i=0; i<5; i++ )
+  for( unsigned i=0; i<857; i++ )
     intarr_push(test_ia,(int)i);
     
     
