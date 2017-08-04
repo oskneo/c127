@@ -118,7 +118,7 @@ intarr_t* intarr_load_json( const char* filename ){
   //printf("%s...%lu\n",st,sizeof(intarr_t));
   *st2=*st;
   int check2=0,check3=0,check4=0;
-  tk=strtok(st,", []\t\0\n");
+  tk=strtok(st,", []\t\n");
   //puts("ffff");
   while(tk!=NULL){
       
@@ -131,7 +131,7 @@ intarr_t* intarr_load_json( const char* filename ){
         }
         
         puts("");
-        puts("");
+        
       }
       // if(strcmp(tk,"[")==0){
       //   puts("[");
@@ -156,10 +156,16 @@ intarr_t* intarr_load_json( const char* filename ){
       }
       
       *tk2=*tk;
-      tk=strtok(NULL,", []\t\0\n");
+      tk=strtok(NULL,", []\t\n");
+  }
+  int count=0,j=0;
+  for(;j<ia->len;j++){
+    count+=ia->data[j];
+    
   }
   
-  printf("len=%d,check2=%d,check3=%d,check4=%d,tk2=%s,first20=%.20s.\n",ia->len,check2,check3,check4,tk2,st2);
+  
+  printf("len=%d,check2=%d,check3=%d,check4=%d,count=%d,check(count)=%d,tk2=%s,first20=%.20s.\n",ia->len,check2,check3,check4,count,ia->len*(ia->len-1),tk2,st2);
   if(ia->len>4){
     printf("0=%d,1=%d,-1=%d,-2=%d.\n",ia->data[0],ia->data[1],ia->data[ia->len-1],ia->data[ia->len-2]);
   }
