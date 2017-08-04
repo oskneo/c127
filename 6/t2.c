@@ -165,7 +165,7 @@ intarr_t* intarr_load_json( const char* filename ){
   }
   
   
-  printf("len=%d,check2=%d,check3=%d,check4=%d,count=%d,check(count)=%d,tk2=%s,first20=%.20s.\n",ia->len,check2,check3,check4,count,ia->len*(ia->len-1),tk2,st2);
+  printf("len=%d,check2=%d,check3=%d,check4=%d,count=%d,check(count)=%d,tk2=%s,first20=%.20s...],last20=[...%.20s.\n",ia->len,check2,check3,check4,count,ia->len*(ia->len-1)/2,tk2,st2,st2+strlen(st2)-20);
   if(ia->len>4){
     printf("0=%d,1=%d,-1=%d,-2=%d.\n",ia->data[0],ia->data[1],ia->data[ia->len-1],ia->data[ia->len-2]);
   }
