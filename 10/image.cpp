@@ -1,8 +1,6 @@
-//#include <stdio.h>
-//#include <stdint.h> 
+
 #include <stdlib.h>
 #include <iostream>
-//#include <string.h>
 #include "image.hpp"
 
 using namespace std;
@@ -12,7 +10,9 @@ uint8_t* pixels;
 
 Image::Image(){
     cols=0;
+    
     rows=0;
+    
     pixels=(uint8_t*)realloc(NULL,sizeof(uint8_t*));
 }
 Image::~Image(){
@@ -23,20 +23,18 @@ int Image::resize( unsigned int width,  unsigned int height, uint8_t fillcolor )
     uint8_t* pix;
     if(cols!=width||rows!=height){
         pix=(uint8_t*)realloc(pixels,sizeof(uint8_t)*width*height);
-        if(width!=0&&height!=0&&pix==NULL){
+        if(width!=0&& height!=0&&!pix){
             return -1;
         }
         cols=width;
         rows=height;
-        //free(pixels);
+
         pixels=pix;
     }
-    //cout<<"kkkkk"<<endl;
     for(unsigned int i=0;i<(height*width);i++){
         pixels[i]=fillcolor;
     }
     
-    //cout << "yyy" << endl;
     
     
     return 0;
@@ -66,13 +64,11 @@ int Image::get_pixel( unsigned int x, unsigned int y, uint8_t* colorp ){
         return -1;
     }
     else{
-        //std::cout << "hhh\n";
         *colorp=pixels[y*cols+x];
         
     }
     
     
-    //std::cout << "hhhh\n";
     return 0;
     
     

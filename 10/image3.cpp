@@ -22,9 +22,7 @@ Image::~Image(){
     for(i=0;i<(int)cols;i++){
       free(pixels[i]);
     }
-    //free(cols);
-    //free(&rows);
-    //free(&i);
+    
     free(pixels);
 }
 int Image::resize( unsigned int width,  unsigned int height, uint8_t fillcolor ){
@@ -165,7 +163,6 @@ int Image::load( const char* filename ){
     
   // }
   // catch(const ifstream::failure&e){
-  //   //cout << "Open failue\n" ;
   //   return -1;
   // }
   cols=hdr[0];

@@ -16,28 +16,24 @@ Image::Image(){
     pixels=(uint8_t*)realloc(NULL,sizeof(uint8_t*));
 }
 Image::~Image(){
-    //free(cols);
-    //free(rows);
+
     free(pixels);
 }
 int Image::resize( unsigned int width,  unsigned int height, uint8_t fillcolor ){
     uint8_t* pix;
     if(cols!=width||rows!=height){
         pix=(uint8_t*)realloc(pixels,sizeof(uint8_t)*width*height);
-        if(pix==NULL){
+        if(!pix){
             return -1;
         }
         cols=width;
         rows=height;
-        //free(pixels);
         pixels=pix;
     }
-    //cout<<"kkkkk"<<endl;
     for(unsigned int i=0;i<(height*width);i++){
         pixels[i]=fillcolor;
     }
     
-    //cout << "yyy" << endl;
     
     
     return 0;
@@ -63,17 +59,16 @@ int Image::get_pixel( unsigned int x, unsigned int y, uint8_t* colorp ){
     if(x>=cols||y>=rows){
         return -1;
     }
-    if(colorp==NULL){
+    if(!colorp){
         return -1;
     }
     else{
-        //std::cout << "hhh\n";
+        
         *colorp=pixels[y*cols+x];
         
     }
     
     
-    //std::cout << "hhhh\n";
     return 0;
     
     
@@ -90,19 +85,14 @@ int Image::save( const char* filename ){
   hdr[0]=cols;
   hdr[1]=rows;
   ofstream ofs(filename,ios::binary);
-  if(ofs){
+  if(ofs!=NULL){
     ofs.write(reinterpret_cast<const char*>(hdr),2*sizeof(int));
     ofs.write(reinterpret_cast<const char*>(pixels),sizeof(uint8_t)*cols*rows);
-    //ofs<<hdr<<" "<<pixels;
+    
   }
     
     ofs.close();
-    
-  // }
-  // catch(const ifstream::failure&e){
-  //   //cout << "Open failue\n" ;
-  //   return -1;
-  // }
+
   return 0;
 }
 
@@ -117,11 +107,10 @@ int Image::load( const char* filename ){
   
   ifstream in(filename,ios::binary);
   if(in){
-      //in.seekg(0,ios::beg);
-      //in>>hdr>>pixels;
+      
       in.read(reinterpret_cast<char*>(hdr),2*sizeof(int));
       if(cols!=hdr[0]||rows!=hdr[1]){
-        //cout << "not" << endl;
+        
         resize(hdr[0],hdr[1],0);
       }
       
@@ -133,17 +122,7 @@ int Image::load( const char* filename ){
   }
   in.close();
     
-    
-    // file.read(hdr,sizeof(int)*2);
-    // pixels=(uint8_t*)malloc(sizeof(uint8_t)*hdr[0]*hdr[1]);
-    // file.read(pixels,sizeof(uint8_t)*hdr[0]*hdr[1]);
-    // file.close();
-    
-  // }
-  // catch(const ifstream::failure&e){
-  //   //cout << "Open failue\n" ;
-  //   return -1;
-  // }
+
   
   return 0;
 }
