@@ -11,18 +11,6 @@
 
 
 
-int checkappend(list_t *list,int i){
-  
-
-  list_append( list, i );
-  //printf("%d\n",size(list));
-  //puts("aaaaa2"); 
-  
-  
-  
-  //puts("aaaaa3"); 
-  return 0;
-}
 
 int checkprepend(list_t *list,int i){
   
@@ -36,30 +24,18 @@ int checkprepend(list_t *list,int i){
   
   
   
-  
-  // int sz=size(list);
-  element_t *ls;
-  // if(sz<0){
-  //   return 1;
-  // }
+
   ls=list->head;
   list_prepend( list, i );
-  // if(sz!=size(list)-1){
-  //   return 1;
-  // }
+
   if(list->head==NULL||list->tail==NULL||list->head->val!=i){
     return 1;
   }
-  // if(sz>0){
+
     if(list->head==ls||list->head->next!=ls){
       return 1;
     }
-  // }
-  // else{
-  //   if(list->head!=ls||list->head->next!=NULL){
-  //     return 1;
-  //   }
-  // }
+
   return 0;
 }
 int checkcreate(list_t *list){
@@ -81,12 +57,12 @@ int checkcreate(list_t *list){
 
 
 jmp_buf rsp;
-void Handler(int sig)
+void solver(int sig)
 {
     if (sig == SIGSEGV)
     {
-        //printf("received SegFault\n");
-        signal(SIGSEGV, &Handler);
+ 
+        signal(SIGSEGV, &solver);
         longjmp(rsp, SIGSEGV);
     }
 }
@@ -94,7 +70,6 @@ void Handler(int sig)
 
 int chElCre(){
   
-  //puts("kkkkk");
   list_t *lt=list_create();
   list_append(lt,0);
   list_append(lt,1);
@@ -106,13 +81,7 @@ int chElCre(){
   else{
     return 1;
   }
-  //element_t *el=element_create(5);
- 
-  //puts("ddd");
-  //int *ee=malloc(sizeof(int)*2);
-  //free(el);
-  //free(ee);
-  //puts("kkkkk");
+
 }
 
 void testindex(){
@@ -140,8 +109,7 @@ int test(void f())
 void testindex2(){
         list_t *l1=list_create();
         list_append(l1,5);
-        //l1->head=NULL;
-        //l1->tail=element_create(5);
+   
         list_index(l1,2);
 }
 
@@ -220,11 +188,9 @@ int main( int argc, char* argv[] )
 
   for( int i=0; i<5; i++ )
   {
-    if(checkappend(list,i)==1){
-      return 1;
-    }
+    list_append( list, i );
   }
-  //puts("aaaaa");  
+
   
   for( int i=-1; i>-5; i-- )
   {
@@ -236,7 +202,7 @@ int main( int argc, char* argv[] )
 
   int index = 2;
   element_t* el=list_index(list,index) ;
-  signal(SIGSEGV,Handler);
+  signal(SIGSEGV,solver);
   if(chElCre()==1){
     return 1;
   }
@@ -261,5 +227,5 @@ int main( int argc, char* argv[] )
   
   list_destroy( list );
 
-  return 0; // tests pass
+  return 0; 
 }
