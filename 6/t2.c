@@ -47,29 +47,29 @@ int intarr_save_json( intarr_t* ia, const char* filename ){
   if(ia==NULL||ia->len<0){
       return -1;
   }
-  if(ia->data!=NULL&&ia->len>0){
+  if(ia->data!= NULL&&ia->len>0){
       sprintf(tk,"%d",ia->data[0]);
       strcat(st,tk);
   }
-  for(i=1;i<ia->len;i++){
-      strcat(st,", ");
-      sprintf(tk,"%d",ia->data[i]);
-      strcat(st,tk);
+  for(i=1;i< ia->len;i++){
+      strcat( st,", ");
+      sprintf( tk,"%d",ia->data[i]);
+      strcat( st,tk);
   }
-  strcat(st," ]");
+  strcat(st, " ]");
   //st=(char*)realloc(st,strlen(st));
   int c=0;
-  for(;st[c]!='\0';c++){}
+  for(;st[c]!= '\0';c++){}
   //printf("%.20s\n",st);
     
-  FILE* file=fopen(filename,"w");
-  if(!file){
+  FILE* file= fopen(filename,"w");
+  if( !file){
       return -1;
   }
-  if(!fwrite(st,c,1,file)){
+  if( !fwrite(st,c,1,file)){
       return -2;
   }
-  fclose(file);
+  fclose( file);
   
   printf("st=%.20s\n",st);
   
@@ -173,18 +173,7 @@ intarr_t* intarr_load_json( const char* filename ){
     printf("0=%d,1=%d,-1=%d,-2=%d.\n",ia->data[0],ia->data[1],ia->data[ia->len-1],ia->data[ia->len-2]);
   }
   
-//   if(ia==NULL||ia->len<0){
-//       return -1;
-//   }
-//   if(ia->data!=NULL&&ia->len>0){
-//       strcat(st,itoa(ia->data[0]));
-//   }
-//   for(i=0;i<ia->len;i++){
-//       strcat(st,", ");
-//       strcat(st,itoa(ia->data[i]));
-//   }
-//   strcat(st," ]");
-    
+
   
   
   
@@ -192,15 +181,3 @@ intarr_t* intarr_load_json( const char* filename ){
   return ia;
     
 }
-
-// int main(void){
-//     intarr_t* ia=intarr_create(1);
-//     //printf("%d\n",ia->len);
-//     //ia->len=5;
-//     ia->data[0]=10;
-//     intarr_push(ia,5);
-//     //printf("%d\n",ia->len);
-//     intarr_save_json(ia,"1.txt");
-//     intarr_t* aa= intarr_load_json("1.txt");
-//     //printf("%d\n",aa->data[1]);
-// }
