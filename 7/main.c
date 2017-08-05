@@ -38,22 +38,22 @@ int checkprepend(list_t *list,int i){
   
   
   // int sz=size(list);
-  // element_t *ls;
+  element_t *ls;
   // if(sz<0){
   //   return 1;
   // }
-  // ls=list->head;
-  // list_prepend( list, i );
+  ls=list->head;
+  list_prepend( list, i );
   // if(sz!=size(list)-1){
   //   return 1;
   // }
-  // if(list->head==NULL||list->tail==NULL||list->head->val!=i){
-  //   return 1;
-  // }
+  if(list->head==NULL||list->tail==NULL||list->head->val!=i){
+    return 1;
+  }
   // if(sz>0){
-  //   if(list->head==ls||list->head->next!=ls){
-  //     return 1;
-  //   }
+    if(list->head==ls||list->head->next!=ls){
+      return 1;
+    }
   // }
   // else{
   //   if(list->head!=ls||list->head->next!=NULL){
@@ -80,14 +80,14 @@ int checkcreate(list_t *list){
 
 
 
-jmp_buf restore_point;
+jmp_buf rsp;
 void Handler(int sig)
 {
     if (sig == SIGSEGV)
     {
         //printf("received SegFault\n");
         signal(SIGSEGV, &Handler);
-        longjmp(restore_point, SIGSEGV);
+        longjmp(rsp, SIGSEGV);
     }
 }
 
@@ -123,18 +123,15 @@ void testindex(){
 }
 int test(void f())
 {
-    int fault_code = setjmp(restore_point);
-    if (fault_code == 0)
+    int fc = setjmp(rsp);
+    if (fc==0)
     {
-        // do something that might cause a segfault
+        
         f();
+        
         return 1;
     }
-    else
-    {
-        //printf("recovered from a fault; code = %d\n", fault_code);
-        return 2;
-    }
+    return 2;
 }
 
 
@@ -152,19 +149,12 @@ void testindex2(){
 
 int checkindex(list_t *list,unsigned int i,element_t **el1){
   
-  // list_t *l1=list_create();
-  // l1->head=NULL;
-  // l1->tail=element_create(5);
-  // if(list_index(l1,1)!=NULL){
-  //   return 1;
-  // }
+
   
   if(test(testindex)==2){
     return 1;
   }
-  //printf("%d\n",ts(list_index(l1,1));
   
-  //assert(list_index(l1,1)==NULL);
   
   
   if(test(testindex2)==2){
@@ -253,11 +243,7 @@ int main( int argc, char* argv[] )
   if(checkindex(list,index,&el)==1){
     return 1;
   }
-  
-  
-  // #ifndef malloc
-  // #define malloc malloc
-  // #endif
+
   if( el == NULL )
     {
       printf( "index %d not found\n", index );
@@ -271,10 +257,7 @@ int main( int argc, char* argv[] )
     puts("The val of el is not -2");
     return 1;
   }
-  //list->head->val=10;
-  //list_sort(list);
-  //list_print(list);
-  
+
   
   list_destroy( list );
 
