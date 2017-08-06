@@ -21,7 +21,7 @@ int checkprepend(list_t *list,int i){
     return 1;
   }
   
-  
+  element_t *ls;
   
   
 

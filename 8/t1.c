@@ -29,7 +29,7 @@ void point_array_init( point_array_t* pa ){
 // Resets the array to be empty, freeing any memory allocated if
 // necessary.
 void point_array_reset( point_array_t* pa ){
-   
+   //puts("aa");
    if(pa){
       free(pa->points);
       //
@@ -45,7 +45,7 @@ void point_array_reset( point_array_t* pa ){
 // Append a point to the end of an array. If successful, return 0,
 // else return 1;
 int point_array_append( point_array_t* pa, point_t* p ){
-
+  
 
   point_t *npt;
   //unsigned int j;
@@ -56,14 +56,17 @@ int point_array_append( point_array_t* pa, point_t* p ){
   
   
   npt=realloc(pa->points,(pa->len+1)*sizeof(point_t));
+  
   if(npt==NULL){
     return 1;
   }
+  pa->points=npt;
   pa->points[ pa->len]=*p;
+  //puts("bb");
   pa->len++;
   
-  pa->points=npt;
-
+  
+  
   return 0;
   
   
