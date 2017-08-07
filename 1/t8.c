@@ -5,9 +5,10 @@ int main( void )
 {
   int a=0,b=0;
   //
-  int i,j,c=0;
+  int i=0,j=0,c=0;
   //
-  char txt[2048]="";
+  char txt[2048];
+  memset(txt,'\0',2048);
   
  
   
@@ -18,8 +19,8 @@ int main( void )
   
   scanf( "%d", &c );
   
-  for( i=0;i<b;i++){
-      for( j=0;j<a;j++){
+  for( ;i<b;i++){
+      for( ;j<a;j++){
           if( i==0||i==b-1|| j==0||j==a-1){
             //
               strcat(txt,"#");

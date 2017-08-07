@@ -11,13 +11,13 @@ int main( void )
   //
   while (sig!=EOF){
       sig =scanf( "%f", &f );
-      if(sig>0){
+      if(sig){
         printf( "%.0f %.0f %.0f\n", floor(f), round(f), ceil(f) );
       }
       
   }
   //
-  puts("Done.");
+  printf("Done.\n");
   
 
  

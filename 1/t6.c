@@ -3,7 +3,8 @@
  
 int main( void )
 {
-  float f = 0, mnum = INFINITY, xnum = -INFINITY, tt = 0, n = 0;
+  float f = 0, mnum = INFINITY, xnum = -INFINITY, tt = 0;
+  int n = 0;
  
   
   int sig=0;
@@ -12,7 +13,7 @@ int main( void )
     //
       sig =scanf( "%f", &f );
       //
-      if(sig>0){
+      if(sig){
           if(f<mnum){
             //
               mnum=f;
@@ -24,12 +25,12 @@ int main( void )
               //
           }
           //
-          n++;
+          n+=1;
           //
-          tt+=f;
+          tt=tt+f;
       }
   }
-  if ( n > 0 ){
+  if ( n  ){
     //
         printf( "%.2f %.2f %.2f\n", mnum, xnum, tt/n );
 //

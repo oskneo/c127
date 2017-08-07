@@ -27,51 +27,6 @@ void draw_circle( uint8_t img[],
 			}
 		}
 	}
-    // int i, j;
-    // double dx,dy,dt;
- 
-    // for(i = 0; i< cols; i++)
-    // {
-    //     for(j = 0; j< rows;j++)
-    //     {
- 
-    //       if(r > 0 )
-    //       {
-    //         dx = i-x-.5;
-    //         dy = j-y-.5;
-    //         dt = sqrt(pow(dx,2) + pow(dy,2));
-    //         if(dt<r)
-    //         {
-    //             set_pixel(img, cols, rows, i,j,color);
-    //         }
- 
-    //         dx = i-x+.5;
-    //         dy = j-y+.5;
-    //         dt = sqrt(pow(dx,2) + pow(dy,2));
-    //         if(dt<r)
-    //         {
-    //             set_pixel(img, cols, rows, i,j,color);
-    //         }
- 
-    //         dx = i-x+.5;
-    //         dy = j-y-.5;
-    //         dt = sqrt(pow(dx,2) + pow(dy,2));
-    //         if(dt<r)
-    //         {
-    //             set_pixel(img, cols, rows, i,j,color);
-    //         }
- 
- 
-    //         dx = i-x-.5;
-    //         dy = j-y+.5;
-    //         dt = sqrt(pow(dx,2) + pow(dy,2));
-    //         if(dt<r)
-    //         {
-    //             set_pixel(img, cols, rows, i,j,color);
-    //         }
-    //       } 
- 
-    //     }
-    // }
+
 		      
 }

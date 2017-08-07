@@ -6,10 +6,10 @@
 int main( void )
 {
   int a=0,b=0;
-  int c=0,x,y;
-  char txt[2048] = "";
+  int c=0;
+  char txt[2048] ;
   
- 
+ memset(txt,'\0',2048);
  
   scanf( "%d", &a );
   //
@@ -19,17 +19,17 @@ int main( void )
   //
   float m=2.0*c/a;
   //
-  int lt,rt;
+  int lt,rt,x=c-1,y=0;
   //
   int ck=0;
   //
-  for( x=c-1;x>0;x--){
+  for( ;x>0;x--){
     //
       lt= floor(x/m);
       //
       rt= a-lt-1;
       //
-      for( y=0;y<a&& ck!=3;y++){
+      for( ;y<a&& ck!=3;y++){
           
           
           
@@ -67,8 +67,8 @@ int main( void )
       ck=0;
       
   }
-  
-  for( y=0;y<a;y++){
+  y=0;
+  for( ;y<a;y++){
     //
       strcat( txt,"#");
       //

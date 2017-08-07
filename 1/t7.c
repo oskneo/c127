@@ -6,6 +6,7 @@ int main( void )
   int f=0;
   //
   char txt[2048]="";
+  memset(txt,'\0',2048);
  
   
   int sig=0;

@@ -8,7 +8,7 @@ int main( void )
   
   int sig =scanf( "%f", &f );
   //
-  if(sig<=0){
+  if(!sig){
       printf("scanf error: (%d)\n",sig);
       //
   }
