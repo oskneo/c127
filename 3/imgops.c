@@ -130,10 +130,10 @@ void flip_horizontal( uint8_t array[],
               unsigned int rows )
 {
   // your code here
-  unsigned int x,y;
-  for(x=0;x< cols/2;x++){
+  unsigned int x=0,y=0;
+  for(;x< cols/2;x++){
       //
-    for(y=0;y< rows;y++){
+    for(;y< rows;y++){
         //
       uint8_t ls=array[ y*cols+x];
       //
@@ -141,6 +141,7 @@ void flip_horizontal( uint8_t array[],
       //
       array[y* cols+(cols-x-1)]=ls;
     }
+    y=0;
   }
   
 }
@@ -162,6 +163,7 @@ void flip_vertical( uint8_t array[],
       //
       array[( rows-y-1)*cols+x]=ls;
     }
+    y=0;
   }
 }
 /* TASK 4 */
@@ -177,11 +179,11 @@ int locate_color(  const uint8_t array[],
 		   unsigned int *y )
 {
     // your code here
-    unsigned int a,b;
+    unsigned int a=0,b=0;
     
-    for(b=0;b< rows;b++){
+    for(;b< rows;b++){
         //
-        for(a=0;a< cols;a++){
+        for(;a< cols;a++){
             //
             if(*(array +b*cols+a)==color){
                 //
@@ -190,6 +192,7 @@ int locate_color(  const uint8_t array[],
                 return 1;
             }
         }//
+        a=0;
     }
     return 0;
 }
@@ -267,7 +270,7 @@ uint8_t* half( const uint8_t array[],
 	       unsigned int rows )
 {
   // your code here
-    int x,y;
+    int x=0,y=0;
     //
     unsigned int hi=cols/2,hj=rows/2;
     //
@@ -276,9 +279,9 @@ uint8_t* half( const uint8_t array[],
     if (!sl){
         return NULL;
     }
-    for(x=0;x< cols;x+=2){
+    for(;x< cols;x+=2){
         //
-        for(y=0;y< rows;y+=2){
+        for(;y< rows;y+=2){
         
             //
             float ls=0.25*(get_pixel(array  ,cols,rows,x,y)
@@ -288,6 +291,7 @@ uint8_t* half( const uint8_t array[],
             
             set_pixel(sl,hi,hj,x/2,y/2,round(ls));
         }
+        y=0;
     }
     //
     return sl;
@@ -323,7 +327,7 @@ void region_set( uint8_t array[],
          uint8_t color )
 {
     // your code here
-    int x,y;
+    int x=left,y=top;
     //
     if(right<=left || bottom<=top||bottom-top>=rows|| right-left>=cols){
         //
@@ -331,14 +335,15 @@ void region_set( uint8_t array[],
     }
     
     
-    for(x=left;x<right;x++){
+    for(;x<right;x++){
     
-        for(y=top;y<bottom;y++){
+        for(;y<bottom;y++){
             //
             
             set_pixel(array, cols,rows, x, y, color);
             
         }
+        y=top;
     }
     return;
 }
@@ -356,7 +361,7 @@ unsigned long int region_integrate( const uint8_t array[],
 {
   
     
-    int x,y;
+    int x=left,y=top;
     unsigned long int zhi=0;
     if(right<=left||bottom<=top||bottom -top>=rows||right- left>=cols){
         //
@@ -364,14 +369,15 @@ unsigned long int region_integrate( const uint8_t array[],
     }
     
     
-    for(x=left;x< right; x++){
+    for(;x< right; x++){
     
-        for(y=top;y< bottom;y++){
+        for(;y< bottom;y++){
             //
             
             zhi=zhi+get_pixel(array, cols, rows, x, y);
             
         }
+        y=top;
     }
     return zhi;
 }
@@ -389,7 +395,7 @@ uint8_t* region_copy( const uint8_t array[],
               unsigned int bottom )
 {
     // your code here
-    unsigned int x,y;
+    unsigned int x=left,y=top;
     //
     if(right<=left||right-left>=cols ||bottom-top>=rows||bottom<=top){
         //
@@ -397,15 +403,16 @@ uint8_t* region_copy( const uint8_t array[],
     }
     uint8_t *sl=realloc(NULL,(right-left)*(bottom-top)*sizeof(uint8_t));
     //
-    for(y=top;y<bottom;y++){
+    for(;y<bottom;y++){
         //
-        for(x=left;x<right;x++){
+        for(;x<right;x++){
             
            
             uint8_t ls = get_pixel(array,cols,rows,x,y);
             //
 		    set_pixel(sl,right-left,bottom-top,x-left,y-top,ls);
         }
+        x=left;
     }
     //
     return sl;
