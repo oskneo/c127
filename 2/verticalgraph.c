@@ -13,7 +13,7 @@ int main( void )
     //
       sig =scanf( "%d", &f );
       //
-      if(sig){
+      if(sig>0){
           //
           //int i;
           //
@@ -38,6 +38,7 @@ int main( void )
               printf("#");//
           }
       }
+      j=0;
       printf("\n");//
   }
   

@@ -22,6 +22,7 @@ int main( int argc, char* argv[] )
             }
             
         }
+        j=0;
         if( ck==1){
             //
             break;

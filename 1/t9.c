@@ -19,7 +19,7 @@ int main( void )
   //
   float m=2.0*c/a;
   //
-  int lt,rt,x=c-1,y=0;
+  int lt,rt,x=c-1,y;
   //
   int ck=0;
   //
@@ -29,6 +29,7 @@ int main( void )
       //
       rt= a-lt-1;
       //
+      y=0;
       for( ;y<a&& ck!=3;y++){
           
           

@@ -23,7 +23,7 @@ int main( int argc, char* argv[]  )
       //
       sig =scanf( "%c", &xx );
       //
-      if(sig){
+      if(sig>0){
           
           
           txt[cc]=xx;
@@ -73,12 +73,14 @@ int main( int argc, char* argv[]  )
                 }
             
             }
+            b=0;
             //
             if( ck==1){
                 //
                 break;
             }
         }
+        c=0;
         if( ck==1){
             //
             printf("CENSORED");

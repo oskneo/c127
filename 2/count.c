@@ -23,7 +23,7 @@ int main( void )
     //
       ern =scanf( "%c", &st );
       //
-      if(ern){
+      if(ern>0){
           
           
           xtx[cc]=st;

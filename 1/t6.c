@@ -13,7 +13,7 @@ int main( void )
     //
       sig =scanf( "%f", &f );
       //
-      if(sig){
+      if(sig>0){
           if(f<mnum){
             //
               mnum=f;
