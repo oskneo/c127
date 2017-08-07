@@ -2,11 +2,11 @@
 
 int scrambled( unsigned int a[], unsigned int b[], unsigned int len ){
     //
-    int x,jc=1;
+    int x=0,jc=1;
     //
     unsigned int sumA=0,sumB=0,ybA=0,ybB=0;
     //
-    for( x=0;x<len;x++){
+    for( ;x<len;x++){
         //
         sumA=sumA+a[x];
         //
@@ -23,7 +23,8 @@ int scrambled( unsigned int a[], unsigned int b[], unsigned int len ){
     //
     float pj= 1.0*sumA/len;
     //
-    for( x=0;x<len;x++){
+    x=0;
+    for( ;x<len;x++){
         //
         ybA=ybA+(pj-a[x])*(pj-a[x]);
         //

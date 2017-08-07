@@ -1,8 +1,8 @@
 #include <stdio.h>
 void reverse( int arr[], unsigned int len ){
-    int x;
+    int x=0;
     //
-    for( x=0;x<len/2;x++){
+    for( ;x<len/2;x++){
         //
         int zs=arr[x];
         //

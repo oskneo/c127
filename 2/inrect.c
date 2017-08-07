@@ -14,8 +14,7 @@ int InRectangle( float pt[2], float rect[4] ){
         //
         return 1;
     }
-    else{
-        return 0;
-    }
+    
+    return 0;
     
 }

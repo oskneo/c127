@@ -4,7 +4,7 @@
  
 int main( void )
 {
-  int f=0,stg[128],zs=0,zd=0,x,j;
+  int f=0,stg[128],zs=0,zd=0,x=0,j=0;
   //char txt[2048]="";
  
   int sig=0;
@@ -13,7 +13,7 @@ int main( void )
     //
       sig =scanf( "%d", &f );
       //
-      if(sig>0){
+      if(sig){
           //
           //int i;
           //
@@ -27,9 +27,9 @@ int main( void )
           
       }
   }
-  for( x=0;x<zd;x++){
+  for( ;x<zd;x++){
     //
-      for( j=0;j<zs;j++){
+      for( ;j<zs;j++){
         //
           if( zd-stg[j]>x){
               printf(" ");//
@@ -38,7 +38,7 @@ int main( void )
               printf("#");//
           }
       }
-      puts("");//
+      printf("\n");//
   }
   
 

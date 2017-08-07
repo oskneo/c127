@@ -6,8 +6,11 @@ int max( int x, int y)
     //
     return x;
   } 
+  else{
+    return y;
+  }
   //
-  return y;
+  
 }
 
 int min( int x, int y)
@@ -17,6 +20,9 @@ int min( int x, int y)
     //
     return x;
   } 
+  else{
+    return y;
+  }
   //
-  return y;
+  
 }

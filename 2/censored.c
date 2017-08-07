@@ -12,7 +12,8 @@ int main( int argc, char* argv[]  )
 
   unsigned long cc=0;
   //
-  char txt[102400]="";
+  char txt[102400];
+  memset(txt,'\0',102400);
   //
   char xx;
  
@@ -22,7 +23,7 @@ int main( int argc, char* argv[]  )
       //
       sig =scanf( "%c", &xx );
       //
-      if(sig>0){
+      if(sig){
           
           
           txt[cc]=xx;
@@ -38,17 +39,17 @@ int main( int argc, char* argv[]  )
   
   
   
-    int ln[argc-1],a,b,c,x,ck=1;
+    int ln[argc-1],a=0,b=0,c=0,x=0,ck=1;
     //
-    for( x=0;x<argc-1;x++){
+    for( ;x<argc-1;x++){
         //
         ln[x]=strlen(argv[x+1]);
         //
     }
-    for( a=0;a<cc;a++){
+    for( ;a<cc;a++){
         //
         
-        for( c=0;c<argc-1;c++){
+        for( ;c<argc-1;c++){
             //
             ck=1;
             //
@@ -61,7 +62,7 @@ int main( int argc, char* argv[]  )
                     break;
                 }
             }
-            for( b=0;b<ln[c];b++){
+            for( ;b<ln[c];b++){
             //
                 if( txt[a+b]!=argv[c+1][b]){
                   

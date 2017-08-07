@@ -6,7 +6,8 @@ int main( void )
 {
   unsigned long cc=0,wc=0,lc=0;
   //
-  char xtx[204800]="";
+  char xtx[204800];
+  memset(xtx,'\0',204800);
   //
   char st;
   //
@@ -22,7 +23,7 @@ int main( void )
     //
       ern =scanf( "%c", &st );
       //
-      if(ern>0){
+      if(ern){
           
           
           xtx[cc]=st;
@@ -38,15 +39,15 @@ int main( void )
           }
           
           p=strchr(ch,st);
-          if(p==NULL){
-            if(ck==1){
+          if(!p){
+            if(ck){
               ck=0;
             }
             
             
           }
           else{
-            if(ck==0){
+            if(!ck){
               wc++;
               ck=1;
             }
@@ -55,7 +56,7 @@ int main( void )
           
           
           
-          cc++;
+          cc+=1;
           
           
       }

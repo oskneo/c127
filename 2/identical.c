@@ -2,9 +2,9 @@
 
 int identical( int a[], int b[], unsigned int len ){
     //
-    int x,y=1;
+    int x=0,y=1;
     
-    for( x=0;x<len;x++){
+    for( ;x<len;x++){
         //
         if(a[x]!=b[x]){
             //

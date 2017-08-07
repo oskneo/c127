@@ -7,14 +7,14 @@ int main( int argc, char* argv[] )
 {
     int cd1=strlen(argv[1]),cd2=strlen(argv[2]);
     
-    int a,j,ck=1;
+    int a=0,j=0,ck=1;
     //char fr=argv[2][0];
     //
-    for(a=0;a<cd1-cd2+1;a++){
+    for(;a<cd1-cd2+1;a++){
         //
         ck=1;
         //
-        for( j=0;j<cd2;j++){
+        for( ;j<cd2;j++){
             //
             if( argv[1][a+j]!=argv[2][j]){
                 //
@@ -33,11 +33,11 @@ int main( int argc, char* argv[] )
     }
     if( ck==1){
         //
-        puts("true");
+        printf("true\n");
     }
     else{
         //
-        puts("false");
+        printf("false\n");
     }
     
     return 0;
