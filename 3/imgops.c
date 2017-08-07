@@ -72,11 +72,11 @@ uint8_t min( const uint8_t array[],
 	     unsigned int rows )
 {
   // your code here
-  unsigned int x;
+  unsigned int x=0;
   //
   uint8_t ys=255;
   //
-  for( x=0;x<cols*rows;x++){
+  for( ;x<cols*rows;x++){
       if( array[x]<ys){
           //
           ys=array[x];
@@ -92,11 +92,11 @@ uint8_t max( const uint8_t array[],
 		 unsigned int rows )
 {
   // your code here
-  unsigned int x;
+  unsigned int x=0;
   //
   uint8_t ys=0;
   //
-  for( x=0;x<cols*rows;x++){
+  for( ;x<cols*rows;x++){
       //
       if(array[x]>ys){
           //
@@ -115,8 +115,8 @@ void replace_color(  uint8_t array[],
 		     uint8_t post_color )
 {
   // your code here
-  unsigned int x;
-  for( x=0;x<cols* rows;x++){
+  unsigned int x=0;
+  for( ;x<cols* rows;x++){
       if ( array[x]==pre_color){
           //
           array[x]= post_color;
@@ -201,9 +201,9 @@ void invert( uint8_t array[],
          unsigned int rows )
 {
     // your code here
-    unsigned int a;
+    unsigned int a=0;
     //
-    for (a=0;a< cols*rows;a++){
+    for (;a< cols*rows;a++){
         //
         array[a]=255- array[a];
     }
@@ -218,9 +218,9 @@ void scale_brightness( uint8_t array[],
             double scale_factor )
 {
   // your code here
-    unsigned int a;
+    unsigned int a=0;
     //
-    for (a=0;a< cols*rows;a++){
+    for (;a< cols*rows;a++){
         //
         unsigned int ls= (unsigned int)round( scale_factor*array[a]);
         //
@@ -242,12 +242,12 @@ void normalize( uint8_t array[],
         unsigned int rows )
 {
     // your code here
-    unsigned int a;
+    unsigned int a=0;
     uint8_t minnum=min( array,cols,rows);
     //
     uint8_t maxnum=max( array,cols,rows);
     //
-    for (a=0;a<cols* rows;a++){
+    for (;a<cols* rows;a++){
         //
         array[a]=array[a]- minnum;
     }
