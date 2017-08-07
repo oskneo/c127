@@ -43,8 +43,8 @@ void zero( uint8_t array[],
 	   unsigned int rows )
 {
   // your code here.
-  int i;
-  for (i=0;i<cols*rows;i++){
+  int i=0;
+  for (;i<cols*rows;i++){
       array[i] = 0;
   }
 }
@@ -57,8 +57,11 @@ uint8_t* copy( const uint8_t array[],
            unsigned int rows )
 {
   // your code here
-  uint8_t *ar=malloc(cols*rows*sizeof(uint8_t));
-  memcpy(ar,array,cols*rows*sizeof(uint8_t));
+  uint8_t *ar=realloc(NULL,cols*rows*sizeof(uint8_t));
+  if(ar){
+      memcpy(ar,array,cols*rows*sizeof(uint8_t));
+  }
+  
   return ar;
 }
 /*-------------------------------------------------
@@ -246,15 +249,16 @@ void normalize( uint8_t array[],
 {
     // your code here
     unsigned int a=0;
-    uint8_t minnum=min( array,cols,rows);
+    
     //
     uint8_t maxnum=max( array,cols,rows);
+    uint8_t minnum=min( array,cols,rows);
     //
     for (;a<cols* rows;a++){
         //
         array[a]=array[a]- minnum;
     }
-    double d=255.0/(maxnum -minnum);
+    double d=1.0*255/(maxnum -minnum);
     //
     scale_brightness( array,cols,rows,d);
 }
@@ -345,7 +349,7 @@ void region_set( uint8_t array[],
         }
         y=top;
     }
-    return;
+    //return;
 }
 /* TASK 10 */
 // Return the sum of all the pixels in the region. Notice the large
