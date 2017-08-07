@@ -11,7 +11,7 @@ int main( void )
   //
   while (sig!=EOF){
       sig =scanf( "%f", &f );
-      if(sig){
+      if(sig>0){
         printf( "%.0f %.0f %.0f\n", floor(f), round(f), ceil(f) );
       }
       
