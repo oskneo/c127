@@ -52,10 +52,7 @@ intarr_result_t intarr_set( intarr_t* ia,
     //
     return INTARR_OK;
   }
-  else{
-    //
-    return INTARR_BADINDEX;
-  }
+  return INTARR_BADINDEX;
 }
 
 // If index is valid and i is non-null, set *i to ia->data[index] and return
@@ -75,10 +72,7 @@ intarr_result_t intarr_get( const intarr_t* ia,
     //
     return INTARR_OK;
   }
-  else{
-    //
-    return INTARR_BADINDEX;
-  }
+  return INTARR_BADINDEX;
 }
 
 /* LAB 5 TASK 3 */

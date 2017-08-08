@@ -138,11 +138,11 @@ void flip_horizontal( uint8_t array[],
       //
     for(;y< rows;y++){
         //
-      uint8_t ls=array[ y*cols+x];
+      
       //
       array[y*cols+x]=array[ y*cols+(cols-x-1)];
       //
-      array[y* cols+(cols-x-1)]=ls;
+      array[y* cols+(cols-x-1)]=get_pixel(array,cols,rows,x,y);
     }
     y=0;
   }
@@ -160,11 +160,10 @@ void flip_vertical( uint8_t array[],
       //
     for(;y< rows/2;y++){
         //
-      uint8_t ls= array[y*cols+x];
       //
       array[y*cols+x]=array[( rows-y-1)*cols+x];
       //
-      array[( rows-y-1)*cols+x]=ls;
+      array[( rows-y-1)*cols+x]=array[y*cols+x];
     }
     y=0;
   }
@@ -237,7 +236,7 @@ void scale_brightness( uint8_t array[],
         //
         array[a]=ls;
     }
-  
+  return;
 }
 /* TASK 7 */
 // Normalize the dynamic range of the image, i.e. Shift and scale the
@@ -280,7 +279,7 @@ uint8_t* half( const uint8_t array[],
     //
     uint8_t *sl=realloc(NULL,hi*hj*sizeof(uint8_t));
     //
-    if (!sl){
+    if (!sl&&hi*hj>0){
         return NULL;
     }
     for(;x< cols;x+=2){
@@ -288,12 +287,9 @@ uint8_t* half( const uint8_t array[],
         for(;y< rows;y+=2){
         
             //
-            float ls=0.25*(get_pixel(array  ,cols,rows,x,y)
-					+ get_pixel(array ,cols,rows,x,y+1)//
-					+ get_pixel(array ,cols,rows,x+1,y)
-					+ get_pixel(array, cols,rows,x+1,y+1));//
+            //float ls=;
             
-            set_pixel(sl,hi,hj,x/2,y/2,round(ls));
+            set_pixel(sl,hi,hj,x/2,y/2,round(0.25*(get_pixel(array  ,cols,rows,x,y)	+ get_pixel(array ,cols,rows,x,y+1)+ get_pixel(array, cols,rows,x+1,y+1)	+ get_pixel(array ,cols,rows,x+1,y)	)));
         }
         y=0;
     }
@@ -407,17 +403,23 @@ uint8_t* region_copy( const uint8_t array[],
     }
     uint8_t *sl=realloc(NULL,(right-left)*(bottom-top)*sizeof(uint8_t));
     //
-    for(;y<bottom;y++){
+    if(sl==NULL&&(right-left)*(bottom-top)>0){
+        return NULL;
+    }
+    else{
+        for(;y<bottom;y++){
         //
-        for(;x<right;x++){
+            for(;x<right;x++){
             
            
-            uint8_t ls = get_pixel(array,cols,rows,x,y);
+            
             //
-		    set_pixel(sl,right-left,bottom-top,x-left,y-top,ls);
+		        set_pixel(sl,right-left,bottom-top,x-left,y-top,get_pixel(array,cols,rows,x,y));
+            }
+            x=left;
         }
-        x=left;
-    }
     //
-    return sl;
+        return sl;
+    }
+    
 }
