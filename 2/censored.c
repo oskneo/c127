@@ -80,7 +80,7 @@ int main( int argc, char* argv[]  )
                 break;
             }
         }
-        c=0;
+        
         if( ck==1){
             //
             printf("CENSORED");
@@ -93,7 +93,7 @@ int main( int argc, char* argv[]  )
             printf("%c",txt[a]);
             //
         }
-        
+        c=0;  
         
         
     }
