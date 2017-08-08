@@ -138,9 +138,10 @@ void flip_horizontal( uint8_t array[],
       //
     for(;y< rows;y++){
         //
-      uint8_t ls=array[ y*cols+x];
+      uint8_t ls=get_pixel(array,cols,rows,x,y);;
       //
-      array[y*cols+x]=array[ y*cols+(cols-x-1)];
+    //   array[y*cols+x]=array[ y*cols+(cols-x-1)];
+        array[y*cols+x]=get_pixel(array,cols,rows,cols-x-1,y);
       //
       array[y* cols+(cols-x-1)]=ls;
     }
@@ -161,9 +162,11 @@ void flip_vertical( uint8_t array[],
     for(;y< rows/2;y++){
         //
       //
-      array[y*cols+x]=array[( rows-y-1)*cols+x];
+      uint8_t ls=get_pixel(array,cols,rows,x,y);
+      //array[y*cols+x]=array[( rows-y-1)*cols+x];
+      array[y*cols+x]=get_pixel(array,cols,rows,x,rows-y-1);
       //
-      array[( rows-y-1)*cols+x]=array[y*cols+x];
+      array[( rows-y-1)*cols+x]=ls;
     }
     y=0;
   }
