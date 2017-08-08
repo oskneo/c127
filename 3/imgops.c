@@ -138,11 +138,11 @@ void flip_horizontal( uint8_t array[],
       //
     for(;y< rows;y++){
         //
-      
+      uint8_t ls=array[ y*cols+x];
       //
       array[y*cols+x]=array[ y*cols+(cols-x-1)];
       //
-      array[y* cols+(cols-x-1)]=get_pixel(array,cols,rows,x,y);
+      array[y* cols+(cols-x-1)]=ls;
     }
     y=0;
   }
