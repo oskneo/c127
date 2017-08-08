@@ -8,19 +8,15 @@
 // newly-allocated intarr_t.  If unsuccessful, returns a null pointer.
 
 intarr_t* intarr_create( unsigned int len ){
-  intarr_t* a=malloc(sizeof(intarr_t));
-  // if(a!=NULL){
-  //   a->len=len;
-  //   a->data=malloc(len*sizeof(int));
-    
-  // }
+  intarr_t* a=realloc(NULL,sizeof(intarr_t));
+
   if(a==NULL){
     return NULL;
   }
   
   
   
-  a->data=malloc(len*sizeof(int));
+  a->data=realloc(NULL,len*sizeof(int));
   if(a->data==NULL&&len>0){
     return NULL;
   }
@@ -122,11 +118,11 @@ intarr_result_t intarr_sort( intarr_t* ia ){
     //
     return INTARR_BADARRAY;
   }
-  int x,y;
+  int x=0,y=1;
   //
-  for(x=0;x<ia->len;x++){
+  for(;x<ia->len;x++){
     //
-    for(y=1;y<ia->len;y++){
+    for(;y<ia->len;y++){
       //
       if(ia->data[y-1]>ia->data[y]){
         //
@@ -137,6 +133,7 @@ intarr_result_t intarr_sort( intarr_t* ia ){
         ia->data[y]=temp;
       }
     }
+    y=1;
   }
   
   //
@@ -158,9 +155,9 @@ intarr_result_t intarr_find( intarr_t* ia, int target, int* i ){
     return INTARR_BADARRAY;
   }
   //
-  int y;
+  int y=0;
   //
-  for(y=0;y<ia->len;y++){
+  for(;y<ia->len;y++){
     //
     if(ia->data[y]==target &&i!=NULL){
       //
@@ -209,23 +206,14 @@ intarr_result_t intarr_pop( intarr_t* ia, int* i ){
   if(ia->len<=0){
     return INTARR_BADINDEX;
   }
-  // for(l=0;l<ia->len;l++){
-  //   if(ia->data[l]>j){
-  //     j=ia->data[l];
-  //     k=l;
-  //   }
-  // }
+ 
   if(i!=NULL){
     *i=ia->data[ia->len-1];
   }
-  // for(l=k;l<ia->len-1;l++){
-  //   ia->data[l]=ia->data[l+1];
-  // }
+
   newia=realloc(ia->data,(ia->len-1)*sizeof(int));
   
-  // if(new==NULL){
-  //   return INTARR_BADALLOC;
-  // }
+
   
   ia->len--;
   ia->data=newia;
